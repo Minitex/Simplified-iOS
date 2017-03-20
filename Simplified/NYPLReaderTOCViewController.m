@@ -11,6 +11,7 @@
 @property (nonatomic) RDNavigationElement *navigationElement;
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) NSArray *TOCElements;
+@property (nonatomic) UISegmentedControl *segmentedControl;
 
 @end
 
@@ -37,8 +38,23 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+    
+  self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Table of Contents", @"Bookmarks"] ];
+    
+  self.segmentedControl.frame = CGRectMake(0, 80, self.view.bounds.size.width, 50);
+  self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+  self.segmentedControl.selectedSegmentIndex = 0;
+  self.segmentedControl.tintColor = [UIColor blackColor];
+  [self.segmentedControl addTarget:self action:@selector(didSelectSegment) forControlEvents: UIControlEventValueChanged];
+  [self.view addSubview:self.segmentedControl];
   
-  self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    
+  CGRect newTableFrame = self.view.bounds;
+  newTableFrame.origin.y += 60;    // move tableview down
+  newTableFrame.size.height += 60; // increase tableview height
+    
+  self.tableView = [[UITableView alloc] initWithFrame:newTableFrame];
+  //self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
   self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
                                      UIViewAutoresizingFlexibleWidth);
   self.tableView.backgroundColor = [NYPLConfiguration backgroundColor];
@@ -47,6 +63,10 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
   [self.tableView registerClass:[NYPLReaderTOCCell class]
          forCellReuseIdentifier:reuseIdentifier];
   [self.view addSubview:self.tableView];
+    
+  //  [self.view insertSubview:self.tableView belowSubview:self.segmentedControl];
+    
+  [self.view bringSubviewToFront:self.segmentedControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -99,6 +119,23 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   
   [self.delegate TOCViewController:self
            didSelectOpaqueLocation:TOCelement.opaqueLocation];
+}
+
+- (void) didSelectSegment
+{
+    NSLog(@"Selected %@", [self.segmentedControl titleForSegmentAtIndex:[self.segmentedControl selectedSegmentIndex]]);
+    /*
+     if ([self.segmentedControl selectedSegmentIndex] == 0)
+     {
+     NSLog(@"Selected TOC");
+     
+     }
+     else
+     {
+     NSLog(@"Selected Boomarks");
+     }
+     */
+    //NSLog(@"Selected something in segmented control");
 }
 
 @end

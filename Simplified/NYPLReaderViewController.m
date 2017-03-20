@@ -31,6 +31,7 @@
 @property (nonatomic) BOOL previousPageTurnWasRight;
 @property (nonatomic) UIView<NYPLReaderRenderer> *rendererView;
 @property (nonatomic) UIBarButtonItem *settingsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;
 @property (nonatomic) BOOL shouldHideInterfaceOnNextAppearance;
 @property (nonatomic) UIView *bottomView;
 @property (nonatomic) UIImageView *bottomViewImageView;
@@ -253,10 +254,27 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
       forControlEvents:UIControlEventTouchUpInside];
   
   UIBarButtonItem *const TOCBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:TOCButton];
+    
+  // Bookmark button
+  NYPLRoundedButton *const bookmarkButton = [NYPLRoundedButton button];
+  bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
+  bookmarkButton.bounds = settingsButton.bounds;
+  [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+  [bookmarkButton addTarget:self
+                       action:@selector(didSelectBookmark)
+             forControlEvents:UIControlEventTouchUpInside];
+    
+  self.bookmarkButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bookmarkButton];
+    
+    
+  // Add buttons to right button bar navigation
+  self.navigationItem.rightBarButtonItems = @[self.bookmarkButtonItem, TOCBarButtonItem, self.settingsBarButtonItem];
   
+  //self.navigationItem.rightBarButtonItems = @[TOCBarButtonItem, self.settingsBarButtonItem];  // VN
+    
+    
   // Corruption may have occurred before we added these, so we need to set their enabled status
   // here (in addition to |readerView:didEncounterCorruptionForBook:|).
-  self.navigationItem.rightBarButtonItems = @[TOCBarButtonItem, self.settingsBarButtonItem];
   if(self.rendererView.bookIsCorrupt) {
     for(UIBarButtonItem *const item in self.navigationItem.rightBarButtonItems) {
       item.enabled = NO;
@@ -828,6 +846,52 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
   } else {
     [self.navigationController pushViewController:viewController animated:YES];
   }
+}
+
+- (void)didSelectBookmark
+{
+    NSLog(@"\nSelected Bookmark!\n");
+    
+    //NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
+    // let's just try printing stuff from here
+    
+    //NSLog(@"Book Info: %@", [rv getBookInfo]);
+    
+    /*
+    NYPLBook *book = [rv getBookInfo];
+    NSLog(@"Book title: %@\n", book.title);
+    
+    NSLog(@"Book annotations URL: %@\n", book.annotationsURL);
+    
+    NSLog(@"Book identifier: %@\n", book.identifier);
+    
+    NSLog(@"Spine Item Details: %@\n", [rv getSpineItemInfo]);
+    
+    NSLog(@"Spine Item Page Count: %lu\n", (unsigned long)[rv getSpineItemPageCount]);
+    
+    NSLog(@"Spine Item Page Index: %lu\n", (unsigned long)[rv getSpineItemPageIndex]);
+    */
+    //[self syncLastRead];
+    
+    /*
+    NSLog(@"Calling syncLastReadingPosition manually");
+    [rv syncLastReadingPosition];
+     */
+    
+    /*
+     if ([self.bookmarkButtonItem.accessibilityLabel isEqualToString:@"Bookmark Off"])
+     {
+     //[self.bookmarkButtonItem.image ]
+     
+     }
+     else
+     {
+     self.bookmarkButtonItem.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Bookmark Off", nil)];
+     // bookmarkButton.bounds = settingsButton.bounds;
+     self.bookmarkButtonItem.image = [UIImage setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+     // [self.bookmarkButtonItem.buttonGroup.barButtonItems setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+     }
+     */
 }
 
 - (void)turnPageIsRight:(BOOL)isRight
