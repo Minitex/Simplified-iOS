@@ -34,13 +34,58 @@ final class NYPLAnnotations: NSObject {
       let url = NYPLConfiguration.mainFeedURL()?.appendingPathComponent("annotations/")
       
       if let url = url {
+        
+        print("NYPLAnnotations::postLastRead, book is: \(book)")
+        print("NYPLAnnotations::postLastRead, url is: \(url)")
+        print("NYPLAnnotations::postLastRead, parameters is: \(parameters)")
+        print("NYPLAnnotations::postLastRead, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
+        
         postJSONRequest(book, url, parameters, NYPLAnnotations.headers)
       } else {
         Log.error(#file, "MainFeedURL does not exist")
       }
     }
   }
-  
+    
+  class func postBookmark(_ book:NYPLBook, cfi:NSString)
+  {
+    if (NYPLAccount.shared().hasBarcodeAndPIN())
+    {
+      let parameters = [
+        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "type": "Annotation",
+        "motivation": "http://www.w3.org/ns/oa#bookmarking",
+        "target":[
+            "source":  book.identifier,
+            "selector": [
+              "type": "oa:FragmentSelector",
+              "value": cfi
+            ]
+        ],
+        "body": [
+            "http://librarysimplified.org/terms/time" : NSDate().rfc3339String(),
+            "http://librarysimplified.org/terms/device" : NYPLAccount.shared().deviceID
+        ]
+    ] as [String : Any]
+    
+    let url = NYPLConfiguration.mainFeedURL()?.appendingPathComponent("annotations/")
+    
+    if let url = url {
+    
+        print("NYPLAnnotations::postBookmark, book is: \(book)")
+        print("NYPLAnnotations::postBookmark, url is: \(url)")
+        print("NYPLAnnotations::postBookmark, parameters is: \(parameters)")
+        print("NYPLAnnotations::postBookmark, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
+    
+        postJSONRequest(book, url, parameters, NYPLAnnotations.headers)
+     } else {
+        Log.error(#file, "MainFeedURL does not exist")
+     }
+   }
+ }
+    
+    
+    
   class func sync(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ()) {
     syncLastRead(book, completionHandler: completionHandler)
   }
@@ -65,6 +110,8 @@ final class NYPLAnnotations: NSObject {
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
       
       if let response = response as? HTTPURLResponse {
+        print("NYPLAnnotations::postJSONRequest, response.statusCode is \(response.statusCode)")
+        
         if response.statusCode == 200 {
           debugPrint(#file, "Posted Last-Read \(((parameters["target"] as! [String:Any])["selector"] as! [String:Any])["value"] as! String)")
         }
@@ -177,6 +224,9 @@ final class NYPLAnnotations: NSObject {
     let authenticationString = "\(NYPLAccount.shared().barcode!):\(NYPLAccount.shared().pin!)"
     let authenticationData:Data = authenticationString.data(using: String.Encoding.ascii)!
     let authenticationValue = "Basic \(authenticationData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters))"
+    
+    print("\nNYPLAnnotations::headers: authenticationString: \(authenticationString)")
+    print("\nNYPLAnnotations::headers: authenticationValue: \(authenticationValue)")
     
     return ["Authorization" : "\(authenticationValue)",
             "Content-Type" : "application/json"]

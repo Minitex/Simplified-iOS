@@ -695,8 +695,11 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
           setLocation:location
           forIdentifier:weakSelf.book.identifier];
          }
+         
+         NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, self.postLastRead is: %i", self.postLastRead ); // VN
+         
        if(self.postLastRead) {
-         [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
+           [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
        }
      }];
   });

@@ -42,7 +42,6 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
   self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Table of Contents", @"Bookmarks"] ];
     
   self.segmentedControl.frame = CGRectMake(0, 80, self.view.bounds.size.width, 50);
-  self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
   self.segmentedControl.selectedSegmentIndex = 0;
   self.segmentedControl.tintColor = [UIColor blackColor];
   [self.segmentedControl addTarget:self action:@selector(didSelectSegment) forControlEvents: UIControlEventValueChanged];
@@ -124,18 +123,16 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 - (void) didSelectSegment
 {
     NSLog(@"Selected %@", [self.segmentedControl titleForSegmentAtIndex:[self.segmentedControl selectedSegmentIndex]]);
-    /*
-     if ([self.segmentedControl selectedSegmentIndex] == 0)
+    
+     if ([self.segmentedControl selectedSegmentIndex] == 1)
      {
-     NSLog(@"Selected TOC");
+         NSLog(@"Selected Bookmarks");
+         // let's do a get all bookmarks here
      
      }
-     else
-     {
-     NSLog(@"Selected Boomarks");
-     }
-     */
+     
     //NSLog(@"Selected something in segmented control");
+    
 }
 
 @end
