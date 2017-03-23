@@ -19,5 +19,6 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *)opaqueLocation;
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle NS_UNAVAILABLE;
 
 - (instancetype)initWithTOCElements:(NSArray *)TOCElements;
+- (instancetype)initWithTOCElements:(NSArray *)TOCElements andBookmarkElements:(NSArray *)bookmarkElements;
 
 @end

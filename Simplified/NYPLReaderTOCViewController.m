@@ -10,7 +10,9 @@
 
 @property (nonatomic) RDNavigationElement *navigationElement;
 @property (nonatomic) UITableView *tableView;
-@property (nonatomic) NSArray *TOCElements;
+@property (nonatomic) NSArray *selectedTextElements; // either Table of Contents, or bookmarks
+@property (nonatomic) NSArray *TOCElements;          // we need to save off current TOCElements when we're switching whic data to point to
+@property (nonatomic) NSArray *bookmarkElements;     // we need to save off current bookmarks when we're switching which data to point to
 @property (nonatomic) UISegmentedControl *segmentedControl;
 
 @end
@@ -28,10 +30,33 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
   
   self.preferredContentSize = CGSizeMake(320, 1024);
   
-  self.TOCElements = TOCElements;
-  
+  //self.TOCElements = TOCElements;
+  self.selectedTextElements = TOCElements;
+    
   return self;
 }
+
+- (instancetype)initWithTOCElements:(NSArray *)TOCElements andBookmarkElements:(NSArray *)bookmarkElements
+{
+    self = [super init];
+    if(!self) return nil;
+    
+    self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
+    
+    self.preferredContentSize = CGSizeMake(320, 1024);
+    
+    //self.TOCElements = TOCElements;
+    self.selectedTextElements = TOCElements;
+    
+    self.bookmarkElements = bookmarkElements;
+    
+    // bookmarks should be set here as well. Grabbing bookmarks should also be called everytime we
+    // switch to bookmarks in segment control because we don't know if it's been updated since
+    
+    return self;
+}
+
+
 
 #pragma mark UIViewController
 
@@ -92,7 +117,7 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
 - (NSInteger)tableView:(__attribute__((unused)) UITableView *)tableView
  numberOfRowsInSection:(__attribute__((unused)) NSInteger)section
 {
-  return self.TOCElements.count;
+  return self.selectedTextElements.count;
 }
 
 - (UITableViewCell *)tableView:(__attribute__((unused)) UITableView *)tableView
@@ -101,10 +126,10 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
   NYPLReaderTOCCell *const cell = [[NYPLReaderTOCCell alloc]
                                    initWithReuseIdentifier:reuseIdentifier];
   
-  NYPLReaderTOCElement *const TOCElement = self.TOCElements[indexPath.row];
+  NYPLReaderTOCElement *const selectedTextElement = self.selectedTextElements[indexPath.row];
   
-  cell.nestingLevel = TOCElement.nestingLevel;
-  cell.title = TOCElement.title;
+  cell.nestingLevel = selectedTextElement.nestingLevel;
+  cell.title = selectedTextElement.title;
   
   return cell;
 }
@@ -114,10 +139,10 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
 - (void)tableView:(__attribute__((unused)) UITableView *const)tableView
 didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 {
-  NYPLReaderTOCElement *const TOCelement = self.TOCElements[indexPath.row];
+  NYPLReaderTOCElement *const selectedTextElement = self.selectedTextElements[indexPath.row];
   
   [self.delegate TOCViewController:self
-           didSelectOpaqueLocation:TOCelement.opaqueLocation];
+           didSelectOpaqueLocation:selectedTextElement.opaqueLocation];
 }
 
 - (void) didSelectSegment
@@ -126,8 +151,11 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     
      if ([self.segmentedControl selectedSegmentIndex] == 1)
      {
-         NSLog(@"Selected Bookmarks");
+         //NSLog(@"Selected Bookmarks");
          // let's do a get all bookmarks here
+         
+         // for now, we will display bookmark data to the console only
+         NSLog(@"Bookmarks are: %@,", self.bookmarkElements);
      
      }
      

@@ -78,15 +78,19 @@ final class NYPLAnnotations: NSObject {
         print("NYPLAnnotations::postBookmark, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
     
         postJSONRequest(book, url, parameters, NYPLAnnotations.headers)
-     } else {
-        Log.error(#file, "MainFeedURL does not exist")
-     }
-   }
- }
+      } else {
+         Log.error(#file, "MainFeedURL does not exist")
+      }
+    }
+  }
     
+  class func getBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ())
+  {
+    syncLastRead(book, completionHandler: completionHandler)
+  }
     
-    
-  class func sync(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ()) {
+  class func sync(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ())
+  {
     syncLastRead(book, completionHandler: completionHandler)
   }
   

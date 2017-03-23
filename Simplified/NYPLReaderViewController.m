@@ -827,9 +827,12 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
 
 - (void)didSelectTOC
 {
+  //NYPLReaderTOCViewController *const viewController =
+  //  [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements];
+    
   NYPLReaderTOCViewController *const viewController =
-    [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements];
-  
+    [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements andBookmarkElements:self.rendererView.bookmarkElements];
+    
   viewController.delegate = self;
   
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

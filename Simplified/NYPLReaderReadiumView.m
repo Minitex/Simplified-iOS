@@ -38,6 +38,7 @@
 @property (nonatomic) BOOL isPageTurning, canGoLeft, canGoRight;
 @property (nonatomic) RDPackageResourceServer *server;
 @property (nonatomic) NSArray *TOCElements;
+@property (nonatomic) NSArray *bookmarkElements; // VN
 @property (nonatomic) WKWebView *webView;
 
 @property (nonatomic) NSDictionary *bookMapDictionary;
@@ -91,6 +92,7 @@ static void generateTOCElements(NSArray *const navigationElements,
     generateTOCElements(navigationElement.children, nestingLevel + 1, TOCElements);
   }
 }
+
 
 // The idea for this was taken from here:
 // http://stackoverflow.com/a/34679880
@@ -541,7 +543,19 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   
   [self sequentiallyEvaluateJavaScript:javascript];
   [self syncLastReadingPosition];
+    
+    // is this a good place to call syncBookmarks
+  [self syncBookmarks];
 }
+
+- (void)syncBookmarks
+{
+  // This is where we call stuff in Annotations to do our GET and actually return bookmarks here (before it gets formatted, etc.)
+    // and placed in the NSArray* bookmarkElements object
+    [self generateBookmarkElements];
+    NSLog(@"NYPLReaderReadiumView::syncBookmarks called");
+}
+
 - (void)syncLastReadingPosition
 {
   Account *currentAccount = [[AccountsManager sharedInstance] currentAccount];
@@ -853,6 +867,16 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   return _TOCElements;
 }
 
+#pragma mark NYPLReaderRenderer
+
+- (NSArray *)bookmarkElements
+{
+  //if(_bookmarkElements) return _bookmarkElements;
+  
+    
+  return _bookmarkElements;
+}
+
 - (void)openOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
 {
   if(![(id)opaqueLocation isKindOfClass:[RDNavigationElement class]]) {
@@ -865,6 +889,11 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
    [NSString stringWithFormat:@"ReadiumSDK.reader.openContentUrl('%@', '%@')",
     navigationElement.content,
     navigationElement.sourceHref]];
+}
+
+- (void)generateBookmarkElements
+{
+    _bookmarkElements = @[@"apple", @"banana", @"orange"];
 }
 
 - (BOOL) bookHasMediaOverlays {

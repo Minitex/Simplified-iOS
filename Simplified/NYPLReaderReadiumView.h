@@ -24,4 +24,5 @@
 - (BOOL) touchIntersectsLink:(UITouch *)touch;
 
 - (void) syncLastReadingPosition;
+- (void) syncBookmarks;
 @end
