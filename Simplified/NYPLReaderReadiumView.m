@@ -552,7 +552,23 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
   // This is where we call stuff in Annotations to do our GET and actually return bookmarks here (before it gets formatted, etc.)
     // and placed in the NSArray* bookmarkElements object
-    [self generateBookmarkElements];
+    // the function call below actually returns an array of dictionaries
+  [NYPLAnnotations syncAllBookmarks:self.book completionHandler:^(NSArray<NSDictionary<NSString *, NSString *> *> * _Nullable responseObject) {
+        //NSDictionary * doSomething = responseObject;
+      NSLog(@"\nNYPLReaderReadiumView::syncBookmarks, returned responseObject: %@", responseObject);
+      if (responseObject != nil)
+      {
+          // do stuff
+          // For now, let's pass the array into generateBookmarkElement and let
+          // that function figure out what to do
+          [self generateBookmarkElements: responseObject];
+      }
+      
+      
+      //_bookmarkElements = responseObject;
+    }];
+    
+   // [self generateBookmarkElements];
     NSLog(@"NYPLReaderReadiumView::syncBookmarks called");
 }
 
@@ -877,6 +893,15 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   return _bookmarkElements;
 }
 
+- (void)generateBookmarkElements:(NSArray<NSDictionary<NSString *, NSString *> *> *)  responseObject
+{
+    //_bookmarkElements = responseObject;
+    //_bookmarkElements = @[@"apple", @"banana", @"orange"];
+    
+    _bookmarkElements = [responseObject valueForKey:@"serverCFI"];
+}
+
+
 - (void)openOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
 {
   if(![(id)opaqueLocation isKindOfClass:[RDNavigationElement class]]) {
@@ -891,10 +916,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     navigationElement.sourceHref]];
 }
 
-- (void)generateBookmarkElements
-{
-    _bookmarkElements = @[@"apple", @"banana", @"orange"];
-}
 
 - (BOOL) bookHasMediaOverlays {
   /*

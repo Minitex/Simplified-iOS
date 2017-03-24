@@ -84,9 +84,10 @@ final class NYPLAnnotations: NSObject {
     }
   }
     
-  class func getBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ())
+  class func syncAllBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [[String:String]]?) -> ())
   {
-    syncLastRead(book, completionHandler: completionHandler)
+    print("NYPLAnnotations::syncAllBookmarks called");
+    syncLastBookmarks(book, completionHandler: completionHandler)
   }
     
   class func sync(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [String:String]?) -> ())
@@ -141,6 +142,8 @@ final class NYPLAnnotations: NSObject {
        
     if (NYPLAccount.shared().hasBarcodeAndPIN() && book.annotationsURL != nil)
     {
+      print("NYPLAnnotations::syncLastRead, book.annotationsURL is: \(book.annotationsURL)")
+        
       var request = URLRequest.init(url: book.annotationsURL,
                                     cachePolicy: .reloadIgnoringLocalCacheData,
                                     timeoutInterval: 30)
@@ -157,6 +160,9 @@ final class NYPLAnnotations: NSObject {
           return
         } else {
           
+          print("NYPLAnnotations::syncLastRead, response is: \(response)")
+          print("NYPLAnnotations::syncLastRead, data is \(data)")
+            
           guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any] else {
             Log.error(#file, "JSON could not be created from data.")
             completionHandler(nil)
@@ -176,6 +182,7 @@ final class NYPLAnnotations: NSObject {
               return
             }
             
+            print("NYPLAnnotations::syncLastRead, total is: \(total)")
             for item in items
             {
               
@@ -184,6 +191,8 @@ final class NYPLAnnotations: NSObject {
                 return
               }
               
+              print("NYPLAnnotations::syncLastRead, book.identifier is: \(book.identifier)")
+                
               if source == book.identifier
               {
                 
@@ -192,6 +201,7 @@ final class NYPLAnnotations: NSObject {
                   return
                 }
                 
+                print("NYPLAnnotations::syncLastRead, serverCFI is: \(serverCFI)")
                 var responseObject = ["serverCFI" : serverCFI]
                 
                 if let body = item["body"] as? [String:AnyObject],
@@ -202,12 +212,16 @@ final class NYPLAnnotations: NSObject {
                   responseObject["time"] = time
                 }
                 
+                
                 Log.info(#file, "\(responseObject["serverCFI"])")
                 completionHandler(responseObject)
                 return
-              }
-            }
-          } else {
+ 
+              } // this ends source == book.identifier
+            }   // this ends for item in items
+            
+          }
+          else {
             completionHandler(nil)
             return
           }
@@ -223,6 +237,126 @@ final class NYPLAnnotations: NSObject {
     }
   }
   
+
+    private class func syncLastBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObjectArray: [[String:String]]?) -> ()) {
+        
+        if (NYPLAccount.shared().hasBarcodeAndPIN() && book.annotationsURL != nil)
+        {
+            print("NYPLAnnotations::syncLastBookmarks, book.annotationsURL is: \(book.annotationsURL)")
+            
+            var request = URLRequest.init(url: book.annotationsURL,
+                                          cachePolicy: .reloadIgnoringLocalCacheData,
+                                          timeoutInterval: 30)
+            request.httpMethod = "GET"
+            
+            for (headerKey, headerValue) in NYPLAnnotations.headers {
+                request.setValue(headerValue, forHTTPHeaderField: headerKey)
+            }
+            
+            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                if error != nil {
+                    completionHandler(nil)
+                    return
+                } else {
+                    
+                    print("NYPLAnnotations::syncLastBookmarks, response is: \(response)")
+                    print("NYPLAnnotations::syncLastBookmarks, data is \(data)")
+                    
+                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any] else {
+                        Log.error(#file, "JSON could not be created from data.")
+                        completionHandler(nil)
+                        return
+                    }
+                    
+                    guard let first = json["first"] as? [String:AnyObject], let items = first["items"] as? [AnyObject] else {
+                        completionHandler(nil)
+                        return
+                    }
+                    
+                    
+                    guard let total:Int = json["total"] as? Int else {
+                        completionHandler(nil)
+                        return
+                    }
+                    print("NYPLAnnotations::syncLastBookmarks, total is: \(total)")
+                    
+                    if total > 0
+                    {
+                        var responseObjectArray = [[String:String]]()
+                        
+                        // let's grab the device, time, and CFI
+                        for item in items
+                        {
+                            
+                            guard let target = item["target"] as? [String:AnyObject],
+                                  let source = target["source"] as? String else {
+                                    completionHandler(nil)
+                                    return
+                            }
+
+                            var responseObject = [String:String]()
+                            
+                            guard let motivation = item["motivation"] as? String
+                                 else {
+                                    completionHandler(nil)
+                                    return
+                            }
+  
+                            print("NYPLAnnotations::syncLastBookmarks, motivation is: \(motivation)")
+                            if (motivation.lowercased().contains("bookmarking"))
+                            {
+                                    
+                                responseObject["motivation"] = motivation
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            
+                            guard let selector = target["selector"] as? [String:AnyObject],
+                                let serverCFI = selector["value"] as? String else {
+                                    completionHandler(nil)
+                                    return
+                            }
+                            responseObject["serverCFI"] = serverCFI
+                            
+                            print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
+                            
+                            
+                            if let body = item["body"] as? [String:AnyObject],
+                                let device = body["http://librarysimplified.org/terms/device"] as? String,
+                                let time = body["http://librarysimplified.org/terms/time"] as? String
+                            {
+                                responseObject["device"] = device
+                                responseObject["time"] = time
+                            }
+                            
+                            responseObjectArray.append(responseObject)
+                        }   // end for item in items
+                        
+                        Log.info(#file, "\(responseObjectArray)")
+                        completionHandler(responseObjectArray)
+                        return
+                    }   // end if total > 0
+                    else {
+                        completionHandler(nil)
+                        return
+                    }
+                    
+                }
+            }
+            dataTask.resume()
+        }
+        else
+        {
+            completionHandler(nil)
+            return
+        }
+    }
+   
+    
+    
   class var headers: [String:String]
   {
     let authenticationString = "\(NYPLAccount.shared().barcode!):\(NYPLAccount.shared().pin!)"

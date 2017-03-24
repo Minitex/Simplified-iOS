@@ -156,8 +156,14 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
          
          // for now, we will display bookmark data to the console only
          NSLog(@"Bookmarks are: %@,", self.bookmarkElements);
-     
+         //self.selectedTextElements = self.bookmarkElements;
+        // [self.tableView reloadData];
      }
+    else
+    {
+        //self.selectedTextElements = self.TOCElements;
+       // [self.tableView reloadData];
+    }
      
     //NSLog(@"Selected something in segmented control");
     
