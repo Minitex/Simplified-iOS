@@ -31,7 +31,8 @@
 @property (nonatomic) BOOL previousPageTurnWasRight;
 @property (nonatomic) UIView<NYPLReaderRenderer> *rendererView;
 @property (nonatomic) UIBarButtonItem *settingsBarButtonItem;
-@property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;
+@property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;    // VN added
+@property (nonatomic) BOOL bookmarkStatus;  // VN added
 @property (nonatomic) BOOL shouldHideInterfaceOnNextAppearance;
 @property (nonatomic) UIView *bottomView;
 @property (nonatomic) UIImageView *bottomViewImageView;
@@ -121,6 +122,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceOverStatusChanged) name:UIAccessibilityVoiceOverStatusChanged object:nil];
   
+  _bookmarkStatus = NO;   // VN, off or no bookmark by default for current page
   return self;
 }
 
@@ -881,20 +883,37 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     [rv syncLastReadingPosition];
      */
     
-    /*
-     if ([self.bookmarkButtonItem.accessibilityLabel isEqualToString:@"Bookmark Off"])
-     {
-     //[self.bookmarkButtonItem.image ]
-     
-     }
-     else
-     {
-     self.bookmarkButtonItem.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Bookmark Off", nil)];
-     // bookmarkButton.bounds = settingsButton.bounds;
-     self.bookmarkButtonItem.image = [UIImage setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
-     // [self.bookmarkButtonItem.buttonGroup.barButtonItems setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
-     }
-     */
+    _bookmarkStatus = ! _bookmarkStatus;
+    NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
+    
+    if (_bookmarkStatus == YES)
+    {
+        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
+        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
+        
+        NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
+        
+        [NYPLAnnotations postBookmark:rv.book cfi:rv.currentCFI];
+        // let's just try printing stuff from here
+        
+        //rv.book;
+        //NSLog(@"Book Info: %@", [rv getBookInfo]);
+        
+        // call command to set a bookmark here
+        // can we get book and cfi here?
+        
+        NSLog(@"Bookmark set to ON");
+    }
+    else
+    {
+        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
+        
+        // call command to remove a bookmark here
+        NSLog(@"Bookmark set to OFF");
+    }
+    
+    
 }
 
 - (void)turnPageIsRight:(BOOL)isRight

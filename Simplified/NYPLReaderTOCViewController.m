@@ -48,6 +48,20 @@ static NSString *const reuseIdentifier = @"ReaderTOCCell";
     //self.TOCElements = TOCElements;
     self.selectedTextElements = TOCElements;
     
+    self.TOCElements = TOCElements;
+    
+    NSMutableArray *locations;
+    for (NYPLReaderTOCElement *element in TOCElements)
+    {
+        NYPLReaderRendererOpaqueLocation *location = element.opaqueLocation;
+        [locations addObject:location];
+    }
+    
+   // for (NYPLReaderTOCElement * bookmarkElement in bookmarkElements)
+   // {
+   //     bookmarkElement.opaqueLocation = locations[0];
+  //  }
+    
     self.bookmarkElements = bookmarkElements;
     
     // bookmarks should be set here as well. Grabbing bookmarks should also be called everytime we
@@ -156,13 +170,27 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
          
          // for now, we will display bookmark data to the console only
          NSLog(@"Bookmarks are: %@,", self.bookmarkElements);
+         
+         // For now, we've commented out the code below to prevent the app from crashing
+         /*
+         for (NYPLReaderTOCElement *element in self.bookmarkElements)
+         {
+             NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
+         }
+          */
          //self.selectedTextElements = self.bookmarkElements;
         // [self.tableView reloadData];
      }
     else
     {
-        //self.selectedTextElements = self.TOCElements;
-       // [self.tableView reloadData];
+        NSLog(@"Table of Contents are:\n");
+        //NSLog(@"Table of contents are: %@,", self.TOCElements);
+        for (NYPLReaderTOCElement *element in self.TOCElements)
+        {
+            NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
+        }
+        self.selectedTextElements = self.TOCElements;
+        [self.tableView reloadData];
     }
      
     //NSLog(@"Selected something in segmented control");

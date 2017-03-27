@@ -39,6 +39,7 @@
 @property (nonatomic) RDPackageResourceServer *server;
 @property (nonatomic) NSArray *TOCElements;
 @property (nonatomic) NSArray *bookmarkElements; // VN
+@property (nonatomic) NSString *currentCFI; // VN
 @property (nonatomic) WKWebView *webView;
 
 @property (nonatomic) NSDictionary *bookMapDictionary;
@@ -559,16 +560,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
       if (responseObject != nil)
       {
           // do stuff
-          // For now, let's pass the array into generateBookmarkElement and let
+          // For now, let's pass the array into generateBookmarkElements and let
           // that function figure out what to do
           [self generateBookmarkElements: responseObject];
       }
       
-      
-      //_bookmarkElements = responseObject;
     }];
     
-   // [self generateBookmarkElements];
     NSLog(@"NYPLReaderReadiumView::syncBookmarks called");
 }
 
@@ -730,6 +728,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
          
        if(self.postLastRead) {
            [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
+           self.currentCFI = location.locationString;   // VN
        }
      }];
   });
@@ -893,12 +892,60 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   return _bookmarkElements;
 }
 
+// This method is taking in an array of dictionaries
 - (void)generateBookmarkElements:(NSArray<NSDictionary<NSString *, NSString *> *> *)  responseObject
 {
     //_bookmarkElements = responseObject;
     //_bookmarkElements = @[@"apple", @"banana", @"orange"];
     
     _bookmarkElements = [responseObject valueForKey:@"serverCFI"];
+    
+    // All the stuff below doesn't seem to work, for now
+    NSArray * CFIs = [responseObject valueForKey:@"serverCFI"];
+    NSMutableArray * bookmarkElements;
+    NSMutableArray * opaqueLocations;
+    for (NYPLReaderTOCElement *element in _TOCElements)
+    {
+        [opaqueLocations addObject:element.opaqueLocation];
+    }
+    //NSArray * navigationElements =
+    
+    
+    RDNavigationElement *const navigationElement = [RDNavigationElement alloc];
+    
+    [self sequentiallyEvaluateJavaScript:
+     [NSString stringWithFormat:@"ReadiumSDK.reader.openContentUrl('%@', '%@')",
+      navigationElement.content,
+      navigationElement.sourceHref]];
+    
+    
+    
+    for (NSString * CFI in CFIs)
+    {
+        /*
+        NYPLReaderTOCElement *const TOCElement =
+        [[NYPLReaderTOCElement alloc]
+         initWithOpaqueLocation:opaqueLocations[0]
+         title:CFI
+         nestingLevel:1];
+        [bookmarkElements addObject:TOCElement];
+         */
+        RDNavigationElement *const navigationElement = [RDNavigationElement alloc];
+       // [navigationElement.content = @"aaa"];
+       // navigationElement.sourceHref = @"bbb";
+        // when I try to set navigationElement, I get a this is a read only property error
+        
+        NYPLReaderTOCElement *const TOCElement =
+        [[NYPLReaderTOCElement alloc]
+         initWithOpaqueLocation:((NYPLReaderRendererOpaqueLocation *) navigationElement)
+         //initWithOpaqueLocation:((NYPLReaderRendererOpaqueLocation *)@"")
+         title:CFI
+         nestingLevel:1];
+        [bookmarkElements addObject:TOCElement];
+        
+    }
+    
+  //  _bookmarkElements = bookmarkElements;
 }
 
 
