@@ -11,6 +11,7 @@
 #import "NYPLReaderRenderer.h"
 #import "NYPLReaderSettings.h"
 #import "NYPLReaderTOCElement.h"
+#import "NYPLReaderBookmarkElement.h"
 #import "NYPLReadium.h"
 #import "UIColor+NYPLColorAdditions.h"
 #import "NYPLLog.h"
@@ -887,7 +888,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 - (NSArray *)bookmarkElements
 {
   //if(_bookmarkElements) return _bookmarkElements;
-  
+    if (_bookmarkElements) return _bookmarkElements;
     
   return _bookmarkElements;
 }
@@ -898,54 +899,21 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     //_bookmarkElements = responseObject;
     //_bookmarkElements = @[@"apple", @"banana", @"orange"];
     
-    _bookmarkElements = [responseObject valueForKey:@"serverCFI"];
+    //_bookmarkElements = [responseObject valueForKey:@"serverCFI"];
     
-    // All the stuff below doesn't seem to work, for now
+    NSMutableArray * bookmarkElements = [[NSMutableArray alloc] init];
+   // NSArray * serverCFIs = [responseObject valueForKey:@"serverCFI"];
+   // NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
+    
     NSArray * CFIs = [responseObject valueForKey:@"serverCFI"];
-    NSMutableArray * bookmarkElements;
-    NSMutableArray * opaqueLocations;
-    for (NYPLReaderTOCElement *element in _TOCElements)
-    {
-        [opaqueLocations addObject:element.opaqueLocation];
-    }
-    //NSArray * navigationElements =
-    
-    
-    RDNavigationElement *const navigationElement = [RDNavigationElement alloc];
-    
-    [self sequentiallyEvaluateJavaScript:
-     [NSString stringWithFormat:@"ReadiumSDK.reader.openContentUrl('%@', '%@')",
-      navigationElement.content,
-      navigationElement.sourceHref]];
-    
-    
-    
+    //for (NSString * CFI in contentCFIs)
     for (NSString * CFI in CFIs)
     {
-        /*
-        NYPLReaderTOCElement *const TOCElement =
-        [[NYPLReaderTOCElement alloc]
-         initWithOpaqueLocation:opaqueLocations[0]
-         title:CFI
-         nestingLevel:1];
-        [bookmarkElements addObject:TOCElement];
-         */
-        RDNavigationElement *const navigationElement = [RDNavigationElement alloc];
-       // [navigationElement.content = @"aaa"];
-       // navigationElement.sourceHref = @"bbb";
-        // when I try to set navigationElement, I get a this is a read only property error
-        
-        NYPLReaderTOCElement *const TOCElement =
-        [[NYPLReaderTOCElement alloc]
-         initWithOpaqueLocation:((NYPLReaderRendererOpaqueLocation *) navigationElement)
-         //initWithOpaqueLocation:((NYPLReaderRendererOpaqueLocation *)@"")
-         title:CFI
-         nestingLevel:1];
-        [bookmarkElements addObject:TOCElement];
-        
+        NYPLReaderBookmarkElement * bookmarkElement = [[NYPLReaderBookmarkElement alloc] initWithCFI:CFI];
+        [bookmarkElements addObject:bookmarkElement];
     }
     
-  //  _bookmarkElements = bookmarkElements;
+    _bookmarkElements = bookmarkElements;
 }
 
 

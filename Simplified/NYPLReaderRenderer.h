@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, NYPLReaderRendererGesture) {
 @property (nonatomic, readonly, nonnull) NSArray *TOCElements;
 @property (nonatomic, readonly, nonnull) NSArray *bookmarkElements; // VN
 @property (nonatomic, readonly, nonnull) NYPLBook *book; // VN
-@property (nonatomic, readonly, nonnull) NSString *currentCFI;
+@property (nonatomic, readonly, nonnull) NSString *currentCFI;  // VN
 
 // This must be called with a reader-appropriate underlying value. Readers implementing this should
 // throw |NSInvalidArgumentException| in the event it is not.
