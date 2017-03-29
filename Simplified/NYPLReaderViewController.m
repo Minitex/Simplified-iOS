@@ -832,11 +832,19 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
   //NYPLReaderTOCViewController *const viewController =
   //  [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements];
     
-  NYPLReaderTOCViewController *const viewController =
-    [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements andBookmarkElements:self.rendererView.bookmarkElements];
+  //NYPLReaderTOCViewController *const viewController =
+  //  [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements andBookmarkElements:self.rendererView.bookmarkElements];
     
-  viewController.delegate = self;
-  
+  //viewController.delegate = self;
+    
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"NYPLTOC" bundle:nil];
+    NYPLReaderTOCViewController *viewController = [sb instantiateViewControllerWithIdentifier:@"NYPLTOC"];
+    viewController.delegate = self;
+    viewController.TOCElements = self.rendererView.TOCElements;
+    viewController.bookmarkElements = self.rendererView.bookmarkElements;
+    
+    
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     [self.activePopoverController dismissPopoverAnimated:NO];
     self.activePopoverController =

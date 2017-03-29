@@ -13,8 +13,8 @@
 @property (nonatomic) RDNavigationElement *navigationElement;
 @property (nonatomic) UITableView *tableView;
 //@property (nonatomic) NSArray *selectedTextElements; // either Table of Contents, or bookmarks
-@property (nonatomic) NSArray *TOCElements;          // we need to save off current TOCElements when we're switching whic data to point to
-@property (nonatomic) NSArray *bookmarkElements;     // we need to save off current bookmarks when we're switching which data to point to
+//@property (nonatomic) NSArray *TOCElements;          // we need to save off current TOCElements when we're switching whic data to point to
+//@property (nonatomic) NSArray *bookmarkElements;     // we need to save off current bookmarks when we're switching which data to point to
 @property (nonatomic) UISegmentedControl *segmentedControl;
 @property (nonatomic) NSString *dataSource;
 
@@ -28,6 +28,7 @@ static NSString *const TOCDataSource = @"TOCDataSource";
 
 @implementation NYPLReaderTOCViewController
 
+/*
 - (instancetype)initWithTOCElements:(NSArray *const)TOCElements
 {
   self = [super init];
@@ -42,9 +43,12 @@ static NSString *const TOCDataSource = @"TOCDataSource";
     
   return self;
 }
+ */
 
+/*
 - (instancetype)initWithTOCElements:(NSArray *)TOCElements andBookmarkElements:(NSArray *)bookmarkElements
 {
+    
     self = [super init];
     if(!self) return nil;
     
@@ -62,14 +66,29 @@ static NSString *const TOCDataSource = @"TOCDataSource";
     // switch to bookmarks in segment control because we don't know if it's been updated since
     
     return self;
+    
+}
+ */
+
+/*
+- (void)setTOCElements:(NSArray *)TOCElements
+{
+    self.TOCElements = TOCElements;
 }
 
+- (void)setBookmarkElements:(NSArray *)bookmarkElements
+{
+    self.bookmarkElements = bookmarkElements;
+}
+*/
 
 
 #pragma mark UIViewController
 
 - (void)viewDidLoad
 {
+    self.dataSource = TOCDataSource;
+    /*
   [super viewDidLoad];
     
   self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Table of Contents", @"Bookmarks"] ];
@@ -103,6 +122,7 @@ static NSString *const TOCDataSource = @"TOCDataSource";
   //  [self.view insertSubview:self.tableView belowSubview:self.segmentedControl];
     
   [self.view bringSubviewToFront:self.segmentedControl];
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -164,7 +184,7 @@ static NSString *const TOCDataSource = @"TOCDataSource";
     
       bookmarkCell.title = @"Bookmark Title";
       bookmarkCell.excerpt = @"Bookmark Excerpt";
-      bookmarkCell.pageNumber = @"Bookmark PageNumber";
+      //bookmarkCell.pageNumber = @"Bookmark PageNumber";
       bookmarkCell.pageNumber = bookmarkElement.CFI;
   }
     
