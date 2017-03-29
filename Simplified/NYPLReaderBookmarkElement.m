@@ -27,8 +27,14 @@
 - (instancetype)initWithCFI:(NSString *)CFI
 {
     self = [super init];
+    if(!self) return nil;
     
     self.CFI = CFI;
+    self.annotationId = 0;
+    
+    self.title = @"";
+    self.excerpt = @"";
+    self.pageNumber = @"";
     
     return self;
 }

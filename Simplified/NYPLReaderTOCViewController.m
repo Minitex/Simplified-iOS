@@ -157,13 +157,16 @@ static NSString *const TOCDataSource = @"TOCDataSource";
   NYPLReaderBookmarkCell *const bookmarkCell = [[NYPLReaderBookmarkCell alloc]
                                                   initWithReuseIdentifier:reuseIdentifierBookmark];
     
-    // line below crashes the app for some reason. why is that?
-  //NYPLReaderBookmarkElement *const bookmarkElement = self.bookmarkElements[indexPath.row];
+  // line below is a hack for now, so table doesn't crash
+  if ((NSInteger)indexPath.row < (NSInteger)self.bookmarkElements.count)
+  {
+      NYPLReaderBookmarkElement *const bookmarkElement = self.bookmarkElements[indexPath.row];
     
-  bookmarkCell.title = @"Bookmark Title";
-  bookmarkCell.excerpt = @"Bookmark Excerpt";
-  bookmarkCell.pageNumber = @"Bookmark PageNumber";
-  //bookmarkCell.pageNumber = bookmarkElement.CFI;
+      bookmarkCell.title = @"Bookmark Title";
+      bookmarkCell.excerpt = @"Bookmark Excerpt";
+      bookmarkCell.pageNumber = @"Bookmark PageNumber";
+      bookmarkCell.pageNumber = bookmarkElement.CFI;
+  }
     
   if (self.dataSource == bookmarkDataSource)
   {

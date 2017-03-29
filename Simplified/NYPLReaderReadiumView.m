@@ -901,7 +901,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     //_bookmarkElements = [responseObject valueForKey:@"serverCFI"];
     
-    NSMutableArray * bookmarkElements = [[NSMutableArray alloc] init];
+    NSMutableArray * bookmarkElements = [[NSMutableArray alloc] initWithCapacity:responseObject.count];
    // NSArray * serverCFIs = [responseObject valueForKey:@"serverCFI"];
    // NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
     
