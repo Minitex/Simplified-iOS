@@ -21,6 +21,6 @@
 @property (nonatomic) NSString *pageNumber;
 
 // designated initializer
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+//- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

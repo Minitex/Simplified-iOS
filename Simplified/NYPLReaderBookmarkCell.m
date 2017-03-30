@@ -12,9 +12,12 @@
 
 @interface NYPLReaderBookmarkCell()
 
-@property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UILabel *excerptLabel;
-@property (nonatomic) UILabel *pageNumberLabel;
+//@property (nonatomic) UILabel *titleLabel;
+//@property (nonatomic) UILabel *excerptLabel;
+//@property (nonatomic) UILabel *pageNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *excerptLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pageNumberLabel;
 
 @end
 
@@ -22,6 +25,7 @@
 
 
 // designated initializer
+/*
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     
@@ -48,12 +52,15 @@
     [self.contentView addSubview:self.pageNumberLabel];
     
     return self;
+  
 }
+ */
 
 #pragma mark UIView
 
 - (void) layoutSubviews
 {
+    /*
     CGRect titleFrame = self.contentView.bounds;
     titleFrame.size.height = self.contentView.bounds.size.height / 3.0;
     self.titleLabel.frame = titleFrame;
@@ -71,6 +78,7 @@
     //pageNumberFrame.origin.y = self.contentView.bounds.origin.y * 1.6;
     pageNumberFrame.origin.y += 30;
     self.pageNumberLabel.frame = pageNumberFrame;
+     */
 }
 
 

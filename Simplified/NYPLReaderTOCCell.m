@@ -4,7 +4,8 @@
 
 @interface NYPLReaderTOCCell ()
 
-@property (nonatomic) UILabel *titleLabel;
+//@property (nonatomic) UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -17,8 +18,8 @@
   self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
   if(!self) return nil;
   
-  self.titleLabel = [[UILabel alloc] init];
-  [self.contentView addSubview:self.titleLabel];
+  //self.titleLabel = [[UILabel alloc] init];
+  //[self.contentView addSubview:self.titleLabel];
   
   self.backgroundColor = [NYPLReaderSettings sharedSettings].backgroundColor;
   self.titleLabel.textColor = [NYPLReaderSettings sharedSettings].foregroundColor;
