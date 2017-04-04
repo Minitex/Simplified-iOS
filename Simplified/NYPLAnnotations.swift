@@ -47,7 +47,7 @@ final class NYPLAnnotations: NSObject {
     }
   }
     
-  class func postBookmark(_ book:NYPLBook, cfi:NSString)
+  class func postBookmark(_ book:NYPLBook, cfi:NSString, completionHandler: @escaping () -> Void)
   {
     if (NYPLAccount.shared().hasBarcodeAndPIN())
     {
@@ -77,17 +77,46 @@ final class NYPLAnnotations: NSObject {
         print("NYPLAnnotations::postBookmark, parameters is: \(parameters)")
         print("NYPLAnnotations::postBookmark, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
     
-        postJSONRequest(book, url, parameters, NYPLAnnotations.headers)
+        postJSONRequest(book, url, parameters, NYPLAnnotations.headers, completionHandler)
       } else {
          Log.error(#file, "MainFeedURL does not exist")
       }
     }
   }
     
-  class func deleteBookmark(annotationId:NSString)
+  class func deleteBookmark(annotationId:NSString, completionHandler: @escaping () -> Void)
   {
         // For this, all we need are URL and the headers
         // in fact, the annotation ID is exactly the same as the URL that we need
+    
+    let url: URL = URL(string: annotationId as String)!
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    
+    if let headers = NYPLAnnotations.headers as [String:String]? {
+        for (headerKey, headerValue) in headers {
+            request.setValue(headerValue, forHTTPHeaderField: headerKey)
+        }
+    }
+    
+    // for now, run the completionHandler only when one exists
+    
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        if let response = response as? HTTPURLResponse {
+            print("NYPLAnnotations::deleteBookmark, response.statusCode is \(response.statusCode)")
+            
+            if response.statusCode == 200 {
+                // run completion handler if one  exists
+                completionHandler()
+            }
+        } else {
+            guard let error = error as? NSError else { return }
+            
+            Log.error(#file, "Request Error Code: \(error.code). Description: \(error.localizedDescription)")
+        }
+    }
+    task.resume()
   }
     
   class func syncAllBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [[String:String]]?) -> ())
@@ -101,6 +130,46 @@ final class NYPLAnnotations: NSObject {
     syncLastRead(book, completionHandler: completionHandler)
   }
   
+    // this one is different from the other postJSONRequest in that it has a completionHandler
+    private class func postJSONRequest(_ book: NYPLBook, _ url: URL, _ parameters: [String:Any], _ headers: [String:String]?,
+                                       _ completionHandler: @escaping () -> Void)
+    {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: [.prettyPrinted]) else {
+            Log.error(#file, "Network request abandoned. Could not create JSON from given parameters.")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        
+        if let headers = headers {
+            for (headerKey, headerValue) in headers {
+                request.setValue(headerValue, forHTTPHeaderField: headerKey)
+            }
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let response = response as? HTTPURLResponse {
+                print("NYPLAnnotations::postJSONRequest, response.statusCode is \(response.statusCode)")
+                
+                if response.statusCode == 200 {
+                    completionHandler()
+                    debugPrint(#file, "Posted Last-Read \(((parameters["target"] as! [String:Any])["selector"] as! [String:Any])["value"] as! String)")
+                }
+            } else {
+                guard let error = error as? NSError else { return }
+                if NetworkQueue.StatusCodes.contains(error.code) {
+                    self.addToOfflineQueue(book, url, parameters)
+                }
+                Log.error(#file, "Request Error Code: \(error.code). Description: \(error.localizedDescription)")
+            }
+        }
+        task.resume()
+    }
+  
+    
   private class func postJSONRequest(_ book: NYPLBook, _ url: URL, _ parameters: [String:Any], _ headers: [String:String]?)
   {
     guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: [.prettyPrinted]) else {
@@ -266,8 +335,8 @@ final class NYPLAnnotations: NSObject {
                     return
                 } else {
                     
-                    print("NYPLAnnotations::syncLastBookmarks, response is: \(response)")
-                    print("NYPLAnnotations::syncLastBookmarks, data is \(data)")
+                    //print("NYPLAnnotations::syncLastBookmarks, response is: \(response)")
+                    //print("NYPLAnnotations::syncLastBookmarks, data is \(data)")
                     
                     guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any] else {
                         Log.error(#file, "JSON could not be created from data.")
@@ -303,7 +372,6 @@ final class NYPLAnnotations: NSObject {
                             print("NYPLAnnotations::syncLastBookmarks, motivation is: \(motivation)")
                             if (motivation.lowercased().contains("bookmarking"))
                             {
-                                    
                                 responseObject["motivation"] = motivation
                             }
                             else

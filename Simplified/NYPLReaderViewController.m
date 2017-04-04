@@ -837,6 +837,9 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     
   //viewController.delegate = self;
     
+    // VN: TODO : Should probably sync bookmarks before calling TOC?
+    // This doesn't work all the time!
+    [[NYPLReaderSettings sharedSettings].currentReaderReadiumView syncBookmarks];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"NYPLTOC" bundle:nil];
     NYPLReaderTOCViewController *viewController = [sb instantiateViewControllerWithIdentifier:@"NYPLTOC"];
@@ -891,27 +894,29 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     [rv syncLastReadingPosition];
      */
     
-    // No matter what, always do a GET bookmarks before either adding or deleting a bookmark!
     NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
     
     _bookmarkStatus = ! _bookmarkStatus;
-    NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
+   
     
     if (_bookmarkStatus == YES)
     {
-        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
-        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
-        
-        [rv postBookmark];
+        [rv postBookmark:^ {
+            NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
+            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
+            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
+        }];
         
         NSLog(@"Bookmark set to ON");
     }
     else
     {
-        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
-        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
         
-        [rv deleteBookmark];
+        [rv deleteBookmark:^ {
+            NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
+            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
+        }];
         
         NSLog(@"Bookmark set to OFF");
     }

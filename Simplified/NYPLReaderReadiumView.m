@@ -573,31 +573,47 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 }
 
 // implement NYPLReaderRender function
-- (void) postBookmark
+- (void) postBookmark:(void(^)(void))completionHandler
 {
     // we have to grab all the bookmarks first, before we can create a new one
-    [self syncBookmarks];
-    [NYPLAnnotations postBookmark:self.book cfi:self.currentCFI];
+    //[self syncBookmarks];
+    [NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
     
     NSLog(@"NYPLReaderReadiumView::postBookmark called");
 }
 
 // implement NYPLReaderRender function
-- (void) deleteBookmark
+- (void) deleteBookmark:(void(^)(void))completionHandler
 {
-    [self syncBookmarks];
     
-    bool bookmarkExists = false;
+    
+    //NSLog(@"NYPLReaderReadiumView::deleteBookmark, self.currentCFI is %@", self.currentCFI);
+    
+    // for now, we're going to grab all the bookmarks, grab a random annotation id (the first one) and call
+    // delete on that to make sure it works
+    
+    [self syncBookmarks];
+    NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[0];
+    [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmarkElement.annotationId completionHandler:completionHandler];
+    NSLog(@"NYPLReaderReadiumView::deleteBookmark called");
+    
+    /*
     
     // stop gap solution, check the current CFI against the bookmarkElement array
     // if there is a match, call delete bookmarks in Annotations
     
-    for (NSUInteger i = 0; i < _bookmarkElements.count; i++)
+     //bool bookmarkExists = false;
+     //NSString *annotationId;
+     for (NSUInteger i = 0; i < _bookmarkElements.count; i++)
     {
         NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[i];
+        NSLog(@"NYPLReaderReadiumView::deleteBookmark, self.currentCFI is %@", self.currentCFI);
+        NSLog(@"      NYPLReaderReadiumView::deleteBookmark, bookmarkElement.CFI is %@", bookmarkElement.CFI);
+        
         if ([bookmarkElement.CFI isEqualToString:self.currentCFI] == true)
         {
             NSLog(@"Bookmark exists for this page/CFI, CFI is: %@", self.currentCFI);
+            annotationId = bookmarkElement.annotationId;
             bookmarkExists = true;
             break;
         }
@@ -606,12 +622,15 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     if (bookmarkExists == true)
     {
         // call delete bookmarks in Annotations
+        [NYPLAnnotations deleteBookmarkWithAnnotationId:annotationId];
+        bookmarkExists = false;
     }
     else
     {
         NSLog(@"Bookmark does NOT exist for this page/CFI, CFI is %@", self.currentCFI);
     }
-    NSLog(@"NYPLReaderReadiumView::deleteBookmark called");
+     */
+    
 }
 
 

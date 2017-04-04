@@ -68,7 +68,7 @@ static NSString *const reuseIdentifierBookmark = @"bookmarkCell";
       numRows = self.tableOfContents.count;
       break;
     case 1:
-      numRows = 10;//self.bookmarks.count;
+      numRows = self.bookmarks.count;
       break;
     default:
       break;
@@ -165,7 +165,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       NSLog(@"Bookmarks are: %@,", self.bookmarks);
       for (NYPLReaderBookmarkElement *element in self.bookmarks)
       {
-        NSLog(@"element: %@", element.CFI);
+        NSLog(@"element CFI: %@, annotationId: %@", element.CFI, element.annotationId);
       }
       
     }
