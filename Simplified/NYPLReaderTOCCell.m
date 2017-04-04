@@ -1,59 +1,20 @@
-#import "NYPLReaderSettings.h"
-
 #import "NYPLReaderTOCCell.h"
 
-@interface NYPLReaderTOCCell ()
-
-//@property (nonatomic) UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
-@end
-
 @implementation NYPLReaderTOCCell
-
-#pragma mark UITableViewCell
-
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
-  self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-  if(!self) return nil;
-  
-  //self.titleLabel = [[UILabel alloc] init];
-  //[self.contentView addSubview:self.titleLabel];
-  
-  self.backgroundColor = [NYPLReaderSettings sharedSettings].backgroundColor;
-  self.titleLabel.textColor = [NYPLReaderSettings sharedSettings].foregroundColor;
-
-  return self;
-}
 
 #pragma mark UIView
 
 - (void)layoutSubviews
 {
-  CGRect frame = self.contentView.bounds;
-  frame.origin.x = self.nestingLevel * 20 + 10;
-  frame.size.width -= self.nestingLevel * 20 + 20;
-  self.titleLabel.frame = frame;
-}
-
-#pragma mark -
-
-- (void)setNestingLevel:(NSUInteger)nestingLevel
-{
-  _nestingLevel = nestingLevel;
+  [super layoutSubviews];
   
-  [self setNeedsLayout];
+  CGRect frame = self.contentView.bounds;
+  if (self.nestingLevel > 0) {
+    frame.origin.x = self.nestingLevel * 20 + 10;
+    frame.size.width -= self.nestingLevel * 20 + 20;
+    self.titleLabel.frame = frame;
+  }
 }
 
-- (NSString *)title
-{
-  return self.titleLabel.text;
-}
-
-- (void)setTitle:(NSString *const)title
-{
-  self.titleLabel.text = title;
-}
 
 @end

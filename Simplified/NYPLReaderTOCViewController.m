@@ -11,131 +11,36 @@
 @interface NYPLReaderTOCViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) RDNavigationElement *navigationElement;
-//@property (nonatomic) UITableView *tableView;
-//@property (nonatomic) NSArray *selectedTextElements; // either Table of Contents, or bookmarks
-//@property (nonatomic) NSArray *TOCElements;          // we need to save off current TOCElements when we're switching whic data to point to
-//@property (nonatomic) NSArray *bookmarkElements;     // we need to save off current bookmarks when we're switching which data to point to
-//@property (nonatomic) UISegmentedControl *segmentedControl;
-@property (nonatomic) NSString *dataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
 - (IBAction)didSelectSegment:(id)sender;
 
 @end
 
-static NSString *const reuseIdentifierTOC = @"ReaderTOCCell";
-static NSString *const reuseIdentifierBookmark = @"ReaderBookmarkCell";
-static NSString *const bookmarkDataSource = @"bookmarkDataSource";
-static NSString *const TOCDataSource = @"TOCDataSource";
+static NSString *const reuseIdentifierTOC = @"contentCell";
+static NSString *const reuseIdentifierBookmark = @"bookmarkCell";
 
 
 @implementation NYPLReaderTOCViewController
-
-/*
-- (instancetype)initWithTOCElements:(NSArray *const)TOCElements
-{
-  self = [super init];
-  if(!self) return nil;
-  
-  self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
-  
-  self.preferredContentSize = CGSizeMake(320, 1024);
-  
-  self.TOCElements = TOCElements;
-  self.dataSource = TOCDataSource;
-    
-  return self;
-}
- */
-
-/*
-- (instancetype)initWithTOCElements:(NSArray *)TOCElements andBookmarkElements:(NSArray *)bookmarkElements
-{
-    
-    self = [super init];
-    if(!self) return nil;
-    
-    self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
-    
-    self.preferredContentSize = CGSizeMake(320, 1024);
-    
-    self.TOCElements = TOCElements;
-    
-    self.bookmarkElements = bookmarkElements;
-    
-    self.dataSource = TOCDataSource;
-    
-    // bookmarks should be set here as well. Grabbing bookmarks should also be called everytime we
-    // switch to bookmarks in segment control because we don't know if it's been updated since
-    
-    return self;
-    
-}
- */
-
-/*
-- (void)setTOCElements:(NSArray *)TOCElements
-{
-    self.TOCElements = TOCElements;
-}
-
-- (void)setBookmarkElements:(NSArray *)bookmarkElements
-{
-    self.bookmarkElements = bookmarkElements;
-}
-*/
-
 
 #pragma mark UIViewController
 
 - (void)viewDidLoad
 {
-    self.dataSource = TOCDataSource;
-    
+  
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  
     self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
     
-    /*
-  [super viewDidLoad];
-    
-  self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Table of Contents", @"Bookmarks"] ];
-    
-  self.segmentedControl.frame = CGRectMake(0, 80, self.view.bounds.size.width, 50);
-  self.segmentedControl.selectedSegmentIndex = 0;
-  self.segmentedControl.tintColor = [UIColor blackColor];
-  [self.segmentedControl addTarget:self action:@selector(didSelectSegment) forControlEvents: UIControlEventValueChanged];
-  [self.view addSubview:self.segmentedControl];
-  
-    
-  CGRect newTableFrame = self.view.bounds;
-  newTableFrame.origin.y += 60;    // move tableview down
-  newTableFrame.size.height += 60; // increase tableview height
-    
-  self.tableView = [[UITableView alloc] initWithFrame:newTableFrame];
-  //self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-  self.tableView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
-                                     UIViewAutoresizingFlexibleWidth);
-  self.tableView.backgroundColor = [NYPLConfiguration backgroundColor];
-  self.tableView.dataSource = self;
-  self.tableView.delegate = self;
-    
-  [self.tableView registerClass:[NYPLReaderTOCCell class]
-         forCellReuseIdentifier:reuseIdentifierTOC];
-  [self.tableView registerClass:[NYPLReaderBookmarkCell class]
-         forCellReuseIdentifier:reuseIdentifierBookmark];
-    
-  [self.view addSubview:self.tableView];
-    
-  //  [self.view insertSubview:self.tableView belowSubview:self.segmentedControl];
-    
-  [self.view bringSubviewToFront:self.segmentedControl];
-     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+  [super viewWillAppear:animated];
+
   switch([NYPLReaderSettings sharedSettings].colorScheme) {
     case NYPLReaderSettingsColorSchemeBlackOnSepia:
       self.tableView.backgroundColor = [NYPLConfiguration backgroundSepiaColor];
@@ -149,8 +54,6 @@ static NSString *const TOCDataSource = @"TOCDataSource";
   }
   
   [self.tableView reloadData];
-
-  [super viewWillAppear:animated];
 }
 
 #pragma mark UITableViewDataSource
@@ -158,52 +61,52 @@ static NSString *const TOCDataSource = @"TOCDataSource";
 - (NSInteger)tableView:(__attribute__((unused)) UITableView *)tableView
  numberOfRowsInSection:(__attribute__((unused)) NSInteger)section
 {
-    NSInteger numRows = self.TOCElements.count;
-    
-    if (self.dataSource == bookmarkDataSource)
-    {
-        numRows = self.bookmarkElements.count;
-    }
-    return numRows;
-    
-  //return self.selectedTextElements.count;
+  NSUInteger numRows = 0;
+  
+  switch (self.segmentedControl.selectedSegmentIndex) {
+    case 0:
+      numRows = self.tableOfContents.count;
+      break;
+    case 1:
+      numRows = 10;//self.bookmarks.count;
+      break;
+    default:
+      break;
+  }
+  
+  return numRows;
 }
 
 - (UITableViewCell *)tableView:(__attribute__((unused)) UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *const)indexPath
 {
-  //NYPLReaderTOCCell *const TOCCell = [[NYPLReaderTOCCell alloc]
-  //                                 initWithReuseIdentifier:reuseIdentifierTOC];
-    
-    
-  NYPLReaderTOCCell *TOCCell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifierTOC];
-  NYPLReaderTOCElement *const TOCElement = self.TOCElements[indexPath.row];
-  
-    
-  TOCCell.nestingLevel = TOCElement.nestingLevel;
-  TOCCell.title = TOCElement.title;
-    
-  //NYPLReaderBookmarkCell *const bookmarkCell = [[NYPLReaderBookmarkCell alloc]
-   //                                               initWithReuseIdentifier:reuseIdentifierBookmark];
-    
-  NYPLReaderBookmarkCell *bookmarkCell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifierBookmark];
-    
-  // line below is a hack for now, so table doesn't crash
-  if ((NSInteger)indexPath.row < (NSInteger)self.bookmarkElements.count)
-  {
-      NYPLReaderBookmarkElement *const bookmarkElement = self.bookmarkElements[indexPath.row];
-    
-      //bookmarkCell.title = @"Bookmark Title";
-      //bookmarkCell.excerpt = @"Bookmark Excerpt";
-      //bookmarkCell.pageNumber = @"Bookmark PageNumber";
-      bookmarkCell.pageNumber = bookmarkElement.CFI;
+  switch (self.segmentedControl.selectedSegmentIndex) {
+    case 0:{
+      NYPLReaderTOCCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifierTOC];
+      NYPLReaderTOCElement *const toc = self.tableOfContents[indexPath.row];
+      
+      cell.nestingLevel = toc.nestingLevel;
+      cell.titleLabel.text = toc.title;
+
+      return cell;
+    }
+    case 1:{
+      NYPLReaderBookmarkCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifierBookmark];
+      
+      // line below is a hack for now, so table doesn't crash
+      if ((NSInteger)indexPath.row < (NSInteger)self.bookmarks.count)
+      {
+        NYPLReaderBookmarkElement *const bookmarkElement = self.bookmarks[indexPath.row];
+        
+        cell.titleLabel.text = @"Bookmark Title";
+        cell.excerptLabel.text = @"Bookmark Excerpt";
+        cell.pageNumberLabel.text = bookmarkElement.CFI;
+      }
+      return cell;
+    }
+    default:
+      return nil;
   }
-    
-  if (self.dataSource == bookmarkDataSource)
-  {
-      return bookmarkCell;
-  }
-  return TOCCell;
 }
 
 #pragma mark UITableViewDelegate
@@ -211,81 +114,65 @@ static NSString *const TOCDataSource = @"TOCDataSource";
 - (void)tableView:(__attribute__((unused)) UITableView *const)tableView
 didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 {
-  NYPLReaderTOCElement *const TOCElement = self.TOCElements[indexPath.row];
+  switch (self.segmentedControl.selectedSegmentIndex) {
+    case 0:{
+      NYPLReaderTOCElement *const TOCElement = self.tableOfContents[indexPath.row];
+      
+      [self.delegate TOCViewController:self
+               didSelectOpaqueLocation:TOCElement.opaqueLocation];
+      break;
+    }
+    case 1:{
+      // bookmark selected
+      
+    }
+    default:
+      break;
+  }
+}
+
+-(CGFloat)tableView:(__attribute__((unused)) UITableView *)tableView heightForRowAtIndexPath:(__attribute__((unused)) NSIndexPath *)indexPath
+{
+  switch (self.segmentedControl.selectedSegmentIndex) {
+    case 0:
+      return 56;
+    case 1:
+      return 100;
+    default:
+      return 44;
+  }
+
+}
+
+
+- (IBAction)didSelectSegment:(UISegmentedControl*)sender
+{
+  NSLog(@"Selected %@", [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]]);
   
-  [self.delegate TOCViewController:self
-           didSelectOpaqueLocation:TOCElement.opaqueLocation];
-}
-
-/*
-- (void) didSelectSegment
-{
-    NSLog(@"Selected %@", [self.segmentedControl titleForSegmentAtIndex:[self.segmentedControl selectedSegmentIndex]]);
-    
-     if ([self.segmentedControl selectedSegmentIndex] == 1)
-     {
-         //NSLog(@"Selected Bookmarks");
-         // let's do a get all bookmarks here
-         
-         // for now, we will display bookmark data to the console only
-         NSLog(@"Bookmarks are: %@,", self.bookmarkElements);
-         
-         
-         // For now, we've commented out the code below to prevent the app from crashing
-          
-          
-         for (NYPLReaderBookmarkElement *element in self.bookmarkElements)
-         {
-             NSLog(@"element: %@", element.CFI);
-         }
-         
-         //self.selectedTextElements = self.bookmarkElements;
-        // [self.tableView reloadData];
-         self.dataSource = bookmarkDataSource;
-    }
-    else
+  
+  switch (sender.selectedSegmentIndex) {
+    case 0:
     {
-        NSLog(@"Table of Contents are:\n");
-        //NSLog(@"Table of contents are: %@,", self.TOCElements);
-        for (NYPLReaderTOCElement *element in self.TOCElements)
-        {
-            NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
-        }
-        self.dataSource = TOCDataSource;
+      NSLog(@"Table of Contents are:\n");
+      for (NYPLReaderTOCElement *element in self.tableOfContents)
+      {
+        NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
+      }
+      break;
     }
-    
-    [self.tableView reloadData];
-    //NSLog(@"Selected something in segmented control");
-    
-}
- */
-
-- (IBAction)didSelectSegment:(id)sender
-{
-    NSLog(@"Selected %@", [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]]);
-    
-    if ([sender selectedSegmentIndex] == 1)
+    case 1:
     {
-        NSLog(@"Bookmarks are: %@,", self.bookmarkElements);
-        
-        for (NYPLReaderBookmarkElement *element in self.bookmarkElements)
-        {
-            NSLog(@"bookmark CFI: %@", element.CFI);
-            NSLog(@"   bookmark annotation id: %@", element.annotationId);
-        }
-        self.dataSource = bookmarkDataSource;
+      NSLog(@"Bookmarks are: %@,", self.bookmarks);
+      for (NYPLReaderBookmarkElement *element in self.bookmarks)
+      {
+        NSLog(@"element: %@", element.CFI);
+      }
+      
     }
-    else
-    {
-        NSLog(@"Table of Contents are:\n");
-        //NSLog(@"Table of contents are: %@,", self.TOCElements);
-        for (NYPLReaderTOCElement *element in self.TOCElements)
-        {
-            NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
-        }
-        self.dataSource = TOCDataSource;
-    }
-    
-    [self.tableView reloadData];
+    default:
+      break;
+  }
+  
+  [self.tableView reloadData];
 }
 @end

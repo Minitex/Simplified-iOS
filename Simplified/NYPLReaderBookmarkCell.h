@@ -8,19 +8,8 @@
 
 @interface NYPLReaderBookmarkCell : UITableViewCell
 
-+ (id)new NS_UNAVAILABLE;
-- (id)init NS_UNAVAILABLE;
-- (id)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-- (id)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (id)initWithStyle:(UITableViewCellStyle)style
-    reuseIdentifier:(NSString *)reuseIdentifier NS_UNAVAILABLE;
-
-
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *excerpt;
-@property (nonatomic) NSString *pageNumber;
-
-// designated initializer
-//- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *excerptLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pageNumberLabel;
 
 @end

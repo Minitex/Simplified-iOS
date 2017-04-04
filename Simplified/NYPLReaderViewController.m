@@ -841,8 +841,8 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"NYPLTOC" bundle:nil];
     NYPLReaderTOCViewController *viewController = [sb instantiateViewControllerWithIdentifier:@"NYPLTOC"];
     viewController.delegate = self;
-    viewController.TOCElements = self.rendererView.TOCElements;
-    viewController.bookmarkElements = self.rendererView.bookmarkElements;
+    viewController.tableOfContents = self.rendererView.TOCElements;
+    viewController.bookmarks = self.rendererView.bookmarkElements;
     
     
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
