@@ -9,7 +9,7 @@
 @interface  NYPLReaderBookmarkElement : NSObject
 
 @property (nonatomic, readonly) NSString *CFI;
-@property (nonatomic, readonly) NSUInteger annotationId;  // this will be used to identify which bookmark to delete
+@property (nonatomic, readonly) NSString *annotationId;  // this will be used to identify which bookmark to delete
 
 
 // properties that we will set in NYPLReaderBookmarkCell
@@ -20,6 +20,6 @@
 + (id)new NS_UNAVAILABLE;
 - (id)init NS_UNAVAILABLE;
 
-- (instancetype)initWithCFI:(NSString *)CFI;
+- (instancetype)initWithCFI:(NSString *)CFI andId:(NSString *)annotationId;
 
 @end

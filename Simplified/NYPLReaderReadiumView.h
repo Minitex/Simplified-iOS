@@ -25,4 +25,6 @@
 
 - (void) syncLastReadingPosition;
 - (void) syncBookmarks;
+- (void) postBookmark;
+- (void) deleteBookmark;
 @end

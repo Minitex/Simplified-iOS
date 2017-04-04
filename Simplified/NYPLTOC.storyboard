@@ -54,7 +54,7 @@
                                         <rect key="frame" x="0.0" y="87" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g4U-cz-zN8" id="EjL-Iz-7v0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Table of Contents Stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWm-n9-kgW">
@@ -74,11 +74,11 @@
                                         <rect key="frame" x="0.0" y="143" width="375" height="209"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEj-nU-fdd" id="wsS-tD-dSx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="208.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Part 3 - Accidental Magic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaf-vU-xEs">
-                                                    <rect key="frame" x="16" y="16" width="343" height="40"/>
+                                                    <rect key="frame" x="16" y="13" width="194" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="eYj-wO-KgI"/>
                                                     </constraints>
@@ -87,7 +87,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="247" text="&quot;...some quotes on this page...&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msw-5b-4NZ">
-                                                    <rect key="frame" x="16" y="74" width="343" height="40"/>
+                                                    <rect key="frame" x="16" y="58" width="237" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="5Yx-UA-1Rp"/>
                                                     </constraints>
@@ -96,23 +96,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bookmark Page Number" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQP-TR-adZ">
-                                                    <rect key="frame" x="16" y="135" width="343" height="40"/>
+                                                    <rect key="frame" x="16" y="103" width="187" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="uaf-vU-xEs" secondAttribute="trailing" constant="8" id="4ur-aL-8lw"/>
-                                                <constraint firstItem="QQP-TR-adZ" firstAttribute="trailing" secondItem="msw-5b-4NZ" secondAttribute="trailing" id="512-jz-5sO"/>
-                                                <constraint firstItem="uaf-vU-xEs" firstAttribute="top" secondItem="wsS-tD-dSx" secondAttribute="topMargin" constant="8" id="80O-sM-lPG"/>
                                                 <constraint firstItem="QQP-TR-adZ" firstAttribute="leading" secondItem="msw-5b-4NZ" secondAttribute="leading" id="Fhb-TY-3A4"/>
                                                 <constraint firstItem="uaf-vU-xEs" firstAttribute="leading" secondItem="wsS-tD-dSx" secondAttribute="leadingMargin" constant="8" id="I3h-YN-GkO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="QQP-TR-adZ" secondAttribute="bottom" constant="25" id="Mzz-Xe-zBa"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="msw-5b-4NZ" secondAttribute="trailing" constant="8" id="YiD-o0-h5G"/>
-                                                <constraint firstItem="msw-5b-4NZ" firstAttribute="top" secondItem="uaf-vU-xEs" secondAttribute="bottom" constant="18" id="ctq-rr-huU"/>
+                                                <constraint firstItem="uaf-vU-xEs" firstAttribute="top" secondItem="wsS-tD-dSx" secondAttribute="topMargin" constant="5" id="Ksn-Y7-qIa"/>
+                                                <constraint firstItem="msw-5b-4NZ" firstAttribute="top" secondItem="uaf-vU-xEs" secondAttribute="bottom" constant="5" id="ctq-rr-huU"/>
                                                 <constraint firstItem="msw-5b-4NZ" firstAttribute="leading" secondItem="wsS-tD-dSx" secondAttribute="leadingMargin" constant="8" id="wdy-pM-n2t"/>
-                                                <constraint firstItem="QQP-TR-adZ" firstAttribute="top" secondItem="msw-5b-4NZ" secondAttribute="bottom" constant="21" id="wuN-N0-YZj"/>
+                                                <constraint firstItem="QQP-TR-adZ" firstAttribute="top" secondItem="msw-5b-4NZ" secondAttribute="bottom" constant="5" id="wuN-N0-YZj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

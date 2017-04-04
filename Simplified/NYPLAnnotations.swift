@@ -84,6 +84,12 @@ final class NYPLAnnotations: NSObject {
     }
   }
     
+  class func deleteBookmark(annotationId:NSString)
+  {
+        // For this, all we need are URL and the headers
+        // in fact, the annotation ID is exactly the same as the URL that we need
+  }
+    
   class func syncAllBookmarks(_ book:NYPLBook, completionHandler: @escaping (_ responseObject: [[String:String]]?) -> ())
   {
     print("NYPLAnnotations::syncAllBookmarks called");
@@ -279,26 +285,17 @@ final class NYPLAnnotations: NSObject {
                         completionHandler(nil)
                         return
                     }
-                    print("NYPLAnnotations::syncLastBookmarks, total is: \(total)")
                     
+                    var responseObjectArray = [[String:String]]()
                     if total > 0
                     {
-                        var responseObjectArray = [[String:String]]()
-                        
-                        // let's grab the device, time, and CFI
+                        // let's grab the device, time, and CFI; and annotation id
                         for item in items
                         {
-                            
-                            guard let target = item["target"] as? [String:AnyObject],
-                                  let source = target["source"] as? String else {
-                                    completionHandler(nil)
-                                    return
-                            }
-
                             var responseObject = [String:String]()
                             
-                            guard let motivation = item["motivation"] as? String
-                                 else {
+                            
+                            guard let motivation = item["motivation"] as? String else {
                                     completionHandler(nil)
                                     return
                             }
@@ -314,7 +311,14 @@ final class NYPLAnnotations: NSObject {
                                 continue;
                             }
                             
-                            guard let selector = target["selector"] as? [String:AnyObject],
+                            guard let id = item["id"] as? String else {
+                                completionHandler(nil)
+                                return
+                            }
+                            responseObject["id"] = id
+                            
+                            guard let target = item["target"] as? [String:AnyObject],
+                                let selector = target["selector"] as? [String:AnyObject],
                                 let serverCFI = selector["value"] as? String else {
                                     completionHandler(nil)
                                     return
@@ -335,6 +339,7 @@ final class NYPLAnnotations: NSObject {
                             responseObjectArray.append(responseObject)
                         }   // end for item in items
                         
+                        print("NYPLAnnotations::syncLastBookmarks, total bookmarks are: \(responseObjectArray.count)")
                         Log.info(#file, "\(responseObjectArray)")
                         completionHandler(responseObjectArray)
                         return

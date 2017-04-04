@@ -270,7 +270,8 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
         
         for (NYPLReaderBookmarkElement *element in self.bookmarkElements)
         {
-            NSLog(@"element: %@", element.CFI);
+            NSLog(@"bookmark CFI: %@", element.CFI);
+            NSLog(@"   bookmark annotation id: %@", element.annotationId);
         }
         self.dataSource = bookmarkDataSource;
     }

@@ -891,6 +891,9 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     [rv syncLastReadingPosition];
      */
     
+    // No matter what, always do a GET bookmarks before either adding or deleting a bookmark!
+    NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
+    
     _bookmarkStatus = ! _bookmarkStatus;
     NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
     
@@ -899,16 +902,7 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
         [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
         bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
         
-        NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
-        
-        [NYPLAnnotations postBookmark:rv.book cfi:rv.currentCFI];
-        // let's just try printing stuff from here
-        
-        //rv.book;
-        //NSLog(@"Book Info: %@", [rv getBookInfo]);
-        
-        // call command to set a bookmark here
-        // can we get book and cfi here?
+        [rv postBookmark];
         
         NSLog(@"Bookmark set to ON");
     }
@@ -917,7 +911,8 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
         [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
         bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
         
-        // call command to remove a bookmark here
+        [rv deleteBookmark];
+        
         NSLog(@"Bookmark set to OFF");
     }
     

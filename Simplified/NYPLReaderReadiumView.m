@@ -550,14 +550,15 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   [self syncBookmarks];
 }
 
+// implement NYPLReaderRender function
 - (void)syncBookmarks
 {
   // This is where we call stuff in Annotations to do our GET and actually return bookmarks here (before it gets formatted, etc.)
     // and placed in the NSArray* bookmarkElements object
     // the function call below actually returns an array of dictionaries
   [NYPLAnnotations syncAllBookmarks:self.book completionHandler:^(NSArray<NSDictionary<NSString *, NSString *> *> * _Nullable responseObject) {
-        //NSDictionary * doSomething = responseObject;
-      NSLog(@"\nNYPLReaderReadiumView::syncBookmarks, returned responseObject: %@", responseObject);
+      
+      //NSLog(@"\nNYPLReaderReadiumView::syncBookmarks, returned responseObject: %@", responseObject);
       if (responseObject != nil)
       {
           // do stuff
@@ -570,6 +571,49 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     NSLog(@"NYPLReaderReadiumView::syncBookmarks called");
 }
+
+// implement NYPLReaderRender function
+- (void) postBookmark
+{
+    // we have to grab all the bookmarks first, before we can create a new one
+    [self syncBookmarks];
+    [NYPLAnnotations postBookmark:self.book cfi:self.currentCFI];
+    
+    NSLog(@"NYPLReaderReadiumView::postBookmark called");
+}
+
+// implement NYPLReaderRender function
+- (void) deleteBookmark
+{
+    [self syncBookmarks];
+    
+    bool bookmarkExists = false;
+    
+    // stop gap solution, check the current CFI against the bookmarkElement array
+    // if there is a match, call delete bookmarks in Annotations
+    
+    for (NSUInteger i = 0; i < _bookmarkElements.count; i++)
+    {
+        NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[i];
+        if ([bookmarkElement.CFI isEqualToString:self.currentCFI] == true)
+        {
+            NSLog(@"Bookmark exists for this page/CFI, CFI is: %@", self.currentCFI);
+            bookmarkExists = true;
+            break;
+        }
+    }
+    
+    if (bookmarkExists == true)
+    {
+        // call delete bookmarks in Annotations
+    }
+    else
+    {
+        NSLog(@"Bookmark does NOT exist for this page/CFI, CFI is %@", self.currentCFI);
+    }
+    NSLog(@"NYPLReaderReadiumView::deleteBookmark called");
+}
+
 
 - (void)syncLastReadingPosition
 {
@@ -709,7 +753,9 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
        NYPLBookLocation *const location = [[NYPLBookLocation alloc]
                                            initWithLocationString:locationJSON
                                            renderer:renderer];
-       
+         
+       self.currentCFI = location.locationString;   // VN
+         
        [weakSelf calculateProgressionWithDictionary:dictionary withHandler:^{
          [weakSelf.delegate
           renderer:weakSelf
@@ -729,8 +775,9 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
          
        if(self.postLastRead) {
            [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
-           self.currentCFI = location.locationString;   // VN
+           
        }
+         
      }];
   });
 }
@@ -887,9 +934,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 
 - (NSArray *)bookmarkElements
 {
-  //if(_bookmarkElements) return _bookmarkElements;
-    if (_bookmarkElements) return _bookmarkElements;
-    
   return _bookmarkElements;
 }
 
@@ -906,10 +950,12 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
    // NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
     
     NSArray * CFIs = [responseObject valueForKey:@"serverCFI"];
-    //for (NSString * CFI in contentCFIs)
-    for (NSString * CFI in CFIs)
+    NSArray * annotationIds = [responseObject valueForKey:@"id"];
+    
+    for (NSUInteger i = 0; i < responseObject.count; i++)
     {
-        NYPLReaderBookmarkElement * bookmarkElement = [[NYPLReaderBookmarkElement alloc] initWithCFI:CFI];
+        NYPLReaderBookmarkElement * bookmarkElement = [[NYPLReaderBookmarkElement alloc] initWithCFI:CFIs[i] andId:annotationIds[i]];
+        
         [bookmarkElements addObject:bookmarkElement];
     }
     
