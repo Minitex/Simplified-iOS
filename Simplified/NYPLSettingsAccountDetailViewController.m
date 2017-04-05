@@ -18,11 +18,13 @@
 #import "UIView+NYPLViewAdditions.h"
 #import "SimplyE-Swift.h"
 #import <PureLayout/PureLayout.h>
-#import <ScanditBarcodeScanner/ScanditBarcodeScanner.h>
+#import <HelpStack/HSUtility.h>
+#import "HSHelpStack.h"
+#import "HSDeskGear.h"
 
-#define kScanditBarcodeScannerAppKey    @"ADD YOUR APP KEY"
 
 @import CoreLocation;
+@import MessageUI;
 
 #if defined(FEATURE_DRM_CONNECTOR)
 #import <ADEPT/ADEPT.h>
@@ -40,7 +42,9 @@ typedef NS_ENUM(NSInteger, CellKind) {
   CellKindSyncButton,
   CellKindAbout,
   CellKindPrivacyPolicy,
-  CellKindContentLicense
+  CellKindContentLicense,
+  CellReportIssue,
+  CellSupportCenter
 };
 
 typedef NS_ENUM(NSInteger, Section) {
@@ -49,7 +53,7 @@ typedef NS_ENUM(NSInteger, Section) {
   SectionLicenses = 2,
 };
 
-@interface NYPLSettingsAccountDetailViewController () <NSURLSessionDelegate, UITextFieldDelegate, SBSScanDelegate, UIAlertViewDelegate>
+@interface NYPLSettingsAccountDetailViewController () <NSURLSessionDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) BOOL isLoggingInAfterSignUp;
 @property (nonatomic) UITextField *barcodeTextField;
@@ -70,9 +74,8 @@ typedef NS_ENUM(NSInteger, Section) {
 @property (nonatomic) UITableViewCell *logInSignOutCell;
 @property (nonatomic) UITableViewCell *ageCheckCell;
 
-@property (nonatomic) NSArray *tableData;
+@property (nonatomic) NSMutableArray *tableData;
 @property (nonatomic) bool rotated;
-@property (nonatomic, strong, nullable) SBSBarcodePicker *picker;
 
 @property (nonatomic) UISwitch* switchView;
 
@@ -194,21 +197,22 @@ NSString *const NYPLSettingsAccountsSignInFinishedNotification = @"NYPLSettingsA
   [self.PINShowHideButton addTarget:self action:@selector(PINShowHideSelected)
                    forControlEvents:UIControlEventTouchUpInside];
   
-  
-  self.barcodeScanButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.barcodeScanButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
-  [self.barcodeScanButton sizeToFit];
-  [self.barcodeScanButton addTarget:self action:@selector(scanLibraryCard)
+  if (self.account.supportsBarcodeScanner) {
+    self.barcodeScanButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.barcodeScanButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
+    [self.barcodeScanButton sizeToFit];
+    [self.barcodeScanButton addTarget:self action:@selector(scanLibraryCard)
                    forControlEvents:UIControlEventTouchUpInside];
 
-
+    self.barcodeTextField.rightView = self.barcodeScanButton;
+    self.barcodeTextField.rightViewMode = UITextFieldViewModeAlways;
+  }
   self.PINTextField.rightView = self.PINShowHideButton;
   self.PINTextField.rightViewMode = UITextFieldViewModeAlways;
   
-    self.barcodeTextField.rightView = self.barcodeScanButton;
-    self.barcodeTextField.rightViewMode = UITextFieldViewModeAlways;
   [self setupTableData];
   
+  [self checkSyncSetting];
   self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
 }
 
@@ -267,11 +271,11 @@ NSString *const NYPLSettingsAccountsSignInFinishedNotification = @"NYPLSettingsA
   
   NSMutableArray *sectionRegister = @[@(CellKindRegistration)].mutableCopy;
 
-  if (self.account.needsAuth == YES && [[NYPLAccount sharedAccount:self.accountType] hasBarcodeAndPIN]){
+  if (self.account.needsAuth == YES && [[NYPLAccount sharedAccount:self.accountType] hasBarcodeAndPIN] && self.account.supportsBarcodeDisplay){
     [section0 insertObject:@(CellKindBarcodeImage) atIndex: 0];
   }
   NSMutableArray *section1 = [[NSMutableArray alloc] init];
-  if ([self syncButtonShouldBeVisible]) {
+  if (self.account.supportsSimplyESync && [self syncButtonShouldBeVisible]) {
     [section1 addObject:@(CellKindSyncButton)];
   }
   NSMutableArray *section2 = [[NSMutableArray alloc] init];
@@ -283,11 +287,29 @@ NSString *const NYPLSettingsAccountsSignInFinishedNotification = @"NYPLSettingsA
   }
   
   if ([self registrationIsPossible]) {
-    self.tableData = @[section0, sectionRegister, section1, section2];
+    self.tableData = @[section0, sectionRegister, section1].mutableCopy;
   }
   else{
-    self.tableData = @[section0, section1, section2];
+    self.tableData = @[section0, section1].mutableCopy;
   }
+  
+
+  NSMutableArray *supportCenter = [[NSMutableArray alloc] init];
+  if (self.account.supportsHelpCenter)
+  {
+    [supportCenter addObject:@(CellSupportCenter)];
+    [self.tableData addObject:supportCenter];
+    
+  }
+  NSMutableArray *reportIssue = [[NSMutableArray alloc] init];
+  if (self.account.supportEmail != nil)
+  {
+    [reportIssue addObject:@(CellReportIssue)];
+    [self.tableData addObject:reportIssue];
+  }
+  [self.tableData addObject:section2];
+
+  
   NSMutableArray *newArray = [[NSMutableArray alloc] init];
   for (NSMutableArray *section in self.tableData) {
     if ([section count] != 0) { [newArray addObject:section]; }
@@ -516,6 +538,12 @@ NSString *const NYPLSettingsAccountsSignInFinishedNotification = @"NYPLSettingsA
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     
     if(success) {
+      [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+        [self checkSyncSetting];
+      
+      }];
+      
       [[NYPLAccount sharedAccount:self.accountType] setBarcode:self.barcodeTextField.text
                                                            PIN:self.PINTextField.text];
       
@@ -690,6 +718,54 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       break;
     }
     case CellKindSyncButton: {
+      break;
+    }
+    case CellKindBarcodeImage: {
+      break;
+    }
+    case CellReportIssue: {
+      if ([MFMailComposeViewController canSendMail])
+      {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ReportIssue" bundle:nil];
+        NYPLReportIssueViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ReportIssueController"];
+        vc.account = self.account;
+        [self.navigationController pushViewController:vc animated:YES];
+      }
+      else
+      {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"No email account is set for this device. "
+                              message:[NSString stringWithFormat:@"If you have web email, contact %@ to report an issue.", self.account.supportEmail]
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
+      }
+      break;
+    }
+    case CellSupportCenter: {
+      
+      [[HSHelpStack instance] setThemeFrompList:@"HelpStackThemeNYPL"];
+
+      HSDeskGear *deskGear = [[HSDeskGear alloc]
+                              initWithInstanceBaseUrl:@"######## REPLACE #########"
+                              token:@"######## REPLACE #########"
+                              andBrand:nil];
+      
+      HSHelpStack *helpStack = [HSHelpStack instance];
+      helpStack.gear = deskGear;
+    
+      if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIStoryboard* helpStoryboard = [UIStoryboard storyboardWithName:@"HelpStackStoryboard" bundle:[NSBundle mainBundle]];
+        UINavigationController *mainNavVC = [helpStoryboard instantiateInitialViewController];
+        UIViewController *firstVC = mainNavVC.viewControllers.firstObject;
+        firstVC.navigationItem.leftBarButtonItem = nil;
+        [self.navigationController pushViewController:firstVC animated:true];
+
+      } else {
+        [[HSHelpStack instance] showHelp:self];
+      }
       break;
     }
     case CellKindAbout: {
@@ -901,6 +977,24 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
                                               @"Title for switch to turn on or off syncing.");
       return cell;
     }
+    case CellReportIssue: {
+      UITableViewCell *cell = [[UITableViewCell alloc]
+                               initWithStyle:UITableViewCellStyleDefault
+                               reuseIdentifier:nil];
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      cell.textLabel.font = [UIFont systemFontOfSize:17];
+      cell.textLabel.text = NSLocalizedString(@"Report An Issue", nil);
+      return cell;
+    }
+    case CellSupportCenter: {
+      UITableViewCell *cell = [[UITableViewCell alloc]
+                               initWithStyle:UITableViewCellStyleDefault
+                               reuseIdentifier:nil];
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      cell.textLabel.font = [UIFont systemFontOfSize:17];
+      cell.textLabel.text = NSLocalizedString(@"Support Center", nil);
+      return cell;
+    }
     case CellKindAbout: {
       UITableViewCell *cell = [[UITableViewCell alloc]
                                      initWithStyle:UITableViewCellStyleDefault
@@ -962,7 +1056,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 }
 -(NSString *)tableView:(__unused UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-  if ([self syncButtonShouldBeVisible] && section == 1) {
+  if (self.account.supportsSimplyESync && [self syncButtonShouldBeVisible] && section == 1) {
   return NSLocalizedString(@"SettingsAccountSyncSubTitle",
                            @"Disclaimer for switch to turn on or off syncing.");
   }
@@ -1136,113 +1230,6 @@ replacementString:(NSString *)string
   self.hiddenPIN = NO;
   [self.tableView reloadData];
 }
-- (void)scanLibraryCard
-{
-  [SBSLicense setAppKey:kScanditBarcodeScannerAppKey];
-  
-  SBSScanSettings* settings = [SBSScanSettings defaultSettings];
-  
-  //By default, all symbologies are turned off so you need to explicity enable the desired simbologies.
-  NSSet *symbologiesToEnable = [NSSet setWithObjects:
-                                @(SBSSymbologyCodabar), nil];
-  [settings enableSymbologies:symbologiesToEnable];
-  
-  
-  // Some 1d barcode symbologies allow you to encode variable-length data. By default, the
-  // Scandit BarcodeScanner SDK only scans barcodes in a certain length range. If your
-  // application requires scanning of one of these symbologies, and the length is falling
-  // outside the default range, you may need to adjust the "active symbol counts" for this
-  // symbology. This is shown in the following 3 lines of code.
-  
-  SBSSymbologySettings *symSettings = [settings settingsForSymbology:SBSSymbologyCode39];
-  symSettings.activeSymbolCounts =
-  [NSSet setWithObjects:@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20, nil];
-  // For details on defaults and how to calculate the symbol counts for each symbology, take
-  // a look at http://docs.scandit.com/stable/c_api/symbologies.html.
-  
-  // Initialize the barcode picker - make sure you set the app key above
-  self.picker = [[SBSBarcodePicker alloc] initWithSettings:settings];
-  
-  [self.picker.overlayController setTorchEnabled:NO];
-
-  // only show camera switch button on tablets. For all other devices the switch button is
-  // hidden, even if they have a front camera.
-  [self.picker.overlayController setCameraSwitchVisibility:SBSCameraSwitchVisibilityOnTablet];
-  // set the allowed interface orientations. The value UIInterfaceOrientationMaskAll is the
-  // default and is only shown here for completeness.
-  [self.picker setAllowedInterfaceOrientations:UIInterfaceOrientationMaskAll];
-  // Set the delegate to receive scan event callbacks
-  self.picker.scanDelegate = self;
-  
-  // Open the camera and start scanning barcodes
-  [self.picker startScanning];
-  
-  UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:self.picker];
-  UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissPicker)];
-  self.picker.navigationItem.rightBarButtonItem = cancel;
-  [self presentViewController:navController animated:YES completion:nil];
-}
-
-
--(void)dismissPicker
-{
-  [self.picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-//! [SBSScanDelegate callback]
-/**
- * This delegate method of the SBSScanDelegate protocol needs to be implemented by
- * every app that uses the Scandit Barcode Scanner and this is where the custom application logic
- * goes. In the example below, we are just showing an alert view with the result.
- */
-- (void)barcodePicker:(__unused SBSBarcodePicker *)thePicker didScan:(SBSScanSession *)session {
-  
-  // call stopScanning on the session to immediately stop scanning and close the camera. This
-  // is the preferred way to stop scanning barcodes from the SBSScanDelegate as it is made sure
-  // that no new codes are scanned. When calling stopScanning on the picker, another code may be
-  // scanned before stopScanning has completely stoppen the scanning process.
-  [session stopScanning];
-  
-  SBSCode *code = [session.newlyRecognizedCodes objectAtIndex:0];
-  // the barcodePicker:didScan delegate method is invoked from a picker-internal queue. To display
-  // the results in the UI, you need to dispatch to the main queue. Note that it's not allowed
-  // to use SBSScanSession in the dispatched block as it's only allowed to access the
-  // SBSScanSession inside the barcodePicker:didScan callback. It is however safe to use results
-  // returned by session.newlyRecognizedCodes etc.
-  dispatch_async(dispatch_get_main_queue(), ^{
-    
-    NSString *symbology = code.symbologyString;
-    NSString *barcode = code.data;
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:[NSString stringWithFormat:@"Scanned %@", symbology]
-                          message:barcode
-                          delegate:self
-                          cancelButtonTitle:@"Done"
-                          otherButtonTitles:@"Try Again", nil];
-    [alert show];
-    
-
-  });
-  
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  
-  if (buttonIndex == 0)
-  {
-    [self.picker dismissViewControllerAnimated:YES completion:^{
-      NSString *barcode = alertView.message;
-      barcode = [barcode stringByReplacingOccurrencesOfString:@"A" withString:@""];
-      barcode = [barcode stringByReplacingOccurrencesOfString:@"B" withString:@""];
-      self.barcodeTextField.text = barcode;
-    }];
-  }
-  else{
-    [self.picker startScanning];
-    
-  }
-}
 
 
 - (void)PINShowHideSelected
@@ -1335,6 +1322,46 @@ replacementString:(NSString *)string
   }
 }
 
+- (void)checkSyncSetting
+{
+  [NYPLAnnotations syncSettingsWithCompletionHandler:^(BOOL exist) {
+    
+    if (!exist)
+    {
+      // alert
+      
+      Account *account = [[AccountsManager sharedInstance] account:self.accountType];
+      
+      NSString *title = @"SimplyE Sync";
+      NSString *message = @"<Initial setup> Synchronize your bookmarks and last reading position across all your SimplyE devices.";
+      
+      NYPLAlertController *alertController = [NYPLAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+      
+      
+      [alertController addAction:[UIAlertAction actionWithTitle:@"Do not Enable Sync" style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction * _Nonnull action) {
+        
+        // add server update here as well
+        [NYPLAnnotations updateSyncSettings:false];
+        account.syncIsEnabled = NO;
+        self.switchView.on = account.syncIsEnabled;
+      }]];
+      
+      
+      [alertController addAction:[UIAlertAction actionWithTitle:@"Enable Sync" style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction * _Nonnull action) {
+        
+        // add server update here as well
+        [NYPLAnnotations updateSyncSettings:true];
+        account.syncIsEnabled = YES;
+        self.switchView.on = account.syncIsEnabled;
+        
+      }]];
+      [[NYPLRootTabBarController sharedController] safelyPresentViewController:alertController
+                                                                      animated:YES completion:nil];
+      
+    }
+    
+  }];
+}
 - (void)setActivityTitleWithText:(NSString *)text
 {
   UIActivityIndicatorView *const activityIndicatorView =
@@ -1414,6 +1441,7 @@ replacementString:(NSString *)string
       
       // add server update here as well
       
+      [NYPLAnnotations updateSyncSettings:false];
       if (sender.on) {
         account.syncIsEnabled = YES;
       } else {
@@ -1429,6 +1457,7 @@ replacementString:(NSString *)string
       
       // add server update here as well
       
+      [NYPLAnnotations updateSyncSettings:true];
       if (sender.on) {
         account.syncIsEnabled = YES;
       } else {

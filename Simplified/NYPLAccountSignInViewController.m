@@ -21,6 +21,7 @@
 #import <PureLayout/PureLayout.h>
 @import CoreLocation;
 
+
 #if defined(FEATURE_DRM_CONNECTOR)
 #import <ADEPT/ADEPT.h>
 #endif
@@ -73,11 +74,12 @@ static CellKind CellKindFromIndexPath(NSIndexPath *const indexPath)
   }
 }
 
-@interface NYPLAccountSignInViewController () <NSURLSessionDelegate, UITextFieldDelegate>
+@interface NYPLAccountSignInViewController () <NSURLSessionDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) BOOL isLoggingInAfterSignUp;
 @property (nonatomic) BOOL isCurrentlySigningIn;
 @property (nonatomic) UITextField *barcodeTextField;
+@property (nonatomic) UIButton *barcodeScanButton;
 @property (nonatomic, copy) void (^completionHandler)();
 @property (nonatomic) BOOL hiddenPIN;
 @property (nonatomic) UITableViewCell *eulaCell;
@@ -85,6 +87,7 @@ static CellKind CellKindFromIndexPath(NSIndexPath *const indexPath)
 @property (nonatomic) UITextField *PINTextField;
 @property (nonatomic) NSURLSession *session;
 @property (nonatomic) UIButton *PINShowHideButton;
+@property (nonatomic) bool rotated;
 
 @end
 
@@ -183,6 +186,21 @@ static CellKind CellKindFromIndexPath(NSIndexPath *const indexPath)
                    forControlEvents:UIControlEventTouchUpInside];
   self.PINTextField.rightView = self.PINShowHideButton;
   self.PINTextField.rightViewMode = UITextFieldViewModeAlways;
+  
+  Account *currentAccount = [[NYPLSettings sharedSettings] currentAccount];
+
+  if (currentAccount.supportsBarcodeScanner) {
+    self.barcodeScanButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.barcodeScanButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
+    [self.barcodeScanButton sizeToFit];
+    [self.barcodeScanButton addTarget:self action:@selector(scanLibraryCard)
+                     forControlEvents:UIControlEventTouchUpInside];
+    
+    self.barcodeTextField.rightView = self.barcodeScanButton;
+    self.barcodeTextField.rightViewMode = UITextFieldViewModeAlways;
+  }
+
+  
   
   self.logInSignOutCell = [[UITableViewCell alloc]
                            initWithStyle:UITableViewCellStyleDefault

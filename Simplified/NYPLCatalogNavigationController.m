@@ -185,7 +185,8 @@
     NYPLLOG([[NYPLAccount sharedAccount:account.id] licensor]);
     NYPLLOG(first);
     NYPLLOG(last);
-    
+#if defined(FEATURE_DRM_CONNECTOR)
+
     [[NYPLADEPT sharedInstance]
      authorizeWithVendorID:[[NYPLAccount sharedAccount:account.id] licensor][@"vendor"]
      username:first
@@ -215,13 +216,9 @@
          [[NSNotificationCenter defaultCenter] postNotificationName:NYPLSyncEndedNotification object:nil];
        }
      }];
+#endif
+
   }
-//  else if (account.needsAuth)
-//  {
-////    [[NYPLBookRegistry sharedRegistry] syncWithCompletionHandler:^(BOOL __unused success) {
-//      [[NSNotificationCenter defaultCenter] postNotificationName:NYPLSyncEndedNotification object:nil];
-////    }];
-//  }
   else{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [[NSNotificationCenter defaultCenter] postNotificationName:NYPLSyncEndedNotification object:nil];
@@ -241,6 +238,50 @@
   }
   
 }
+- (void)checkSyncSetting
+{
+  [NYPLAnnotations syncSettingsWithCompletionHandler:^(BOOL exist) {
+    
+    if (!exist)
+    {
+      // alert
+      
+      Account *account = [[AccountsManager sharedInstance] currentAccount];
+      
+      NSString *title = @"SimplyE Sync";
+      NSString *message = @"<Initial setup> Synchronize your bookmarks and last reading position across all your SimplyE devices.";
+      
+      
+      NYPLAlertController *alertController = [NYPLAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+      
+      
+      [alertController addAction:[UIAlertAction actionWithTitle:@"Do not Enable Sync" style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction * _Nonnull action) {
+        
+        // add server update here as well
+        [NYPLAnnotations updateSyncSettings:false];
+        account.syncIsEnabled = NO;
+        
+      }]];
+      
+      
+      [alertController addAction:[UIAlertAction actionWithTitle:@"Enable Sync" style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction * _Nonnull action) {
+        
+        // add server update here as well
+        
+        [NYPLAnnotations updateSyncSettings:true];
+        account.syncIsEnabled = YES;
+        
+      }]];
+      
+      
+      
+      [[NYPLRootTabBarController sharedController] safelyPresentViewController:alertController
+                                                                      animated:YES completion:nil];
+      
+    }
+    
+  }];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -255,6 +296,9 @@
   }
   
   NYPLSettings *settings = [NYPLSettings sharedSettings];
+  
+  
+  [self checkSyncSetting];
   
   if (settings.userHasSeenWelcomeScreen == NO) {
     

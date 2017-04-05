@@ -179,7 +179,7 @@
 "SettingsAccountRegistrationTitle" = "Don't have a library card?";
 "SettingsAccountSetAccountTitle" = "Set to Active Account";
 "SettingsAccountSyncTitle" = "SimplyE Sync";
-"SettingsAccountSyncSubTitle" = "Enable if you want to synchronize your bookmarks and last reading position across all your SimplyE devices. Bookmarks and last reading position will be saved for this device anyway.";
+"SettingsAccountSyncSubTitle" = "Enable if you want to synchronize your bookmarks and last reading position across all your SimplyE devices. Bookmarks and last reading position will be saved for this device anyway. Note: This requires the information to be saved in SimplyE servers";
 "SettingsAccountViewControllerAuthenticationReason" = "Authenticate to reveal your PIN.";
 "SettingsAccountViewControllerCannotLogOutTitle" =
   "Logout Failed";
@@ -215,11 +215,11 @@
 
 // NYPLWelcomeScreen
 "WelcomeScreenAgeVerifyTitle" = "Age Verification";
-"WelcomeScreenAgeVerifyMessage" = "You must be 13 years of age or older to download a book from the collection. How old are you?";
-"WelcomeScreenTitle1" = "Read Books From Your Library";
-"WelcomeScreenSubtitle1" = "Check out books and sync across devices";
-"WelcomeScreenButtonTitle1" = "PICK YOUR LIBRARY";
-"WelcomeScreenTitle2" = "Read Books Without a Library Card";
-"WelcomeScreenSubtitle2" = "Find classic books in the public domain";
-"WelcomeScreenButtonTitle2" = "INSTANT CLASSICS";
+"WelcomeScreenAgeVerifyMessage" = "You must be 13 years of age or older to download some of the books from this collection. How old are you?";
+"WelcomeScreenTitle1" = "Read Books from your Library";
+"WelcomeScreenSubtitle1" = "Simply browse borrow and read free ebooks from you local library";
+"WelcomeScreenButtonTitle1" = "Pick Your Library";
+"WelcomeScreenTitle2" = "SimplyRead";
+"WelcomeScreenSubtitle2" = "Download and read ebooks without a library card";
+"WelcomeScreenButtonTitle2" = "Read Now";
 "LibraryListTitle" = "Pick Your Library";
