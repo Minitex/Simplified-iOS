@@ -108,10 +108,10 @@ final class NYPLAnnotations: NSObject {
 
       if let url = annotationsUrl {
 
-        print("NYPLAnnotations::postLastRead, book is: \(book)")
-        print("NYPLAnnotations::postLastRead, url is: \(url)")
-        print("NYPLAnnotations::postLastRead, parameters is: \(parameters)")
-        print("NYPLAnnotations::postLastRead, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
+        //print("NYPLAnnotations::postLastRead, book is: \(book)")
+        //print("NYPLAnnotations::postLastRead, url is: \(url)")
+        //print("NYPLAnnotations::postLastRead, parameters is: \(parameters)")
+        //print("NYPLAnnotations::postLastRead, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
 
         postJSONRequest(book, url, parameters, NYPLAnnotations.headers)
       } else {
@@ -145,10 +145,10 @@ final class NYPLAnnotations: NSObject {
 
     if let url = url {
 
-        print("NYPLAnnotations::postBookmark, book is: \(book)")
-        print("NYPLAnnotations::postBookmark, url is: \(url)")
-        print("NYPLAnnotations::postBookmark, parameters is: \(parameters)")
-        print("NYPLAnnotations::postBookmark, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
+        //print("NYPLAnnotations::postBookmark, book is: \(book)")
+        //print("NYPLAnnotations::postBookmark, url is: \(url)")
+        //print("NYPLAnnotations::postBookmark, parameters is: \(parameters)")
+        //print("NYPLAnnotations::postBookmark, NYPLAnnotations.headers is: \(NYPLAnnotations.headers)")
 
         postJSONRequest(book, url, parameters, NYPLAnnotations.headers, completionHandler)
       } else {
@@ -357,8 +357,8 @@ final class NYPLAnnotations: NSObject {
           return
         } else {
 
-          print("NYPLAnnotations::syncLastRead, response is: \(response)")
-          print("NYPLAnnotations::syncLastRead, data is \(data)")
+          //print("NYPLAnnotations::syncLastRead, response is: \(response)")
+          //print("NYPLAnnotations::syncLastRead, data is \(data)")
 
           guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any] else {
             Log.error(#file, "JSON could not be created from data.")
@@ -441,7 +441,7 @@ final class NYPLAnnotations: NSObject {
 
         if (NYPLAccount.shared().hasBarcodeAndPIN() && book.annotationsURL != nil)
         {
-            print("NYPLAnnotations::syncLastBookmarks, book.annotationsURL is: \(book.annotationsURL)")
+            //print("NYPLAnnotations::syncLastBookmarks, book.annotationsURL is: \(book.annotationsURL)")
 
             var request = URLRequest.init(url: book.annotationsURL,
                                           cachePolicy: .reloadIgnoringLocalCacheData,
@@ -493,7 +493,7 @@ final class NYPLAnnotations: NSObject {
                                     return
                             }
 
-                            print("NYPLAnnotations::syncLastBookmarks, motivation is: \(motivation)")
+                            //print("NYPLAnnotations::syncLastBookmarks, motivation is: \(motivation)")
                             if (motivation.lowercased().contains("bookmarking"))
                             {
                                 responseObject["motivation"] = motivation
@@ -517,7 +517,7 @@ final class NYPLAnnotations: NSObject {
                             }
                             responseObject["serverCFI"] = serverCFI
 
-                            print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
+                            //print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
 
 
                             if let body = item["body"] as? [String:AnyObject],
@@ -532,7 +532,7 @@ final class NYPLAnnotations: NSObject {
                         }   // end for item in items
 
                         print("NYPLAnnotations::syncLastBookmarks, total bookmarks are: \(responseObjectArray.count)")
-                        Log.info(#file, "\(responseObjectArray)")
+                        //Log.info(#file, "\(responseObjectArray)")
                         completionHandler(responseObjectArray)
                         return
                     }   // end if total > 0
@@ -560,8 +560,8 @@ final class NYPLAnnotations: NSObject {
     let authenticationData:Data = authenticationString.data(using: String.Encoding.ascii)!
     let authenticationValue = "Basic \(authenticationData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters))"
 
-    print("\nNYPLAnnotations::headers: authenticationString: \(authenticationString)")
-    print("\nNYPLAnnotations::headers: authenticationValue: \(authenticationValue)")
+    //print("\nNYPLAnnotations::headers: authenticationString: \(authenticationString)")
+    //print("\nNYPLAnnotations::headers: authenticationValue: \(authenticationValue)")
 
     return ["Authorization" : "\(authenticationValue)",
             "Content-Type" : "application/json"]

@@ -489,6 +489,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   
   NYPLBookLocation *const location = [[NYPLBookRegistry sharedRegistry]
                                       locationForIdentifier:self.book.identifier];
+    
   if([location.renderer isEqualToString:renderer]) {
     // Readium stores a "contentCFI" but needs an "elementCfi" when handling a page request, so we
     // have to create a new dictionary.
@@ -850,13 +851,39 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
          [[NYPLBookRegistry sharedRegistry]
           setLocation:location
           forIdentifier:weakSelf.book.identifier];
+           
+           
+       }
+         
+         // this is also where we set bookmarks, if they exist // VN
+         if (_bookmarkElements) {
+             [[NYPLBookRegistry sharedRegistry]
+              setBookmarks:_bookmarkElements
+              forIdentifier:weakSelf.book.identifier];
+             
+             NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
+             
+             NSArray * bookmarks = [registry bookmarksForIdentifier:weakSelf.book.identifier];
+             NYPLReaderBookmarkElement *bookmarkElement = bookmarks[0];
+             
+             NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, location.dictionaryRepresentation: %@", location.dictionaryRepresentation);
+             NSLog(@"\tNYPLReaderReadiumView::readiumPaginationChangedWithDictionary, registry.registryDirectory: %@, registry.book: %@, registry.bookmarks annotationID: %@, registry.bookmarks CFI: %@",
+                   registry.registryDirectory,
+                   
+                   [[registry bookForIdentifier:weakSelf.book.identifier] title],
+                   
+                   bookmarkElement.annotationId, bookmarkElement.CFI);
+             
+         }
+         else
+         {
+            NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, we don't have bookmarks yet!"); // VN 
          }
          
          NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, self.postLastRead is: %i", self.postLastRead ); // VN
          
        if(self.postLastRead) {
            [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
-           
        }
          
      }];

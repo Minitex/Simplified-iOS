@@ -274,7 +274,8 @@ static NSString *const RecordsKey = @"records";
            if(existingBook) {
              [self updateBook:book];
            } else {
-             [self addBook:book location:nil state:NYPLBookStateDownloadNeeded fulfillmentId:nil];
+               // this may or may not be a problem later (bookmarks are nil)
+               [self addBook:book location:nil state:NYPLBookStateDownloadNeeded fulfillmentId:nil bookmarks:nil];
            }
          }
          for (NSString *identifier in identifiersToRemove) {
@@ -322,6 +323,7 @@ static NSString *const RecordsKey = @"records";
        location:(NYPLBookLocation *const)location
           state:(NYPLBookState)state
   fulfillmentId:(NSString *)fulfillmentId
+      bookmarks:(NSArray *)bookmarks
 {
   if(!book) {
     @throw NSInvalidArgumentException;
@@ -337,7 +339,8 @@ static NSString *const RecordsKey = @"records";
                                                   initWithBook:book
                                                   location:location
                                                   state:state
-                                                  fulfillmentId:fulfillmentId];
+                                                  fulfillmentId:fulfillmentId
+                                                  bookmarks:bookmarks];
     [self broadcastChange];
   }
 }
@@ -448,6 +451,34 @@ static NSString *const RecordsKey = @"records";
     return record.location;
   }
 }
+
+// TODO: Vui add bookmark functions here
+
+
+// Set the bookmarks for a book previously registered given its identifier
+- (void)setBookmarks:(NSArray *)bookmarks forIdentifier:(NSString *)identifier
+{
+    @synchronized(self) {
+        NYPLBookRegistryRecord *const record = self.identifiersToRecords[identifier];
+        if(!record) {
+            @throw NSInvalidArgumentException;
+        }
+        
+        self.identifiersToRecords[identifier] = [record recordWithBookmarks:bookmarks];
+        
+        [self broadcastChange];
+    }
+}
+
+
+- (NSArray *)bookmarksForIdentifier:(NSString *)identifier
+{
+    @synchronized(self) {
+        NYPLBookRegistryRecord *const record = self.identifiersToRecords[identifier];
+        return record.bookmarks;
+    }
+}
+
 
 - (void)setFulfillmentId:(NSString *)fulfillmentId forIdentifier:(NSString *)identifier
 {

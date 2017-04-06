@@ -57,9 +57,14 @@
  "subtitle" : "Inspiring lifelong learning, advancing knowledge, and strengthening our communities.",
  "logo" : "LibraryLogoNYPL",
  "needsAuth" : true,
+ "supportsSimplyESync" : false,
+ "supportsBarcodeScanner" : false,
+ "supportsBarcodeDisplay" : false,
  "supportsReservations" : true,
  "supportsCardCreator" : false,
+ "supportsHelpCenter" : true,
  "catalogUrl" : "http://qa.circulation.librarysimplified.org",
+ "supportEmail" : "simplyehelp@nypl.org",
  "mainColor" : "da2527"
  }
 ]

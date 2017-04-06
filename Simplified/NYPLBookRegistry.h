@@ -5,6 +5,7 @@
 @class NYPLBook;
 @class NYPLBookLocation;
 
+
 // This is broadcast whenever the book registry is modified.
 static NSString *const NYPLBookRegistryDidChangeNotification =
   @"NYPLBookRegistryDidChangeNotification";
@@ -59,7 +60,8 @@ static NSString *const NYPLBookProcessingDidChangeNotification =
 - (void)addBook:(NYPLBook *)book
        location:(NYPLBookLocation *)location
           state:(NYPLBookState)state
-  fulfillmentId:(NSString *)fulfillmentId;
+  fulfillmentId:(NSString *)fulfillmentId
+      bookmarks:(NSArray *)bookmarks;
 
 // This method should be called whenever new book information is retrieved from a server. Doing so
 // ensures that once the user has seen the new information, they will continue to do so when
@@ -92,6 +94,12 @@ static NSString *const NYPLBookProcessingDidChangeNotification =
 
 // Returns the location of a book given its identifier.
 - (NYPLBookLocation *)locationForIdentifier:(NSString *)identifier;
+
+// Set the bookmarks for a book previously registered given its identifier
+- (void)setBookmarks:(NSArray *)bookmarks forIdentifier:(NSString *)identifier;
+
+// Returns the bookmarks for a book given its identifier
+- (NSArray *)bookmarksForIdentifier:(NSString *)identifier;
 
 // Sets the fulfillmentId for a book previously registered given its identifier.
 - (void)setFulfillmentId:(NSString *)fulfillmentId forIdentifier:(NSString *)identifier;
