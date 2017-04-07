@@ -249,11 +249,16 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
   self.view.backgroundColor = [NYPLConfiguration backgroundColor];
   
   NYPLRoundedButton *const settingsButton = [NYPLRoundedButton button];
-  settingsButton.accessibilityLabel = NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil);
-  [settingsButton setTitle:@"Aa" forState:UIControlStateNormal];
-  [settingsButton sizeToFit];
+  //settingsButton.accessibilityLabel = NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil);
+  //[settingsButton setTitle:@"Aa" forState:UIControlStateNormal];
+  //[settingsButton sizeToFit];
   // We set a larger font after sizing because we want large text in a standard-size button.
   settingsButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    
+    
+  settingsButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil)];
+  [settingsButton setImage:[UIImage imageNamed:@"Format"] forState:UIControlStateNormal];
+  [settingsButton sizeToFit];
   [settingsButton addTarget:self
                      action:@selector(didSelectSettings)
            forControlEvents:UIControlEventTouchUpInside];
