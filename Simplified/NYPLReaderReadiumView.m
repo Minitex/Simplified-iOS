@@ -587,15 +587,49 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 - (void) deleteBookmark:(void(^)(void))completionHandler
 {
     
-    
     //NSLog(@"NYPLReaderReadiumView::deleteBookmark, self.currentCFI is %@", self.currentCFI);
     
     // for now, we're going to grab all the bookmarks, grab a random annotation id (the first one) and call
     // delete on that to make sure it works
     
-    [self syncBookmarks];
-    NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[0];
-    [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmarkElement.annotationId completionHandler:completionHandler];
+    /*
+    if (self.postLastRead == YES)
+    {
+        // remove bookmark from server
+     // we may / may not need to call syncBookmarks first
+     
+        NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[0];
+        [self syncBookmarks];
+        [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmarkElement.annotationId completionHandler:completionHandler];
+     }
+    else
+    {
+        // remove bookmark locally
+    }
+    */
+    
+    // April 7, 2017
+    // For now, we are going to remove bookmarks locally from the app to test that functionality
+    
+        
+        NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
+        
+        NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
+        NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
+        NYPLReaderBookmarkElement *bookmarkToRemove = newBookmarks[0];
+        [newBookmarks removeObject:bookmarkToRemove];
+    
+    NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@",
+          bookmarkToRemove.CFI, bookmarkToRemove.annotationId);
+    
+        // set the new bookmarks in the registry, and in this class
+        [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
+        self.bookmarkElements = newBookmarks;
+    
+    completionHandler();
+    
+    
+    
     NSLog(@"NYPLReaderReadiumView::deleteBookmark called");
     
     /*
