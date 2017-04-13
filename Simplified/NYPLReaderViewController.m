@@ -36,7 +36,7 @@
 @property (nonatomic) UIBarButtonItem *settingsBarButtonItem;
 @property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;    // VN added
 @property (nonatomic) NYPLReaderBookmarkElement * currentBookmark;
-@property (nonatomic) BOOL bookmarkStatus;  // VN added
+//@property (nonatomic) BOOL bookmarkStatus;  // VN added
 @property (nonatomic) BOOL shouldHideInterfaceOnNextAppearance;
 @property (nonatomic) UIView *bottomView;
 @property (nonatomic) UIImageView *bottomViewImageView;
@@ -137,7 +137,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceOverStatusChanged) name:UIAccessibilityVoiceOverStatusChanged object:nil];
   
-  _bookmarkStatus = NO;   // VN, off or no bookmark by default for current page
+  //_bookmarkStatus = NO;   // VN, off or no bookmark by default for current page
   return self;
 }
 
@@ -256,7 +256,7 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
   //[settingsButton setTitle:@"Aa" forState:UIControlStateNormal];
   //[settingsButton sizeToFit];
   // We set a larger font after sizing because we want large text in a standard-size button.
-  settingsButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+ // settingsButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
     
     
   settingsButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil)];
@@ -653,6 +653,7 @@ spineItemTitle:(NSString *const)title
     }
     else{
         [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
     }
     self.currentBookmark = bookmark;
 }
@@ -995,12 +996,12 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     //_bookmarkStatus = ! _bookmarkStatus;
    
     
-    if (!self.currentBookmark)
+    if (self.currentBookmark)
     {
-        [rv postBookmark:^ {
+        [rv deleteBookmark:self.currentBookmark withCompletionHandler:^ {
             NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
-            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
-            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
+            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
         }];
         
         NSLog(@"Bookmark set to ON");
@@ -1008,10 +1009,10 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     else
     {
         
-        [rv deleteBookmark:self.currentBookmark withCompletionHandler:^ {
+        [rv postBookmark:^ {
             NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
-            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
-            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
+            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
+            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
         }];
         
         NSLog(@"Bookmark set to OFF");
