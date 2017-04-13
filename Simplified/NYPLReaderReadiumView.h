@@ -25,6 +25,6 @@
 
 - (void) syncLastReadingPosition;
 - (void) syncBookmarks;
-- (void) postBookmark:(void(^)(void))completionHandler;
-- (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark withCompletionHandler:(void(^)(void))completionHandler;
+- (void) addBookmark;
+- (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark;
 @end

@@ -996,25 +996,16 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     //_bookmarkStatus = ! _bookmarkStatus;
    
     
+    
     if (self.currentBookmark)
     {
-        [rv deleteBookmark:self.currentBookmark withCompletionHandler:^ {
-            NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
-            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
-            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];
-        }];
-        
+        [rv deleteBookmark:self.currentBookmark ];
         NSLog(@"Bookmark set to ON");
     }
     else
     {
         
-        [rv postBookmark:^ {
-            NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
-            [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
-            bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
-        }];
-        
+        [rv addBookmark];
         NSLog(@"Bookmark set to OFF");
     }
     

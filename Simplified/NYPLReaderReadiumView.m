@@ -575,101 +575,46 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 }
 
 // implement NYPLReaderRender function
-- (void) postBookmark:(void(^)(void))completionHandler
+- (void) addBookmark
 {
     // we have to grab all the bookmarks first, before we can create a new one
-    [self syncBookmarks];
+    
     
     // this posts to the server
-    [NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
+    //[NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
+    //[self syncBookmarks];
+    
+    //completionHandler();
     
     // For now, we're doing all the sets locally
-         /*
-                NYPLReaderBookmarkElement * bookmark = [[NYPLReaderBookmarkElement alloc] initWithCFI:self.currentCFI andId:TBDFromServer andIdref:self.currentIdref
+    
+    NYPLReaderBookmarkElement * bookmark = [[NYPLReaderBookmarkElement alloc] initWithCFI:self.currentCFI andId:nil andIdref:self.currentIdref];
           
-          
+    
           
                     NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
           
                     NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
                     NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
-                    NYPLReaderBookmarkElement *bookmarkToRemove = bookmark;
-                    [newBookmarks removeObject:bookmarkToRemove];
-          
-                    NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@, idref: %@",
-                          bookmarkToRemove.CFI, bookmarkToRemove.annotationId, bookmarkToRemove.idref);
-          
+    
+                    [newBookmarks addObject:bookmark];
+    
+    
                     // set the new bookmarks in the registry, and in this class
                     [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
                     self.bookmarkElements = newBookmarks;
-                */
+    
+    __weak NYPLReaderReadiumView *const weakSelf = self;
+    [weakSelf.delegate renderer:weakSelf bookmark:bookmark icon:YES];
+    
     
     NSLog(@"NYPLReaderReadiumView::postBookmark called");
 }
 
 // implement NYPLReaderRender function
-- (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark withCompletionHandler:(void(^)(void))completionHandler
+- (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark
 {
     
-    //NSLog(@"NYPLReaderReadiumView::deleteBookmark, self.currentCFI is %@", self.currentCFI);
-    
-    // for now, we're going to grab all the bookmarks, grab a random annotation id (the first one) and call
-    // delete on that to make sure it works
-    
-    /*
-    if (self.postLastRead == YES)
-    {
-        // remove bookmark from server
-     // we may / may not need to call syncBookmarks first
-     
-        NYPLReaderBookmarkElement *bookmarkElement = _bookmarkElements[0];
-        [self syncBookmarks];
-        [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmarkElement.annotationId completionHandler:completionHandler];
-     }
-    else
-    {
-        // remove bookmark locally
-    }
-    */
-    
-    // April 7, 2017
-    // For now, we are going to remove bookmarks locally from the app to test that functionality
-    
-    /*
-    
-        
-        NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
-        
-        NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
-        NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
-        NYPLReaderBookmarkElement *bookmarkToRemove = newBookmarks[0];
-        [newBookmarks removeObject:bookmarkToRemove];
-    
-    NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@",
-          bookmarkToRemove.CFI, bookmarkToRemove.annotationId);
-    
-        // set the new bookmarks in the registry, and in this class
-        [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
-        self.bookmarkElements = newBookmarks;
-    
-    completionHandler();
-    
-    */
-//    NYPLBookLocation * location = [[NYPLBookRegistry sharedRegistry] locationForIdentifier: self.book.identifier];
-//    
-//    
-//        NSDictionary *const locationDictionary =
-//        NYPLJSONObjectFromData([location.locationString dataUsingEncoding:NSUTF8StringEncoding]);
-//    
-//    NSString * idref = locationDictionary[@"idref"];
-//    NSLog(@"NYPLReaderReadiumView::deleteBookmark, idref: %@", idref);
-    
-//    [self hasBookmarkForSpineItem: idref completionHandler:^(bool success, NYPLReaderBookmarkElement *bookmark) {
-//
-//        if (success)
-//        {
-//            
-//
     
 //            // store the bookmark status locally
         NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
@@ -687,8 +632,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
          self.bookmarkElements = newBookmarks;
     
         // set the bookmark icon
-        completionHandler();
-    
+        __weak NYPLReaderReadiumView *const weakSelf = self;
+        [weakSelf.delegate renderer:weakSelf bookmark:nil icon:NO];
     
         // this deletes from the server
             //[NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:completionHandler];
@@ -889,9 +834,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 //                         [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:
 //                          completionHandler];
 //                         }
-//                         // break out of this loop, somehow
-//                         bookmarkFound = YES;
-                       //  break;
                      }
                      else
                      {
@@ -992,7 +934,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
                                            initWithLocationString:locationJSON
                                            renderer:renderer];
          
-       self.currentCFI = location.locationString;   // VN
+       self.currentCFI = json[@"contentCFI"];   // VN
          
        self.currentIdref = json[@"idref"]; // VN
          
