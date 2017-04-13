@@ -7,6 +7,9 @@
 - (void)TOCViewController:(NYPLReaderTOCViewController *)controller
 didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *)opaqueLocation;
 
+- (void)TOCViewController:(NYPLReaderTOCViewController *)controller
+  didSelectBookmark:(NYPLReaderBookmarkElement *)bookmark;
+
 @end
 
 @interface NYPLReaderTOCViewController : UIViewController

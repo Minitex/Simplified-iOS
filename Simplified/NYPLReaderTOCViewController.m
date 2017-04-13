@@ -100,7 +100,7 @@ static NSString *const reuseIdentifierBookmark = @"bookmarkCell";
         
         cell.titleLabel.text = @"Bookmark Title";
         cell.excerptLabel.text = @"Bookmark Excerpt";
-        cell.pageNumberLabel.text = bookmarkElement.CFI;
+        cell.pageNumberLabel.text = bookmarkElement.contentCFI;
       }
       return cell;
     }
@@ -124,6 +124,11 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     }
     case 1:{
       // bookmark selected
+        NYPLReaderBookmarkElement *const bookmark = self.bookmarks[indexPath.row];
+        
+        [self.delegate TOCViewController:self
+                 didSelectBookmark:bookmark];
+        break;
       
     }
     default:
@@ -165,7 +170,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       NSLog(@"Bookmarks are: %@,", self.bookmarks);
       for (NYPLReaderBookmarkElement *element in self.bookmarks)
       {
-        NSLog(@"element CFI: %@, annotationId: %@", element.CFI, element.annotationId);
+        NSLog(@"element CFI: %@, annotationId: %@", element.contentCFI, element.annotationId);
       }
       
     }

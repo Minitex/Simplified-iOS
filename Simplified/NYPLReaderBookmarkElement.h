@@ -8,7 +8,7 @@
 
 @interface  NYPLReaderBookmarkElement : NSObject
 
-@property (nonatomic, readonly) NSString *CFI;
+@property (nonatomic, readonly) NSString *contentCFI;
 @property (nonatomic, readonly) NSString *annotationId;  // this will be used to identify which bookmark to delete
 @property (nonatomic, readonly) NSString *idref; // This is like the chapterß
 

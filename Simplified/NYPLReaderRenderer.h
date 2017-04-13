@@ -15,13 +15,14 @@ typedef NS_ENUM(NSInteger, NYPLReaderRendererGesture) {
 @property (nonatomic, readonly) BOOL bookIsCorrupt;
 @property (nonatomic, readonly) BOOL loaded;
 @property (nonatomic, readonly, nonnull) NSArray *TOCElements;
-@property (nonatomic, readonly, nonnull) NSArray *bookmarkElements; // VN
-@property (nonatomic, readonly, nonnull) NYPLBook *book; // VN
-@property (nonatomic, readonly, nonnull) NSString *currentCFI;  // VN
+@property (nonatomic, readonly, nonnull) NSArray *bookmarkElements;
+
 
 // This must be called with a reader-appropriate underlying value. Readers implementing this should
 // throw |NSInvalidArgumentException| in the event it is not.
 - (void)openOpaqueLocation:(nonnull NYPLReaderRendererOpaqueLocation *)opaqueLocation;
+
+- (void)openBookmark:(nonnull NYPLReaderBookmarkElement *)bookmark;
 
 @end
 
@@ -38,7 +39,7 @@ didUpdateProgressWithinBook:(float)progressWithinBook
        pageCount:(NSUInteger)pageCount
   spineItemTitle:(nullable NSString *)spineItemTitle;
 
--(void)renderer:(nonnull id<NYPLReaderRenderer>)renderer bookmark:(NYPLReaderBookmarkElement*)bookmark icon:(bool)on;
+-(void)renderer:(nonnull id<NYPLReaderRenderer>)renderer bookmark:(nullable NYPLReaderBookmarkElement*)bookmark icon:(bool)on;
 
 - (void)rendererDidBeginLongLoad:(nonnull id<NYPLReaderRenderer>)render;
 

@@ -644,7 +644,7 @@ spineItemTitle:(NSString *const)title
 }
 
 
--(void)renderer:(id<NYPLReaderRenderer>)renderer bookmark:(NYPLReaderBookmarkElement*)bookmark icon:(bool)on
+-(void)renderer:(__unused id<NYPLReaderRenderer>)renderer bookmark:(NYPLReaderBookmarkElement*)bookmark icon:(bool)on
 {
     NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
     if (on){
@@ -769,6 +769,20 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     self.shouldHideInterfaceOnNextAppearance = YES;
     [self.navigationController popViewControllerAnimated:YES];
   }
+}
+
+- (void)TOCViewController:(NYPLReaderTOCViewController *)controller didSelectBookmark:(NYPLReaderBookmarkElement *)bookmark
+{
+    [self.rendererView openBookmark:bookmark];
+    
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.activePopoverController dismissPopoverAnimated:YES];
+        if (!UIAccessibilityIsVoiceOverRunning())
+            self.interfaceHidden = YES;
+    } else {
+        self.shouldHideInterfaceOnNextAppearance = YES;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark NYPLReaderSettingsViewDelegate
@@ -936,7 +950,7 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     
     // VN: TODO : Should probably sync bookmarks before calling TOC?
     // This doesn't work all the time!
-    [[NYPLReaderSettings sharedSettings].currentReaderReadiumView syncBookmarks];
+    //[[NYPLReaderSettings sharedSettings].currentReaderReadiumView syncBookmarks];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"NYPLTOC" bundle:nil];
     NYPLReaderTOCViewController *viewController = [sb instantiateViewControllerWithIdentifier:@"NYPLTOC"];
