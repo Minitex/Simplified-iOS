@@ -15,6 +15,8 @@
 #import "NYPLReaderViewController.h"
 #import "SimplyE-Swift.h"
 #import <PureLayout/PureLayout.h>
+#import "NYPLReaderBookmarkElement.h"
+
 
 #define EDGE_OF_SCREEN_POINT_FRACTION    0.2
 
@@ -33,6 +35,7 @@
 @property (nonatomic) UIView<NYPLReaderRenderer> *rendererView;
 @property (nonatomic) UIBarButtonItem *settingsBarButtonItem;
 @property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;    // VN added
+@property (nonatomic) NYPLReaderBookmarkElement * currentBookmark;
 @property (nonatomic) BOOL bookmarkStatus;  // VN added
 @property (nonatomic) BOOL shouldHideInterfaceOnNextAppearance;
 @property (nonatomic) UIView *bottomView;
@@ -640,6 +643,20 @@ spineItemTitle:(NSString *const)title
   [self.bottomViewProgressLabel needsUpdateConstraints];
 }
 
+
+-(void)renderer:(id<NYPLReaderRenderer>)renderer bookmark:(NYPLReaderBookmarkElement*)bookmark icon:(bool)on
+{
+    NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
+    if (on){
+        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOn"] forState:UIControlStateNormal];
+        bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Remove Bookmark", nil)];
+    }
+    else{
+        [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
+    }
+    self.currentBookmark = bookmark;
+}
+
 #pragma mark UIPopoverControllerDelegate
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
@@ -975,10 +992,10 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     
     NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
     
-    _bookmarkStatus = ! _bookmarkStatus;
+    //_bookmarkStatus = ! _bookmarkStatus;
    
     
-    if (_bookmarkStatus == YES)
+    if (!self.currentBookmark)
     {
         [rv postBookmark:^ {
             NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
@@ -991,7 +1008,7 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     else
     {
         
-        [rv deleteBookmark:^ {
+        [rv deleteBookmark:self.currentBookmark withCompletionHandler:^ {
             NYPLRoundedButton * bookmarkButton = self.bookmarkButtonItem.customView;
             [bookmarkButton setImage:[UIImage imageNamed:@"BookmarkOff"] forState:UIControlStateNormal];
             bookmarkButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Add Bookmark", nil)];

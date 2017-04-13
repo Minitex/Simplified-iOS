@@ -10,6 +10,7 @@
 
 @property (nonatomic, readonly) NSString *CFI;
 @property (nonatomic, readonly) NSString *annotationId;  // this will be used to identify which bookmark to delete
+@property (nonatomic, readonly) NSString *idref; // This is like the chapterß
 
 
 // properties that we will set in NYPLReaderBookmarkCell
@@ -20,6 +21,6 @@
 + (id)new NS_UNAVAILABLE;
 - (id)init NS_UNAVAILABLE;
 
-- (instancetype)initWithCFI:(NSString *)CFI andId:(NSString *)annotationId;
+- (instancetype)initWithCFI:(NSString *)CFI andId:(NSString *)annotationId andIdref:(NSString *)idref;
 
 @end

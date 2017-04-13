@@ -577,14 +577,14 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 - (void) postBookmark:(void(^)(void))completionHandler
 {
     // we have to grab all the bookmarks first, before we can create a new one
-    //[self syncBookmarks];
+    [self syncBookmarks];
     [NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
     
     NSLog(@"NYPLReaderReadiumView::postBookmark called");
 }
 
 // implement NYPLReaderRender function
-- (void) deleteBookmark:(void(^)(void))completionHandler
+- (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark withCompletionHandler:(void(^)(void))completionHandler
 {
     
     //NSLog(@"NYPLReaderReadiumView::deleteBookmark, self.currentCFI is %@", self.currentCFI);
@@ -611,6 +611,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     // April 7, 2017
     // For now, we are going to remove bookmarks locally from the app to test that functionality
     
+    /*
+    
         
         NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
         
@@ -628,7 +630,32 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     completionHandler();
     
+    */
+//    NYPLBookLocation * location = [[NYPLBookRegistry sharedRegistry] locationForIdentifier: self.book.identifier];
+//    
+//    
+//        NSDictionary *const locationDictionary =
+//        NYPLJSONObjectFromData([location.locationString dataUsingEncoding:NSUTF8StringEncoding]);
+//    
+//    NSString * idref = locationDictionary[@"idref"];
+//    NSLog(@"NYPLReaderReadiumView::deleteBookmark, idref: %@", idref);
     
+//    [self hasBookmarkForSpineItem: idref completionHandler:^(bool success, NYPLReaderBookmarkElement *bookmark) {
+//
+//        if (success)
+//        {
+//            
+//            // set the bookmark icon
+//            // store the bookmark status locally
+    
+            
+            [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:completionHandler];
+            
+//        }
+//    
+//    }];
+    
+    //completionHandler();
     
     NSLog(@"NYPLReaderReadiumView::deleteBookmark called");
     
@@ -765,7 +792,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   }];
 }
 
-- (void) hasBookmarkForSpineItem:(NSString*)idref
+- (void) hasBookmarkForSpineItem:(NSString*)idref completionHandler:(void(^)(bool success, NYPLReaderBookmarkElement *bookmark))completionHandler
 {
   
   //  filter the bookmarks first by spine item (idref) and then run the result through a loop until there is a match
@@ -774,46 +801,94 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   
 //  for (bookmark in filteredBookmarks) {
   
+    NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
+    
+    NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
+    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
+    
+    // loop through oldBookmarks and grab all the CFI for that chapter (idref)
+    __block bool bookmarkFound = NO;
+    for (NSUInteger i = 0; i < oldBookmarks.count; i++)
+    {
+        NYPLReaderBookmarkElement *bookmark = oldBookmarks[i];
+        
+        if (bookmark.idref == idref)
+        {
+            // dummy cfi , replace by cfi from the bookmark in this loop
+            NSString *contentCFI = bookmark.CFI;
+        
+            NSString *js = [NSString stringWithFormat:@"ReadiumSDK.reader.isVisibleSpineItemElementCfi('%@', '%@')",
+                        idref,
+                        contentCFI];
+        
+            NYPLLOG(js);
+        
+            
+            [self
+             sequentiallyEvaluateJavaScript:js
+             withCompletionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+             
+                 if (!error)
+                 {
+                     NSNumber const *isBookmarked = result;
+                     NYPLLOG(isBookmarked);
+                     if (isBookmarked && ![isBookmarked  isEqual: @0])
+                     {
+                         // is a bookmarked page
+                         NYPLLOG(@"there is a bookmark for this page");
+                         // remove the bookmark with that CFI from local bookmarks
+                         [newBookmarks removeObject:bookmark];
+                         
+                         
+                         completionHandler(YES, bookmark);
+                         
+//                         
+//                         if (completionHandler)
+//                         {
+//                         // remove from the servers
+//                         [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:
+//                          completionHandler];
+//                         }
+//                         // break out of this loop, somehow
+//                         bookmarkFound = YES;
+                       //  break;
+                     }
+                     else
+                     {
+                         // is not a bookmarked page
+                     
+                         NYPLLOG(@"there is no bookmark for this page");
+                     }
+                 
+                 }
+                 else
+                 {
+                     NYPLLOG(error);
+                 }
+             
+                 
+             }];
+            
+            if (bookmarkFound)
+            {
+                break;
+            }
+        }   // end if bookmark.idref == idref
+        // end loop through bookmarks
+        completionHandler(NO, nil);
 
-  // dummy cfi , replace by cfi from the bookmark in this loop 
-  NSString *contentCFI = @"/4/2/2";
-  
-  NSString *js = [NSString stringWithFormat:@"ReadiumSDK.reader.isVisibleSpineItemElementCfi('%@', '%@')",
-                  idref,
-                  contentCFI];
-  
-  NYPLLOG(js);
-  
-  [self
-   sequentiallyEvaluateJavaScript:js
-   withCompletionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-     
-     if (!error)
-     {
-       NSNumber const *isBookmarked = result;
-       NYPLLOG(isBookmarked);
-       if (isBookmarked && ![isBookmarked  isEqual: @0])
-       {
-         // is not a bookmarked page
-         NYPLLOG(@"there is a bookmark for this page");
-       }
-       else
-       {
-         // is not a bookmarked page
-         
-         NYPLLOG(@"there is no bookmark for this page");
-       }
-       
-     }
-     else{
-       NYPLLOG(error);
-     }
-     
-   }];
-  
-  // end loop
-//  }
-  
+    }
+    //NYPLReaderBookmarkElement *bookmarkToRemove = newBookmarks[0];
+    //[newBookmarks removeObject:bookmarkToRemove];
+    
+   // NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@",
+   //       bookmarkToRemove.CFI, bookmarkToRemove.annotationId);
+    
+    // set the new bookmarks in the registry, and in this class
+   // [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
+   // self.bookmarkElements = newBookmarks;
+    
+   // completionHandler();
   
 }
 
@@ -858,13 +933,20 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
        }
        NYPLLOG(locationJSON);
        
-//       NSError *jsonError;
-//       NSData *objectData = [locationJSON dataUsingEncoding:NSUTF8StringEncoding];
-//       NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
-//                                                            options:NSJSONReadingMutableContainers
-//                                                              error:&jsonError];
+       NSError *jsonError;
+       NSData *objectData = [locationJSON dataUsingEncoding:NSUTF8StringEncoding];
+       NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&jsonError];
 
-//       [self hasBookmarkForSpineItem:json[@"idref"]];
+       [self hasBookmarkForSpineItem:json[@"idref"] completionHandler:^(bool success, NYPLReaderBookmarkElement *bookmark) {
+           
+        
+           
+           [weakSelf.delegate renderer:weakSelf bookmark:bookmark icon:success];
+                      
+           
+       }];
        
        NYPLBookLocation *const location = [[NYPLBookLocation alloc]
                                            initWithLocationString:locationJSON
@@ -1088,20 +1170,52 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     //_bookmarkElements = [responseObject valueForKey:@"serverCFI"];
     
     NSMutableArray * bookmarkElements = [[NSMutableArray alloc] initWithCapacity:responseObject.count];
-   // NSArray * serverCFIs = [responseObject valueForKey:@"serverCFI"];
-   // NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
-    
-    NSArray * CFIs = [responseObject valueForKey:@"serverCFI"];
+    NSArray * serverCFIs = [responseObject valueForKey:@"serverCFI"];
     NSArray * annotationIds = [responseObject valueForKey:@"id"];
+    
+    NSMutableArray * contentCFIsMutable = [[NSMutableArray alloc] initWithCapacity:responseObject.count];
+    NSMutableArray * idrefsMutables = [[NSMutableArray alloc] initWithCapacity:responseObject.count];
+    
     
     for (NSUInteger i = 0; i < responseObject.count; i++)
     {
-        NYPLReaderBookmarkElement * bookmarkElement = [[NYPLReaderBookmarkElement alloc] initWithCFI:CFIs[i] andId:annotationIds[i]];
+        NSDictionary *const serverCFIDictionary =
+        NYPLJSONObjectFromData([serverCFIs[i] dataUsingEncoding:NSUTF8StringEncoding]);
+    
+        NSString * idref = serverCFIDictionary[@"idref"];
+        NSString * contentCFI = serverCFIDictionary[@"contentCFI"];
+        
+        [idrefsMutables addObject:idref];
+        [contentCFIsMutable addObject:contentCFI];
+    }
+    
+    NSArray * idrefs = idrefsMutables;
+    NSArray * contentCFIs = contentCFIsMutable;
+    // What if we parse the idref and contentCFI from the server
+    //NSArray * idrefs = [[responseObject valueForKey:@"serverCFI" ] valueForKey:@"idref"];
+    //NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
+    
+    //NSArray * contentCFIs = [responseObject valueForKey:@"contentCFI"];
+    //NSArray * idrefs = [responseObject valueForKey:@"idref"];
+    
+    //NSArray * CFIs = [responseObject valueForKey:@"contentCFI"];
+   
+    
+    for (NSUInteger i = 0; i < responseObject.count; i++)
+    {
+        NYPLReaderBookmarkElement * bookmarkElement = [[NYPLReaderBookmarkElement alloc] initWithCFI:contentCFIs[i] andId:annotationIds[i] andIdref:idrefs[i]];
         
         [bookmarkElements addObject:bookmarkElement];
     }
     
     _bookmarkElements = bookmarkElements;
+    
+    
+    // This is also where we should update the book registry no?
+    [[NYPLBookRegistry sharedRegistry]
+     setBookmarks:bookmarkElements
+     forIdentifier:self.book.identifier];
+    
 }
 
 

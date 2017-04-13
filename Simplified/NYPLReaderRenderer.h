@@ -4,6 +4,7 @@
 // TOC-related location information. Any object that wants to do something with an opaque location
 // must verify that it is of the correct class and then cast it appropriately.
 @class NYPLReaderRendererOpaqueLocation;
+@class NYPLReaderBookmarkElement;
 
 typedef NS_ENUM(NSInteger, NYPLReaderRendererGesture) {
   NYPLReaderRendererGestureToggleUserInterface
@@ -36,6 +37,8 @@ didUpdateProgressWithinBook:(float)progressWithinBook
        pageIndex:(NSUInteger)pageIndex
        pageCount:(NSUInteger)pageCount
   spineItemTitle:(nullable NSString *)spineItemTitle;
+
+-(void)renderer:(nonnull id<NYPLReaderRenderer>)renderer bookmark:(NYPLReaderBookmarkElement*)bookmark icon:(bool)on;
 
 - (void)rendererDidBeginLongLoad:(nonnull id<NYPLReaderRenderer>)render;
 

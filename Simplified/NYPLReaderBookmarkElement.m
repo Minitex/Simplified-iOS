@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSString *CFI;
 @property (nonatomic) NSString *annotationId;  // this will be used to identify which bookmark to delete
+@property (nonatomic) NSString *idref;
 
 
 // properties that we will set in NYPLReaderBookmarkCell
@@ -24,13 +25,14 @@
 @implementation  NYPLReaderBookmarkElement
 
 
-- (instancetype)initWithCFI:(NSString *)CFI andId:(NSString *)annotationId
+- (instancetype)initWithCFI:(NSString *)CFI andId:(NSString *)annotationId andIdref:(NSString *)idref
 {
     self = [super init];
     if(!self) return nil;
     
     self.CFI = CFI;
     self.annotationId = annotationId;
+    self.idref = idref;
     
     self.title = @"";
     self.excerpt = @"";

@@ -459,7 +459,7 @@ final class NYPLAnnotations: NSObject {
                     return
                 } else {
 
-                    //print("NYPLAnnotations::syncLastBookmarks, response is: \(response)")
+                    print("NYPLAnnotations::syncLastBookmarks, response is: \(response)")
                     //print("NYPLAnnotations::syncLastBookmarks, data is \(data)")
 
                     guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any] else {
@@ -509,6 +509,7 @@ final class NYPLAnnotations: NSObject {
                             }
                             responseObject["id"] = id
 
+                            
                             guard let target = item["target"] as? [String:AnyObject],
                                 let selector = target["selector"] as? [String:AnyObject],
                                 let serverCFI = selector["value"] as? String else {
@@ -516,10 +517,24 @@ final class NYPLAnnotations: NSObject {
                                     return
                             }
                             responseObject["serverCFI"] = serverCFI
+ 
+                            
+                            print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
 
-                            //print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
-
-
+                            /*
+                            guard let target = item["target"] as? [String:AnyObject],
+                                let selector = target["selector"] as? [String:AnyObject],
+                                let serverCFI = selector["value"] as? [String: AnyObject],
+                                let contentCFI = serverCFI["contentCFI"] as? String,
+                                let idref = serverCFI["idref"] as? String else {
+                                    completionHandler(nil)
+                                    return
+                            }
+                            
+                            print("NYPLAnnotations::syncLastBookmarks, contentCFI is:  \(contentCFI)")
+                            print("NYPLAnnotations::syncLastBookmarks, idref is: \(idref)")
+                            */
+                            
                             if let body = item["body"] as? [String:AnyObject],
                                 let device = body["http://librarysimplified.org/terms/device"] as? String,
                                 let time = body["http://librarysimplified.org/terms/time"] as? String
