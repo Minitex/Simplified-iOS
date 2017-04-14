@@ -1014,13 +1014,13 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
     if (self.currentBookmark)
     {
         [rv deleteBookmark:self.currentBookmark ];
-        NSLog(@"Bookmark set to ON");
+        NSLog(@"Bookmark set to OFF");
     }
     else
     {
         
         [rv addBookmark];
-        NSLog(@"Bookmark set to OFF");
+        NSLog(@"Bookmark set to ON");
     }
     
     
