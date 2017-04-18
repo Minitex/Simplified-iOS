@@ -172,15 +172,13 @@ final class NYPLAnnotations: NSObject {
         }
     }
 
-    // for now, run the completionHandler only when one exists
-
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
 
         if let response = response as? HTTPURLResponse {
             print("NYPLAnnotations::deleteBookmark, response.statusCode is \(response.statusCode)")
 
-            if response.statusCode == 200 {
-                // run completion handler if one  exists
+            if response.statusCode == 200
+            {
                 completionHandler()
             }
         } else {
@@ -521,20 +519,6 @@ final class NYPLAnnotations: NSObject {
                             
                             print("NYPLAnnotations::syncLastBookmarks, serverCFI is: \(serverCFI)")
 
-                            /*
-                            guard let target = item["target"] as? [String:AnyObject],
-                                let selector = target["selector"] as? [String:AnyObject],
-                                let serverCFI = selector["value"] as? [String: AnyObject],
-                                let contentCFI = serverCFI["contentCFI"] as? String,
-                                let idref = serverCFI["idref"] as? String else {
-                                    completionHandler(nil)
-                                    return
-                            }
-                            
-                            print("NYPLAnnotations::syncLastBookmarks, contentCFI is:  \(contentCFI)")
-                            print("NYPLAnnotations::syncLastBookmarks, idref is: \(idref)")
-                            */
-                            
                             if let body = item["body"] as? [String:AnyObject],
                                 let device = body["http://librarysimplified.org/terms/device"] as? String,
                                 let time = body["http://librarysimplified.org/terms/time"] as? String

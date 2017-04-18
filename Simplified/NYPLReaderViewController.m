@@ -34,9 +34,8 @@
 @property (nonatomic) BOOL previousPageTurnWasRight;
 @property (nonatomic) UIView<NYPLReaderRenderer> *rendererView;
 @property (nonatomic) UIBarButtonItem *settingsBarButtonItem;
-@property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;    // VN added
+@property (nonatomic) UIBarButtonItem *const bookmarkButtonItem;
 @property (nonatomic) NYPLReaderBookmarkElement * currentBookmark;
-//@property (nonatomic) BOOL bookmarkStatus;  // VN added
 @property (nonatomic) BOOL shouldHideInterfaceOnNextAppearance;
 @property (nonatomic) UIView *bottomView;
 @property (nonatomic) UIImageView *bottomViewImageView;
@@ -137,7 +136,6 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceOverStatusChanged) name:UIAccessibilityVoiceOverStatusChanged object:nil];
   
-  //_bookmarkStatus = NO;   // VN, off or no bookmark by default for current page
   return self;
 }
 
@@ -251,14 +249,8 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
   
   self.view.backgroundColor = [NYPLConfiguration backgroundColor];
   
+  // Settings button
   NYPLRoundedButton *const settingsButton = [NYPLRoundedButton button];
-  //settingsButton.accessibilityLabel = NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil);
-  //[settingsButton setTitle:@"Aa" forState:UIControlStateNormal];
-  //[settingsButton sizeToFit];
-  // We set a larger font after sizing because we want large text in a standard-size button.
- // settingsButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
-    
-    
   settingsButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"ReaderViewControllerToggleReaderSettings", nil)];
   [settingsButton setImage:[UIImage imageNamed:@"Format"] forState:UIControlStateNormal];
   [settingsButton sizeToFit];
@@ -267,6 +259,7 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
            forControlEvents:UIControlEventTouchUpInside];
   self.settingsBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
   
+  // Table of Contents button
   NYPLRoundedButton *const TOCButton = [NYPLRoundedButton button];
   TOCButton.accessibilityLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"TOC", nil)];
   TOCButton.bounds = settingsButton.bounds;
@@ -288,12 +281,8 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
     
   self.bookmarkButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bookmarkButton];
     
-    
   // Add buttons to right button bar navigation
   self.navigationItem.rightBarButtonItems = @[self.bookmarkButtonItem, TOCBarButtonItem, self.settingsBarButtonItem];
-  
-  //self.navigationItem.rightBarButtonItems = @[TOCBarButtonItem, self.settingsBarButtonItem];  // VN
-    
     
   // Corruption may have occurred before we added these, so we need to set their enabled status
   // here (in addition to |readerView:didEncounterCorruptionForBook:|).
@@ -940,17 +929,13 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
 
 - (void)didSelectTOC
 {
-  //NYPLReaderTOCViewController *const viewController =
-  //  [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements];
-    
-  //NYPLReaderTOCViewController *const viewController =
-  //  [[NYPLReaderTOCViewController alloc] initWithTOCElements:self.rendererView.TOCElements andBookmarkElements:self.rendererView.bookmarkElements];
-    
-  //viewController.delegate = self;
-    
     // VN: TODO : Should probably sync bookmarks before calling TOC?
     // This doesn't work all the time!
     //[[NYPLReaderSettings sharedSettings].currentReaderReadiumView syncBookmarks];
+    
+    // TODO: When we background or close the app and open the app again, it does not preserve
+    // local bookmarks when displaying in the TOC page. But if you go to the bookmarked pages themselves,
+    // they are still there!
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"NYPLTOC" bundle:nil];
     NYPLReaderTOCViewController *viewController = [sb instantiateViewControllerWithIdentifier:@"NYPLTOC"];
@@ -979,36 +964,7 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
 {
     NSLog(@"\nSelected Bookmark!\n");
     
-    //NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
-    // let's just try printing stuff from here
-    
-    //NSLog(@"Book Info: %@", [rv getBookInfo]);
-    
-    /*
-    NYPLBook *book = [rv getBookInfo];
-    NSLog(@"Book title: %@\n", book.title);
-    
-    NSLog(@"Book annotations URL: %@\n", book.annotationsURL);
-    
-    NSLog(@"Book identifier: %@\n", book.identifier);
-    
-    NSLog(@"Spine Item Details: %@\n", [rv getSpineItemInfo]);
-    
-    NSLog(@"Spine Item Page Count: %lu\n", (unsigned long)[rv getSpineItemPageCount]);
-    
-    NSLog(@"Spine Item Page Index: %lu\n", (unsigned long)[rv getSpineItemPageIndex]);
-    */
-    //[self syncLastRead];
-    
-    /*
-    NSLog(@"Calling syncLastReadingPosition manually");
-    [rv syncLastReadingPosition];
-     */
-    
     NYPLReaderReadiumView *rv = [[NYPLReaderSettings sharedSettings] currentReaderReadiumView];
-    
-    //_bookmarkStatus = ! _bookmarkStatus;
-   
     
     
     if (self.currentBookmark)
@@ -1022,8 +978,6 @@ didSelectOpaqueLocation:(NYPLReaderRendererOpaqueLocation *const)opaqueLocation
         [rv addBookmark];
         NSLog(@"Bookmark set to ON");
     }
-    
-    
 }
 
 - (void)turnPageIsRight:(BOOL)isRight

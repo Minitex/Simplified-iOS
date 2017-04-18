@@ -124,7 +124,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     }
     case 1:{
       // bookmark selected
-    NYPLReaderBookmarkElement *const bookmark = self.bookmarks[indexPath.row];
+      NYPLReaderBookmarkElement *const bookmark = self.bookmarks[indexPath.row];
         
         [self.delegate TOCViewController:self
                  didSelectBookmark:bookmark];

@@ -546,7 +546,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     [self sequentiallyEvaluateJavaScript:javascript];
     [self syncLastReadingPosition];
     
-    // is this a good place to call syncBookmarks
+    // TODO: is this a good place to call syncBookmarks?
     //[self syncBookmarks];
 }
 
@@ -575,16 +575,14 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 // implement NYPLReaderRender function
 - (void) addBookmark
 {
-    // we have to grab all the bookmarks first, before we can create a new one
-    
+    // TODO: Do we have to grab all the bookmarks first (locally or from the server),
+    // before we can create a new one?
     
     // this posts to the server
     //[NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
     //[self syncBookmarks];
     
-    //completionHandler();
-    
-    // For now, we're doing all the sets locally
+    // For now, we're doing all the add bookmarks locally
     
     NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
     
@@ -603,14 +601,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     [newBookmarks addObject:bookmark];
     
-    
     // set the new bookmarks in the registry, and in this class
     [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
     self.bookmarkElements = newBookmarks;
     
+    // change bookmark icon to ON
     __weak NYPLReaderReadiumView *const weakSelf = self;
     [weakSelf.delegate renderer:weakSelf bookmark:bookmark icon:YES];
-    
     
     NSLog(@"NYPLReaderReadiumView::addBookmark called");
 }
@@ -618,8 +615,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 // implement NYPLReaderRender function
 - (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark
 {
-    
-    
     // store the bookmark status locally
     NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
     
@@ -635,11 +630,11 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
     self.bookmarkElements = newBookmarks;
     
-    // set the bookmark icon
+    // set the bookmark icon to no bookmark
     __weak NYPLReaderReadiumView *const weakSelf = self;
     [weakSelf.delegate renderer:weakSelf bookmark:nil icon:NO];
     
-    // this deletes from the server
+    // TODO: this deletes from the server
     //[NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:completionHandler];
     
     //        }
@@ -752,9 +747,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     //  filter the bookmarks first by spine item (idref) and then run the result through a loop until there is a match
     // break out the loop if a match was found
     
-    
-    //  for (bookmark in filteredBookmarks) {
-    
     NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
     
     NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
@@ -793,13 +785,12 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
                          // remove the bookmark with that CFI from local bookmarks
                          [newBookmarks removeObject:bookmark];
                          
-                         
                          completionHandler(YES, bookmark);
                          
                          //
                          //                         if (completionHandler)
                          //                         {
-                         //                         // remove from the servers
+                         //                         // TODO: remove from the servers
                          //                         [NYPLAnnotations deleteBookmarkWithAnnotationId:bookmark.annotationId completionHandler:
                          //                          completionHandler];
                          //                         }
@@ -826,21 +817,11 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
             }
         }   // end if bookmark.idref == idref
         // end loop through bookmarks
+        
+        // a bookmark was not found
         completionHandler(NO, nil);
         
     }
-    //NYPLReaderBookmarkElement *bookmarkToRemove = newBookmarks[0];
-    //[newBookmarks removeObject:bookmarkToRemove];
-    
-    // NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@",
-    //       bookmarkToRemove.CFI, bookmarkToRemove.annotationId);
-    
-    // set the new bookmarks in the registry, and in this class
-    // [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
-    // self.bookmarkElements = newBookmarks;
-    
-    // completionHandler();
-    
 }
 
 - (void)readiumPaginationChangedWithDictionary:(NSDictionary *const)dictionary
@@ -921,9 +902,9 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
                  
              }
              
-             /*
+             
              // this is also where we set bookmarks, if they exist // VN
-              // don't know if this section is necessary, investigate
+              // TODO: don't know if this section is necessary, investigate
              if (_bookmarkElements) {
                  [[NYPLBookRegistry sharedRegistry]
                   setBookmarks:_bookmarkElements
@@ -932,23 +913,27 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
                  NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
                  
                  NSArray * bookmarks = [registry bookmarksForIdentifier:weakSelf.book.identifier];
-                 NYPLReaderBookmarkElement *bookmarkElement = bookmarks[0]; // this will cause problems if we currently don't have bookmarks
                  
-                 NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, location.dictionaryRepresentation: %@", location.dictionaryRepresentation);
-                 NSLog(@"\tNYPLReaderReadiumView::readiumPaginationChangedWithDictionary, registry.registryDirectory: %@, registry.book: %@, registry.bookmarks annotationID: %@, registry.bookmarks CFI: %@, registry.bookmarks idref: %@",
+                 
+                 if (bookmarks.count > 0)
+                 {
+                     NYPLReaderBookmarkElement *bookmarkElement = bookmarks[0]; // this will cause problems if we currently don't have bookmarks
+                     NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, location.dictionaryRepresentation: %@", location.dictionaryRepresentation);
+                     NSLog(@"\tNYPLReaderReadiumView::readiumPaginationChangedWithDictionary, registry.registryDirectory: %@, registry.book: %@, registry.bookmarks annotationID: %@, registry.bookmarks CFI: %@, registry.bookmarks idref: %@",
                        registry.registryDirectory,
                        
                        [[registry bookForIdentifier:weakSelf.book.identifier] title],
                        
                        bookmarkElement.annotationId, bookmarkElement.contentCFI, bookmarkElement.idref);
+                 }
              }
              else
              {
                  NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, we don't have bookmarks yet!"); // VN
              }
-              */
+             // end TODO
              
-             NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, self.postLastRead is: %i", self.postLastRead ); // VN
+             NSLog(@"NYPLReaderReadiumView::readiumPaginationChangedWithDictionary, self.postLastRead is: %i", self.postLastRead ); 
              
              if(self.postLastRead) {
                  [NYPLAnnotations postLastRead:weakSelf.book cfi:location.locationString];
@@ -1116,11 +1101,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 // This method is taking in an array of dictionaries
 - (void)generateBookmarkElements:(NSArray<NSDictionary<NSString *, NSString *> *> *)  responseObject
 {
-    //_bookmarkElements = responseObject;
-    //_bookmarkElements = @[@"apple", @"banana", @"orange"];
-    
-    //_bookmarkElements = [responseObject valueForKey:@"serverCFI"];
-    
     NSMutableArray * bookmarkElements = [[NSMutableArray alloc] initWithCapacity:responseObject.count];
     NSArray * serverCFIs = [responseObject valueForKey:@"serverCFI"];
     NSArray * annotationIds = [responseObject valueForKey:@"id"];
@@ -1143,15 +1123,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     NSArray * idrefs = idrefsMutables;
     NSArray * contentCFIs = contentCFIsMutable;
-    // What if we parse the idref and contentCFI from the server
-    //NSArray * idrefs = [[responseObject valueForKey:@"serverCFI" ] valueForKey:@"idref"];
-    //NSArray * contentCFIs = [serverCFIs valueForKey:@"contentCFI"];
-    
-    //NSArray * contentCFIs = [responseObject valueForKey:@"contentCFI"];
-    //NSArray * idrefs = [responseObject valueForKey:@"idref"];
-    
-    //NSArray * CFIs = [responseObject valueForKey:@"contentCFI"];
-    
     
     for (NSUInteger i = 0; i < responseObject.count; i++)
     {
@@ -1162,12 +1133,10 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
     
     _bookmarkElements = bookmarkElements;
     
-    
     // This is also where we should update the book registry no?
     [[NYPLBookRegistry sharedRegistry]
      setBookmarks:bookmarkElements
      forIdentifier:self.book.identifier];
-    
 }
 
 

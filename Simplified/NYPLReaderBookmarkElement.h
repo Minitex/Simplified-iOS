@@ -10,7 +10,7 @@
 
 @property (nonatomic, readonly) NSString *contentCFI;
 @property (nonatomic, readonly) NSString *annotationId;  // this will be used to identify which bookmark to delete
-@property (nonatomic, readonly) NSString *idref; // This is like the chapterß
+@property (nonatomic, readonly) NSString *idref;         // This is like the chapter
 
 
 // properties that we will set in NYPLReaderBookmarkCell
