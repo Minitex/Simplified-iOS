@@ -551,28 +551,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 }
 
 // implement NYPLReaderRender function
-- (void)syncBookmarks
-{
-    // This is where we call stuff in Annotations to do our GET and actually return bookmarks here (before it gets formatted, etc.)
-    // and placed in the NSArray* bookmarkElements object
-    // the function call below actually returns an array of dictionaries
-    [NYPLAnnotations syncAllBookmarks:self.book completionHandler:^(NSArray<NSDictionary<NSString *, NSString *> *> * _Nullable responseObject) {
-        
-        //NSLog(@"\nNYPLReaderReadiumView::syncBookmarks, returned responseObject: %@", responseObject);
-        if (responseObject != nil)
-        {
-            // do stuff
-            // For now, let's pass the array into generateBookmarkElements and let
-            // that function figure out what to do
-            [self generateBookmarkElements: responseObject];
-        }
-        
-    }];
-    
-    NSLog(@"NYPLReaderReadiumView::syncBookmarks called");
-}
-
-// implement NYPLReaderRender function
 - (void) addBookmark
 {
     // TODO: Do we have to grab all the bookmarks first (locally or from the server),
