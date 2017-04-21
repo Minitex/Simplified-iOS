@@ -274,8 +274,7 @@ static NSString *const RecordsKey = @"records";
            if(existingBook) {
              [self updateBook:book];
            } else {
-               // this may or may not be a problem later (bookmarks are nil)
-               [self addBook:book location:nil state:NYPLBookStateDownloadNeeded fulfillmentId:nil bookmarks:nil];
+             [self addBook:book location:nil state:NYPLBookStateDownloadNeeded fulfillmentId:nil bookmarks:nil];
            }
          }
          for (NSString *identifier in identifiersToRemove) {
@@ -451,9 +450,6 @@ static NSString *const RecordsKey = @"records";
     return record.location;
   }
 }
-
-// TODO: Vui add bookmark functions here
-
 
 // Set the bookmarks for a book previously registered given its identifier
 - (void)setBookmarks:(NSArray *)bookmarks forIdentifier:(NSString *)identifier

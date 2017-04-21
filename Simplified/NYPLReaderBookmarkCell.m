@@ -6,8 +6,6 @@
 //  Copyright © 2017 NYPL Labs. All rights reserved.
 //
 
-#import "NYPLReaderSettings.h"
-
 #import "NYPLReaderBookmarkCell.h"
 
 

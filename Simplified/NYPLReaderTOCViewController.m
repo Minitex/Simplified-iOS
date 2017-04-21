@@ -28,12 +28,11 @@ static NSString *const reuseIdentifierBookmark = @"bookmarkCell";
 
 - (void)viewDidLoad
 {
+  self.tableView.dataSource = self;
+  self.tableView.delegate = self;
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
   
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  
-    self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
+  self.title = NSLocalizedString(@"ReaderTOCViewControllerTitle", nil);
     
 }
 
@@ -152,32 +151,6 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
 
 - (IBAction)didSelectSegment:(UISegmentedControl*)sender
 {
-  NSLog(@"Selected %@", [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]]);
-  
-  
-  switch (sender.selectedSegmentIndex) {
-    case 0:
-    {
-      NSLog(@"Table of Contents are:\n");
-      for (NYPLReaderTOCElement *element in self.tableOfContents)
-      {
-        NSLog(@"element: %@, %lu, %@", element.opaqueLocation, (unsigned long)element.nestingLevel, element.title);
-      }
-      break;
-    }
-    case 1:
-    {
-      NSLog(@"Bookmarks are: %@,", self.bookmarks);
-      for (NYPLReaderBookmarkElement *element in self.bookmarks)
-      {
-        NSLog(@"element CFI: %@, annotationId: %@", element.contentCFI, element.annotationId);
-      }
-      
-    }
-    default:
-      break;
-  }
-  
   [self.tableView reloadData];
 }
 @end

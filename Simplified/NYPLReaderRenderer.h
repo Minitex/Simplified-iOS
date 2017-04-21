@@ -37,7 +37,7 @@ didEncounterCorruptionForBook:(nonnull NYPLBook *)book;
 didUpdateProgressWithinBook:(float)progressWithinBook
        pageIndex:(NSUInteger)pageIndex
        pageCount:(NSUInteger)pageCount
-  spineItemTitle:(nullable NSString *)spineItemTitle;
+       spineItemTitle:(nullable NSString *)spineItemTitle;
 
 -(void)renderer:(nonnull id<NYPLReaderRenderer>)renderer bookmark:(nullable NYPLReaderBookmarkElement*)bookmark icon:(bool)on;
 
