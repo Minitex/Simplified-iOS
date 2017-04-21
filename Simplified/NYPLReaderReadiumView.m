@@ -1008,7 +1008,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 
 - (NSArray *)bookmarkElements
 {
-    return _bookmarkElements;
+  if(_bookmarkElements) return _bookmarkElements;
+  
+  // otherwise, grab the bookmarks from the registry
+  _bookmarkElements = [[NYPLBookRegistry sharedRegistry]
+                       bookmarksForIdentifier:self.book.identifier];
+  
+  return _bookmarkElements;
 }
 
 // This method is taking in an array of dictionaries
