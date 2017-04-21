@@ -548,64 +548,41 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 // implement NYPLReaderRender function
 - (void) addBookmark
 {
-    // TODO: Do we have to grab all the bookmarks first (locally or from the server),
-    // before we can create a new one?
+  NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
     
-    // this posts to the server
-    //[NYPLAnnotations postBookmark:self.book cfi:self.currentCFI completionHandler:completionHandler];
-    //[self syncBookmarks];
-    
-    // For now, we're doing all the add bookmarks locally
-    
-    NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
-    
-    NYPLBookLocation *location = [registry locationForIdentifier:self.book.identifier];
-    
-    NSDictionary *const locationDictionary =
-    NYPLJSONObjectFromData([location.locationString dataUsingEncoding:NSUTF8StringEncoding]);
+  NYPLBookLocation *location = [registry locationForIdentifier:self.book.identifier];
+  NSDictionary *const locationDictionary =
+  NYPLJSONObjectFromData([location.locationString dataUsingEncoding:NSUTF8StringEncoding]);
 	  
-    NSString *contentCFI = locationDictionary[@"contentCFI"];
-    NSString *idref = locationDictionary[@"idref"];
+  NSString *contentCFI = locationDictionary[@"contentCFI"];
+  NSString *idref = locationDictionary[@"idref"];
     
-    NYPLReaderBookmarkElement * bookmark = [[NYPLReaderBookmarkElement alloc] initWithCFI:contentCFI andId:nil andIdref:idref];
-    
-    NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
-    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
-    
-    [newBookmarks addObject:bookmark];
-    
-    // set the new bookmarks in the registry, and in this class
-    [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
-    self.bookmarkElements = newBookmarks;
-    
-    // change bookmark icon to ON
-    __weak NYPLReaderReadiumView *const weakSelf = self;
-    [weakSelf.delegate renderer:weakSelf bookmark:bookmark icon:YES];
-    
-    NSLog(@"NYPLReaderReadiumView::addBookmark called");
+  NYPLReaderBookmarkElement * bookmark = [[NYPLReaderBookmarkElement alloc] initWithCFI:contentCFI andId:nil andIdref:idref];
+  
+  // add the bookmark to the local registry
+  [registry addBookmark:bookmark forIdentifier:self.book.identifier];
+  
+  // set the new bookmarks in this class
+  self.bookmarkElements = [registry bookmarksForIdentifier:self.book.identifier];
+  
+  // change bookmark icon to ON
+  __weak NYPLReaderReadiumView *const weakSelf = self;
+  [weakSelf.delegate renderer:weakSelf bookmark:bookmark icon:YES];
 }
 
 // implement NYPLReaderRender function
 - (void) deleteBookmark:(NYPLReaderBookmarkElement*)bookmark
 {
-    // store the bookmark status locally
-    NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
-    
-    NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
-    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
-    NYPLReaderBookmarkElement *bookmarkToRemove = bookmark;
-    [newBookmarks removeObject:bookmarkToRemove];
-    
-    NSLog(@"NYPLReaderReadiumView::deleteBookmark, bookmark deleted with CFI: %@, annotationID: %@, idref: %@",
-          bookmarkToRemove.contentCFI, bookmarkToRemove.serverAnnotationId, bookmarkToRemove.idref);
-    
-    // set the new bookmarks in the registry, and in this class
-    [registry setBookmarks:newBookmarks    forIdentifier:self.book.identifier];
-    self.bookmarkElements = newBookmarks;
-    
-    // set the bookmark icon to no bookmark
-    __weak NYPLReaderReadiumView *const weakSelf = self;
-    [weakSelf.delegate renderer:weakSelf bookmark:nil icon:NO];
+  // delete the bookmark from the local registry
+  NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
+  [registry deleteBookmark:bookmark forIdentifier:self.book.identifier];
+  
+  // set the new bookmarks in this class
+  self.bookmarkElements = [registry bookmarksForIdentifier:self.book.identifier];
+  
+  // set the bookmark icon to no bookmark
+  __weak NYPLReaderReadiumView *const weakSelf = self;
+  [weakSelf.delegate renderer:weakSelf bookmark:nil icon:NO];
 }
 
 
@@ -705,72 +682,64 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
   }];
 }
 
+// This function checks to see if the current page has a bookmark or not
+// If it does, turn the bookmark icon to ON. If it does not, turn the bookmark icon to OFF.
 - (void) hasBookmarkForSpineItem:(NSString*)idref completionHandler:(void(^)(bool success, NYPLReaderBookmarkElement *bookmark))completionHandler
 {
-    NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
-    
-    NSArray * oldBookmarks = [registry bookmarksForIdentifier:self.book.identifier];
-    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:oldBookmarks];
-    
-    // loop through oldBookmarks and grab all the CFI for that chapter (idref)
-    __block bool bookmarkFound = NO;
-    for (NSUInteger i = 0; i < oldBookmarks.count; i++)
-    {
-        NYPLReaderBookmarkElement *bookmark = oldBookmarks[i];
+  NYPLBookRegistry *registry = [NYPLBookRegistry sharedRegistry];
+  NSArray * bookmarks = [registry bookmarksForIdentifier:self.book.identifier];
+  
+  // loop through bookmarks and grab all the CFI for that chapter (idref)
+  __block bool bookmarkFound = NO;
+  for (NSUInteger i = 0; i < bookmarks.count; i++)
+  {
+    NYPLReaderBookmarkElement *bookmark = bookmarks[i];
         
-        if (bookmark.idref == idref)
-        {
-            NSString *contentCFI = bookmark.contentCFI;
+    if (bookmark.idref == idref)
+    {
+      NSString *contentCFI = bookmark.contentCFI;
             
-            NSString *js = [NSString stringWithFormat:@"ReadiumSDK.reader.isVisibleSpineItemElementCfi('%@', '%@')",
+      NSString *js = [NSString stringWithFormat:@"ReadiumSDK.reader.isVisibleSpineItemElementCfi('%@', '%@')",
                             idref,
                             contentCFI];
-            
-            NYPLLOG(js);
-            
-            
-            [self
-             sequentiallyEvaluateJavaScript:js
-             withCompletionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+      NYPLLOG(js);
+      
+      [self
+        sequentiallyEvaluateJavaScript:js
+        withCompletionHandler:^(id  _Nullable result, NSError * _Nullable error) {
                  
-                 if (!error)
-                 {
-                     NSNumber const *isBookmarked = result;
-                     NYPLLOG(isBookmarked);
-                     if (isBookmarked && ![isBookmarked  isEqual: @0])
-                     {
-                         // is a bookmarked page
-                         NYPLLOG(@"there is a bookmark for this page");
-                         // remove the bookmark with that CFI from local bookmarks
-                         [newBookmarks removeObject:bookmark];
-                         
-                         completionHandler(YES, bookmark);
-                     }
-                     else
-                     {
-                         // is not a bookmarked page
-                         
-                         NYPLLOG(@"there is no bookmark for this page");
-                     }
-                     
-                 }
-                 else
-                 {
-                     NYPLLOG(error);
-                 }
-             }];
+        if (!error)
+        {
+          NSNumber const *isBookmarked = result;
+          NYPLLOG(isBookmarked);
+          if (isBookmarked && ![isBookmarked  isEqual: @0])
+          {
+            // is a bookmarked page
+            NYPLLOG(@"there is a bookmark for this page");
+            completionHandler(YES, bookmark);
+          }
+          else
+          {
+            // is not a bookmarked page
+            NYPLLOG(@"there is no bookmark for this page");
+          }
+        }
+        else
+        {
+            NYPLLOG(error);
+        }
+      }];
             
-            if (bookmarkFound)
-            {
-                break;
-            }
-        }   // end if bookmark.idref == idref
-        // end loop through bookmarks
+      if (bookmarkFound)
+      {
+        break;
+      }
+    }   // end if bookmark.idref == idref
+    
+    // a bookmark was not found
+    completionHandler(NO, nil);
         
-        // a bookmark was not found
-        completionHandler(NO, nil);
-        
-    }
+  }// end loop through bookmarks
 }
 
 - (void)readiumPaginationChangedWithDictionary:(NSDictionary *const)dictionary

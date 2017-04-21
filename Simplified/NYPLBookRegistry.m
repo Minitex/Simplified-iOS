@@ -475,6 +475,32 @@ static NSString *const RecordsKey = @"records";
     }
 }
 
+// Add bookmark for a book given its identifier
+-(void)addBookmark:(NYPLReaderBookmarkElement *)bookmark forIdentifier:(NSString *)identifier
+{
+  @synchronized(self) {
+    
+    NYPLBookRegistryRecord *const record = self.identifiersToRecords[identifier];
+    
+    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:record.bookmarks];
+    [newBookmarks addObject:bookmark];
+    self.identifiersToRecords[identifier] = [record recordWithBookmarks:newBookmarks];
+  }
+}
+
+
+// Delete bookmark for a book given its identifer
+-(void)deleteBookmark:(NYPLReaderBookmarkElement *)bookmark forIdentifier:(NSString *)identifier
+{
+  @synchronized(self) {
+    
+    NYPLBookRegistryRecord *const record = self.identifiersToRecords[identifier];
+    
+    NSMutableArray * newBookmarks = [[NSMutableArray alloc] initWithArray:record.bookmarks];
+    [newBookmarks removeObject:bookmark];
+    self.identifiersToRecords[identifier] = [record recordWithBookmarks:newBookmarks];
+  }
+}
 
 - (void)setFulfillmentId:(NSString *)fulfillmentId forIdentifier:(NSString *)identifier
 {
