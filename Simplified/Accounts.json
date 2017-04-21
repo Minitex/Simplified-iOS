@@ -49,22 +49,5 @@
  "supportsHelpCenter" : false,
  "catalogUrl" : "https://instantclassics.librarysimplified.org/index.xml",
  "mainColor" : "497049"
- },
- {
- "id" : 6,
- "pathComponent" : "6",
- "name" : "QA New York Public Library",
- "subtitle" : "Inspiring lifelong learning, advancing knowledge, and strengthening our communities.",
- "logo" : "LibraryLogoNYPL",
- "needsAuth" : true,
- "supportsSimplyESync" : false,
- "supportsBarcodeScanner" : false,
- "supportsBarcodeDisplay" : false,
- "supportsReservations" : true,
- "supportsCardCreator" : false,
- "supportsHelpCenter" : true,
- "catalogUrl" : "http://qa.circulation.librarysimplified.org",
- "supportEmail" : "simplyehelp@nypl.org",
- "mainColor" : "da2527"
  }
 ]
