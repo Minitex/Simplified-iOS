@@ -43,10 +43,9 @@
 		08A352221BDE8E560040BF1D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352211BDE8E560040BF1D /* libicucore.tbd */; };
 		08A352241BDE8E640040BF1D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352231BDE8E640040BF1D /* Security.framework */; };
 		08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352251BDE8E700040BF1D /* SystemConfiguration.framework */; };
-		08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49C25461AE05A2600D63B89 /* libRDServices.a */; };
+		08A352271BDE91B80040BF1D /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = A49C25461AE05A2600D63B89 /* libRDServices.a */; };
 		08A352731BDFF5380040BF1D /* NYPLAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A352721BDFF5380040BF1D /* NYPLAlertController.m */; };
-		08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A569A2C1B8351C6003B5B61 /* libADEPT.a */; };
-		08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7048961B94A6710046FFF0 /* libAdobe Content Filter.a */; };
+		0BAB4625A5E1DB9754CA1687 /* Pods_OpenTextbooks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F52186150DB19A3F38B84 /* Pods_OpenTextbooks.framework */; };
 		11068C55196DD37900E8A94B /* NYPLNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 11068C54196DD37900E8A94B /* NYPLNull.m */; };
 		11078357198160A50071AB1E /* NYPLBookDownloadFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11078356198160A50071AB1E /* NYPLBookDownloadFailedCell.m */; };
 		1107835E19816E3D0071AB1E /* UIView+NYPLViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107835D19816E3D0071AB1E /* UIView+NYPLViewAdditions.m */; };
@@ -60,7 +59,7 @@
 		1111973C19880E8D0014462F /* NYPLLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973B19880E8D0014462F /* NYPLLinearView.m */; };
 		1111973F1988226F0014462F /* NYPLBookDetailDownloadFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973E1988226F0014462F /* NYPLBookDetailDownloadFailedView.m */; };
 		11119742198827850014462F /* NYPLBookDetailDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11119741198827850014462F /* NYPLBookDetailDownloadingView.m */; };
-		1112A8431A3249B4002B8CC1 /* libTenPrintCover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
+		1112A8431A3249B4002B8CC1 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
 		1114A6A1195884CB007507A2 /* NYPLCatalogUngroupedFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1114A6A0195884CB007507A2 /* NYPLCatalogUngroupedFeed.m */; };
 		111559ED19B8FA590003BE94 /* NYPLXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 111559EC19B8FA590003BE94 /* NYPLXML.m */; };
 		11172764197F31280043EFBF /* NYPLAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 11172763197F31280043EFBF /* NYPLAccount.m */; };
@@ -139,6 +138,176 @@
 		2DE514351DC3F0BE005A58BD /* NYPLCirculationAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AE32F1DC0FCFC00124AE2 /* NYPLCirculationAnalytics.swift */; };
 		2DF321831DC3B83500E1858F /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
+		529013DE1EEF1DA70004A7AB /* NYPLCirculationAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AE32F1DC0FCFC00124AE2 /* NYPLCirculationAnalytics.swift */; };
+		529013DF1EEF1DA70004A7AB /* UpdateCheckShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC8D9DD1D09F9B4007DD125 /* UpdateCheckShim.swift */; };
+		529013E01EEF1DA70004A7AB /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345BFD61DBF002E00398B6F /* APIKeys.swift */; };
+		529013E11EEF1DA70004A7AB /* NYPLAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 11172763197F31280043EFBF /* NYPLAccount.m */; };
+		529013E21EEF1DA70004A7AB /* NYPLAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C8CD619BE2FD300719B72 /* NYPLAttributedString.m */; };
+		529013E31EEF1DA70004A7AB /* NYPLAgeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC315C1E009F3E0021B65E /* NYPLAgeCheck.swift */; };
+		529013E41EEF1DA70004A7AB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D382BD61D08BA99002C423D /* Log.swift */; };
+		529013E51EEF1DA70004A7AB /* NYPLBookRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 11616E10196B0531003D60D9 /* NYPLBookRegistry.m */; };
+		529013E61EEF1DA70004A7AB /* UILabel+NYPLAppearanceAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 081387561BC574DA003DEA6A /* UILabel+NYPLAppearanceAdditions.m */; };
+		529013E71EEF1DA70004A7AB /* NYPLJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 11369D47199527C200BB11F8 /* NYPLJSON.m */; };
+		529013E81EEF1DA70004A7AB /* NYPLConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 116A5EB81947B57500491A21 /* NYPLConfiguration.m */; };
+		529013E91EEF1DA70004A7AB /* NYPLNetworkQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E671FF7C1E3A7068002AB13F /* NYPLNetworkQueue.swift */; };
+		529013EA1EEF1DA70004A7AB /* NYPLMyBooksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116A5EAE194767B200491A21 /* NYPLMyBooksNavigationController.m */; };
+		529013EB1EEF1DA70004A7AB /* NYPLBookCellCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120749219D20BF9008203A4 /* NYPLBookCellCollectionViewController.m */; };
+		529013EC1EEF1DA70004A7AB /* NYPLXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 111559EC19B8FA590003BE94 /* NYPLXML.m */; };
+		529013ED1EEF1DA70004A7AB /* NYPLBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11580AC71986A77B00949A15 /* NYPLBookCell.m */; };
+		529013EE1EEF1DA70004A7AB /* NSURL+NYPLURLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 085640CD1BB99FC30088BDBF /* NSURL+NYPLURLAdditions.m */; };
+		529013EF1EEF1DA70004A7AB /* NYPLAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F35A194F847100DC322F /* NYPLAsync.m */; };
+		529013F01EEF1DA70004A7AB /* NYPLReloadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20E6D19D9F6DD00877A23 /* NYPLReloadView.m */; };
+		529013F11EEF1DA70004A7AB /* NYPLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E69404091E4A789800E566ED /* NYPLReachabilityManager.m */; };
+		529013F21EEF1DA70004A7AB /* NYPLCatalogGroupedFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA1D0D1B430341006F83DF /* NYPLCatalogGroupedFeedViewController.m */; };
+		529013F31EEF1DA70004A7AB /* NYPLReaderBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03690E221EB2B35000F75D5F /* NYPLReaderBookmarkCell.swift */; };
+		529013F41EEF1DA70004A7AB /* NYPLOpenSearchDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 119BEBB819902A8800121439 /* NYPLOpenSearchDescription.m */; };
+		529013F51EEF1DA70004A7AB /* NYPLReaderTOCElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BFDB35199C08E900378691 /* NYPLReaderTOCElement.m */; };
+		529013F61EEF1DA70004A7AB /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC8D9DB1D09F797007DD125 /* UpdateCheck.swift */; };
+		529013F71EEF1DA70004A7AB /* NYPLReaderTOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BFDB32199C01F700378691 /* NYPLReaderTOCViewController.m */; };
+		529013F81EEF1DA70004A7AB /* BundledHTMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62568A1D412BCB0080A81F /* BundledHTMLViewController.swift */; };
+		529013F91EEF1DA70004A7AB /* NYPLBookDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110AF8951961D94D004887C3 /* NYPLBookDetailView.m */; };
+		529013FA1EEF1DA70004A7AB /* UIButton+NYPLAppearanceAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 081387591BC5767F003DEA6A /* UIButton+NYPLAppearanceAdditions.m */; };
+		529013FB1EEF1DA70004A7AB /* NYPLBookCoverRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139DA6419C7755D00A07810 /* NYPLBookCoverRegistry.m */; };
+		529013FC1EEF1DA70004A7AB /* NYPLBookDetailDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11119741198827850014462F /* NYPLBookDetailDownloadingView.m */; };
+		529013FD1EEF1DA70004A7AB /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
+		529013FE1EEF1DA70004A7AB /* NYPLNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 11068C54196DD37900E8A94B /* NYPLNull.m */; };
+		529013FF1EEF1DA70004A7AB /* readium-shared-js_all.js.map in Sources */ = {isa = PBXBuildFile; fileRef = 5A69291D1B95C8AD00FB4C10 /* readium-shared-js_all.js.map */; };
+		529014001EEF1DA70004A7AB /* NYPLLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973B19880E8D0014462F /* NYPLLinearView.m */; };
+		529014011EEF1DA70004A7AB /* NSDate+NYPLDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11396FB8193D289100E16EE8 /* NSDate+NYPLDateAdditions.m */; };
+		529014021EEF1DA70004A7AB /* NYPLBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F346194F744D00DC322F /* NYPLBook.m */; };
+		529014031EEF1DA70004A7AB /* NYPLCatalogLane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F340194F723D00DC322F /* NYPLCatalogLane.m */; };
+		529014041EEF1DA70004A7AB /* NYPLBookNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A16E6E195B60DF004147F4 /* NYPLBookNormalCell.m */; };
+		529014051EEF1DA70004A7AB /* NYPLCatalogNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11548C0D1939147D009DBF2E /* NYPLCatalogNavigationController.m */; };
+		529014061EEF1DA70004A7AB /* NYPLOPDSGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A46226251B39D4980063F549 /* NYPLOPDSGroup.m */; };
+		529014071EEF1DA70004A7AB /* NYPLBookButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ED41D91B8F6E2E009FC164 /* NYPLBookButtonsView.m */; };
+		529014081EEF1DA70004A7AB /* NYPLDismissibleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111197331986D7550014462F /* NYPLDismissibleViewController.m */; };
+		529014091EEF1DA70004A7AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A823D81C192BABA400B55DE2 /* main.m */; };
+		5290140A1EEF1DA70004A7AB /* UIView+NYPLViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107835D19816E3D0071AB1E /* UIView+NYPLViewAdditions.m */; };
+		5290140B1EEF1DA70004A7AB /* NYPLSettingsPrimaryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111E75821A815CFB00718AD7 /* NYPLSettingsPrimaryTableViewController.m */; };
+		5290140C1EEF1DA70004A7AB /* UIFont+NYPLSystemFontOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E0208C197F05D9009DEA93 /* UIFont+NYPLSystemFontOverride.m */; };
+		5290140D1EEF1DA70004A7AB /* NYPLReaderBookmarkElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03690E281EB2B44300F75D5F /* NYPLReaderBookmarkElement.swift */; };
+		5290140E1EEF1DA70004A7AB /* NYPLReportIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0320E8221E8BFCC900806EF0 /* NYPLReportIssueViewController.swift */; };
+		5290140F1EEF1DA70004A7AB /* NYPLBookAcquisition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F352194F795800DC322F /* NYPLBookAcquisition.m */; };
+		529014101EEF1DA70004A7AB /* UIColor+NYPLColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A14DF31A1BF94F00D6C510 /* UIColor+NYPLColorAdditions.m */; };
+		529014111EEF1DA70004A7AB /* NYPLCatalogFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF31B40F4E00095EBAE /* NYPLCatalogFeedViewController.m */; };
+		529014121EEF1DA70004A7AB /* NYPLBookDownloadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B6020419806CD300800DA9 /* NYPLBookDownloadingCell.m */; };
+		529014131EEF1DA70004A7AB /* NYPLTenPrintCoverView+NYPLImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 114B7F151A3644CF00B8582B /* NYPLTenPrintCoverView+NYPLImageAdditions.m */; };
+		529014141EEF1DA70004A7AB /* NYPLFacetBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1142E4EA19EED86A00D9B3D9 /* NYPLFacetBarView.m */; };
+		529014151EEF1DA70004A7AB /* NYPLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB436371D4C049200F8E69D /* NYPLReachability.m */; };
+		529014161EEF1DA70004A7AB /* NYPLReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1195040A1994075B009FB788 /* NYPLReaderViewController.m */; };
+		529014171EEF1DA70004A7AB /* NYPLCatalogLaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1183F33A194B775900DC322F /* NYPLCatalogLaneCell.m */; };
+		529014181EEF1DA70004A7AB /* NYPLSettingsAccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6202A011DD4E6F300C99553 /* NYPLSettingsAccountDetailViewController.m */; };
+		529014191EEF1DA70004A7AB /* NYPLReaderReadiumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113137E61A48DAB90082954E /* NYPLReaderReadiumView.m */; };
+		5290141A1EEF1DA70004A7AB /* NYPLAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A352721BDFF5380040BF1D /* NYPLAlertController.m */; };
+		5290141B1EEF1DA70004A7AB /* NYPLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 118B7ABE195CBF72005CE3E7 /* NYPLSession.m */; };
+		5290141C1EEF1DA70004A7AB /* NYPLSettingsEULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841B55421B740F2700FAC1AF /* NYPLSettingsEULAViewController.m */; };
+		5290141D1EEF1DA70004A7AB /* NYPLMyBooksDownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A4276F471B00046300CA7194 /* NYPLMyBooksDownloadInfo.m */; };
+		5290141E1EEF1DA70004A7AB /* NYPLBookLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164F105199AC236009BF8BF /* NYPLBookLocation.m */; };
+		5290141F1EEF1DA70004A7AB /* NYPLFacetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F3771E19DB62B000487769 /* NYPLFacetView.m */; };
+		529014201EEF1DA70004A7AB /* NYPLProblemDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 085D31C31BE2987E007F7672 /* NYPLProblemDocument.m */; };
+		529014211EEF1DA70004A7AB /* NYPLReaderContainerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B901A1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm */; };
+		529014221EEF1DA70004A7AB /* NYPLBookCellDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 111197271986B43B0014462F /* NYPLBookCellDelegate.m */; };
+		529014231EEF1DA70004A7AB /* NYPLBookDetailNormalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111197381987F4070014462F /* NYPLBookDetailNormalView.m */; };
+		529014241EEF1DA70004A7AB /* NYPLSettingsPrimaryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111E757C1A801A6F00718AD7 /* NYPLSettingsPrimaryNavigationController.m */; };
+		529014251EEF1DA70004A7AB /* NYPLCatalogUngroupedFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A16E68195B2BD3004147F4 /* NYPLCatalogUngroupedFeedViewController.m */; };
+		529014261EEF1DA70004A7AB /* NYPLSettingsSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111E75791A80165C00718AD7 /* NYPLSettingsSplitViewController.m */; };
+		529014271EEF1DA70004A7AB /* NYPLBookRegistryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C694C197301FE00C48F95 /* NYPLBookRegistryRecord.m */; };
+		529014281EEF1DA70004A7AB /* NYPLMyBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116A5EB2194767DC00491A21 /* NYPLMyBooksViewController.m */; };
+		529014291EEF1DA70004A7AB /* NYPLBookDownloadFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11078356198160A50071AB1E /* NYPLBookDownloadFailedCell.m */; };
+		5290142A1EEF1DA70004A7AB /* NYPLBookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110AF89B1961ED1F004887C3 /* NYPLBookDetailViewController.m */; };
+		5290142B1EEF1DA70004A7AB /* NYPLDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378BC1B1E27FFC80095428E /* NYPLDeviceManager.swift */; };
+		5290142C1EEF1DA70004A7AB /* NYPLSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164A9F61A797238002BD3AE /* NYPLSettings.m */; };
+		5290142D1EEF1DA70004A7AB /* NYPLReaderTOCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BFDB38199C117B00378691 /* NYPLReaderTOCCell.m */; };
+		5290142E1EEF1DA70004A7AB /* NYPLDirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F26E721DFF672F00C103CA /* NYPLDirectoryManager.swift */; };
+		5290142F1EEF1DA70004A7AB /* NYPLProblemReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085D31D61BE29E38007F7672 /* NYPLProblemReportViewController.m */; };
+		529014301EEF1DA70004A7AB /* NYPLHoldsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C5DCF11976D1E0005A9945 /* NYPLHoldsNavigationController.m */; };
+		529014311EEF1DA70004A7AB /* NYPLRemoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E0DF01B3F5A490095EBAE /* NYPLRemoteViewController.m */; };
+		529014321EEF1DA70004A7AB /* NYPLWelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6202A031DD52B8600C99553 /* NYPLWelcomeScreen.swift */; };
+		529014331EEF1DA70004A7AB /* NYPLOPDSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 110AD83B19E497D6005724C3 /* NYPLOPDSAttribute.m */; };
+		529014341EEF1DA70004A7AB /* NYPLCatalogUngroupedFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1114A6A0195884CB007507A2 /* NYPLCatalogUngroupedFeed.m */; };
+		529014351EEF1DA70004A7AB /* NYPLHoldsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C5DCF41976D22F005A9945 /* NYPLHoldsViewController.m */; };
+		529014361EEF1DA70004A7AB /* NYPLSettingsAccountsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B1F4FA1DD20EA900D73CA1 /* NYPLSettingsAccountsList.swift */; };
+		529014371EEF1DA70004A7AB /* NYPLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A823D820192BABA400B55DE2 /* NYPLAppDelegate.m */; };
+		529014381EEF1DA70004A7AB /* NYPLCatalogFacetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C684E19EF003300106973 /* NYPLCatalogFacetGroup.m */; };
+		529014391EEF1DA70004A7AB /* NSURLRequest+NYPLURLRequestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 085D31DE1BE3CD3C007F7672 /* NSURLRequest+NYPLURLRequestAdditions.m */; };
+		5290143A1EEF1DA70004A7AB /* NYPLRootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11548C0A1939136C009DBF2E /* NYPLRootTabBarController.m */; };
+		5290143B1EEF1DA70004A7AB /* ExtendedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F2C6B1EAA81B3002B6373 /* ExtendedNavBarView.swift */; };
+		5290143C1EEF1DA70004A7AB /* NYPLCatalogSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118A0B1A19915BDF00792DDE /* NYPLCatalogSearchViewController.m */; };
+		5290143D1EEF1DA70004A7AB /* NYPLBasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E254F91B0E610900193FE4 /* NYPLBasicAuth.m */; };
+		5290143E1EEF1DA70004A7AB /* NYPLReaderSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1188F3E01A1ECC4B006B2F36 /* NYPLReaderSettings.m */; };
+		5290143F1EEF1DA70004A7AB /* NYPLKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C5DD15197727A6005A9945 /* NYPLKeychain.m */; };
+		529014401EEF1DA70004A7AB /* NYPLOPDSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = AE77E4AF64208439F78B3D73 /* NYPLOPDSEntry.m */; };
+		529014411EEF1DA70004A7AB /* NYPLReaderSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DC19271A12F92500721DBA /* NYPLReaderSettingsView.m */; };
+		529014421EEF1DA70004A7AB /* NYPLIndeterminateProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113DB8A619C24E54004E1154 /* NYPLIndeterminateProgressView.m */; };
+		529014431EEF1DA70004A7AB /* NSString+NYPLStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 119BEB88198C43A600121439 /* NSString+NYPLStringAdditions.m */; };
+		529014441EEF1DA70004A7AB /* NYPLOPDSEntryGroupAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A499BF251B39EFC7002F8B8B /* NYPLOPDSEntryGroupAttributes.m */; };
+		529014451EEF1DA70004A7AB /* NYPLMyBooksDownloadCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1196F75A1970727C00F62670 /* NYPLMyBooksDownloadCenter.m */; };
+		529014461EEF1DA70004A7AB /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
+		529014471EEF1DA70004A7AB /* RemoteHTMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BA02B71DE4B6F600F76404 /* RemoteHTMLViewController.swift */; };
+		529014481EEF1DA70004A7AB /* NYPLCatalogGroupedFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA1D121B43046B006F83DF /* NYPLCatalogGroupedFeed.m */; };
+		529014491EEF1DA70004A7AB /* NYPLBookState.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C6952197309C500C48F95 /* NYPLBookState.m */; };
+		5290144A1EEF1DA70004A7AB /* NYPLCatalogFacet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F3773219E0876F00487769 /* NYPLCatalogFacet.m */; };
+		5290144B1EEF1DA70004A7AB /* NYPLAccountSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158812D1A894F4E008672C3 /* NYPLAccountSignInViewController.m */; };
+		5290144C1EEF1DA70004A7AB /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F94CD01DD6288C00CE8F4F /* Accounts.swift */; };
+		5290144D1EEF1DA70004A7AB /* NYPLBookDetailDownloadFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111973E1988226F0014462F /* NYPLBookDetailDownloadFailedView.m */; };
+		5290144E1EEF1DA70004A7AB /* NYPLOPDSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = AE77E94D56B65997B861C0C0 /* NYPLOPDSFeed.m */; };
+		5290144F1EEF1DA70004A7AB /* NYPLRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C8CD919BF55F900719B72 /* NYPLRoundedButton.m */; };
+		529014501EEF1DA70004A7AB /* NYPLOPDSLink.m in Sources */ = {isa = PBXBuildFile; fileRef = AE77ECC029F3DABDB46A64EB /* NYPLOPDSLink.m */; };
+		529014511EEF1DA70004A7AB /* NYPLOPDSType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE77EFD5622206475B6715A9 /* NYPLOPDSType.m */; };
+		529014531EEF1DA70004A7AB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B0922F1E78871A00AD338D /* MediaPlayer.framework */; };
+		529014541EEF1DA70004A7AB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092271E78859E00AD338D /* CoreMedia.framework */; };
+		529014551EEF1DA70004A7AB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B0922D1E7886ED00AD338D /* CoreVideo.framework */; };
+		529014561EEF1DA70004A7AB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B0922B1E7886C900AD338D /* AVFoundation.framework */; };
+		529014571EEF1DA70004A7AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092291E7885A600AD338D /* AudioToolbox.framework */; };
+		529014581EEF1DA70004A7AB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092251E7883C400AD338D /* libiconv.tbd */; };
+		529014591EEF1DA70004A7AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D812192BABA400B55DE2 /* CoreGraphics.framework */; };
+		5290145A1EEF1DA70004A7AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B092231E78839D00AD338D /* QuartzCore.framework */; };
+		5290145B1EEF1DA70004A7AB /* libePub3-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CE00E91E0C436400C91489 /* libePub3-iOS.a */; };
+		5290145C1EEF1DA70004A7AB /* HelpStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D6F7CA81D910C3C000B906A /* HelpStack.framework */; };
+		5290145D1EEF1DA70004A7AB /* Bugsnag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D6F7CA61D910C12000B906A /* Bugsnag.framework */; };
+		529014601EEF1DA70004A7AB /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = A49C25461AE05A2600D63B89 /* libRDServices.a */; };
+		529014611EEF1DA70004A7AB /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352211BDE8E560040BF1D /* libicucore.tbd */; };
+		529014621EEF1DA70004A7AB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503EA1993F91E009FB788 /* libc++.dylib */; };
+		529014631EEF1DA70004A7AB /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B90141B946CBD002C53E9 /* libstdc++.6.0.9.dylib */; };
+		529014641EEF1DA70004A7AB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA4F2321C68363B008853D7 /* LocalAuthentication.framework */; };
+		529014651EEF1DA70004A7AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352251BDE8E700040BF1D /* SystemConfiguration.framework */; };
+		529014661EEF1DA70004A7AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352231BDE8E640040BF1D /* Security.framework */; };
+		529014671EEF1DA70004A7AB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3521F1BDE8E410040BF1D /* CFNetwork.framework */; };
+		529014681EEF1DA70004A7AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FCD2601B7BA79200BFEDD9 /* CoreLocation.framework */; };
+		529014691EEF1DA70004A7AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D814192BABA400B55DE2 /* UIKit.framework */; };
+		5290146A1EEF1DA70004A7AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A823D810192BABA400B55DE2 /* Foundation.framework */; };
+		5290146B1EEF1DA70004A7AB /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 1112A81F1A322C53002B8CC1 /* libTenPrintCover.a */; };
+		5290146C1EEF1DA70004A7AB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E81993F919009FB788 /* libz.dylib */; };
+		5290146D1EEF1DA70004A7AB /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 119503E61993F914009FB788 /* libxml2.dylib */; };
+		529014701EEF1DA70004A7AB /* attach.png in Resources */ = {isa = PBXBuildFile; fileRef = 03AC46C31E39573500D88541 /* attach.png */; };
+		529014711EEF1DA70004A7AB /* attach@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03AC46C41E39573500D88541 /* attach@2x.png */; };
+		529014721EEF1DA70004A7AB /* ReportIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0320E8261E8BFD5700806EF0 /* ReportIssue.storyboard */; };
+		529014731EEF1DA70004A7AB /* HelpStackThemeNYPL.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0305005D1E8EF65100EA02C4 /* HelpStackThemeNYPL.plist */; };
+		529014741EEF1DA70004A7AB /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3431B84E8FE00584FB2 /* OFL.txt */; };
+		529014751EEF1DA70004A7AB /* HelpStackStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036B02C01DCBF3360098784A /* HelpStackStoryboard.storyboard */; };
+		529014761EEF1DA70004A7AB /* simplified.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D519F84613005B3F63 /* simplified.js */; };
+		529014781EEF1DA70004A7AB /* NYPLProblemReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D31D81BE29ED4007F7672 /* NYPLProblemReportViewController.xib */; };
+		529014791EEF1DA70004A7AB /* CodabarMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 030713651E749D5600DDE3FA /* CodabarMedium.ttf */; };
+		5290147A1EEF1DA70004A7AB /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
+		5290147B1EEF1DA70004A7AB /* ReaderClientCert.sig in Resources */ = {isa = PBXBuildFile; fileRef = 085D31FB1BE7BE86007F7672 /* ReaderClientCert.sig */; };
+		5290147C1EEF1DA70004A7AB /* software-licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 2D6256901D41582A0080A81F /* software-licenses.html */; };
+		5290147D1EEF1DA70004A7AB /* Accounts.json in Resources */ = {isa = PBXBuildFile; fileRef = 03F94CCE1DD627AA00CE8F4F /* Accounts.json */; };
+		5290147E1EEF1DA70004A7AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A823D819192BABA400B55DE2 /* InfoPlist.strings */; };
+		5290147F1EEF1DA70004A7AB /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 11C113CF19F842B9005B3F63 /* reader.html */; };
+		529014801EEF1DA70004A7AB /* DetailSummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 110F853C19D5FA7300052DF7 /* DetailSummaryTemplate.html */; };
+		529014811EEF1DA70004A7AB /* HelpStackTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = B594C7551BB06F40000028F5 /* HelpStackTheme.plist */; };
+		529014821EEF1DA70004A7AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 032A31071DC02E8E0001E4AF /* Localizable.strings */; };
+		529014831EEF1DA70004A7AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A823D822192BABA400B55DE2 /* Images.xcassets */; };
+		529014841EEF1DA70004A7AB /* sdk.css in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290F1B95ACD100FB4C10 /* sdk.css */; };
+		529014851EEF1DA70004A7AB /* OpenDyslexic3-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3441B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf */; };
+		529014861EEF1DA70004A7AB /* NYPLReaderTOC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E5F42A1EA5BCE400DFFC3A /* NYPLReaderTOC.storyboard */; };
+		529014871EEF1DA70004A7AB /* readium-shared-js_all.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 5A69291D1B95C8AD00FB4C10 /* readium-shared-js_all.js.map */; };
+		529014881EEF1DA70004A7AB /* CodabarLarge.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 030713641E749D5600DDE3FA /* CodabarLarge.ttf */; };
+		529014891EEF1DA70004A7AB /* host_app_feedback.js in Resources */ = {isa = PBXBuildFile; fileRef = 11C113D119F842BE005B3F63 /* host_app_feedback.js */; };
+		5290148A1EEF1DA70004A7AB /* readium-shared-js_all.js.bundles.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A6929231B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js */; };
+		5290148B1EEF1DA70004A7AB /* OpenDyslexic3-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B7A3451B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf */; };
+		529014991EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 529014981EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib */; };
+		5290149A1EEF2EB70004A7AB /* OpenTextbooks_Launch_Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 529014981EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib */; };
 		5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B90141B946CBD002C53E9 /* libstdc++.6.0.9.dylib */; };
 		5A5B901B1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B901A1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm */; };
 		5A69290E1B95ACC600FB4C10 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
@@ -202,20 +371,6 @@
 			remoteGlobalIDString = A823D80C192BABA400B55DE2;
 			remoteInfo = SimplyE;
 		};
-		5A569A2B1B8351C6003B5B61 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A4FD2F3A1B601DDA0013DF4F;
-			remoteInfo = ADEPT;
-		};
-		5A7048951B94A6710046FFF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A7048911B94A6700046FFF0 /* Adobe Content Filter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5A5B8F981B9455A5002C53E9;
-			remoteInfo = "Adobe Content Filter";
-		};
 		A49C25451AE05A2600D63B89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A49C25401AE05A2600D63B89 /* RDServices.xcodeproj */;
@@ -226,6 +381,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0149C3B8B9D3D790FCE23F59 /* Pods-SimplyE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyE.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE.release.xcconfig"; sourceTree = "<group>"; };
 		0305005D1E8EF65100EA02C4 /* HelpStackThemeNYPL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HelpStackThemeNYPL.plist; sourceTree = "<group>"; };
 		030713641E749D5600DDE3FA /* CodabarLarge.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CodabarLarge.ttf; sourceTree = "<group>"; };
 		030713651E749D5600DDE3FA /* CodabarMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CodabarMedium.ttf; sourceTree = "<group>"; };
@@ -459,7 +615,6 @@
 		2D382BD61D08BA99002C423D /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		2D62568A1D412BCB0080A81F /* BundledHTMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundledHTMLViewController.swift; sourceTree = "<group>"; };
 		2D6256901D41582A0080A81F /* software-licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "software-licenses.html"; sourceTree = "<group>"; };
-		2D6AF74A1E7E341F005CEC90 /* Simplified+RMSDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Simplified+RMSDK.xcconfig"; sourceTree = "<group>"; };
 		2D6F7CA41D910C0D000B906A /* CHRTextFieldFormatter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CHRTextFieldFormatter.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/CHRTextFieldFormatter/CHRTextFieldFormatter.framework"; sourceTree = "<group>"; };
 		2D6F7CA61D910C12000B906A /* Bugsnag.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugsnag.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/Bugsnag/Bugsnag.framework"; sourceTree = "<group>"; };
 		2D6F7CA81D910C3C000B906A /* HelpStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HelpStack.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/HelpStack/HelpStack.framework"; sourceTree = "<group>"; };
@@ -472,9 +627,14 @@
 		2DFAC8EB1CD8DDD1003D9EC0 /* NYPLOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLOPDSCategory.m; sourceTree = "<group>"; };
 		2FBF380CA3C6978E66F4EFAB /* Pods_SimplyE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplyE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		356FD22C284D3AB149178898 /* Pods-OpenTextbooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenTextbooks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks.debug.xcconfig"; sourceTree = "<group>"; };
+		37778B91D26F4EA20B2A318C /* Pods-OpenTextbooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenTextbooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks.release.xcconfig"; sourceTree = "<group>"; };
+		4A2465DA75DB936DFF350131 /* Pods-SimplyE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE.debug.xcconfig"; sourceTree = "<group>"; };
+		529014921EEF1DA70004A7AB /* OpenTextbooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenTextbooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		529014931EEF1DA80004A7AB /* OpenTextbooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenTextbooks-Info.plist"; path = "/Users/vuinguyen/Documents/NYPL-Simplified/Simplified-iOS/OpenTextbooks-Info.plist"; sourceTree = "<absolute>"; };
+		529014981EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenTextbooks_Launch_Screen.xib; path = Simplified/OpenTextbooks_Launch_Screen.xib; sourceTree = "<group>"; };
 		56A7B7786F9B146602623617 /* Pods-SimplyETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.release.xcconfig"; sourceTree = "<group>"; };
 		579E9BC126424F2B79C0FE7E /* Pods-SimplyETests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.debug.xcconfig"; sourceTree = "<group>"; };
-		5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ADEPT.xcodeproj; path = "adept-ios/ADEPT.xcodeproj"; sourceTree = "<group>"; };
 		5A5B90111B946763002C53E9 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
 		5A5B90141B946CBD002C53E9 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		5A5B90191B946FAD002C53E9 /* NYPLReaderContainerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLReaderContainerDelegate.h; sourceTree = "<group>"; };
@@ -483,11 +643,9 @@
 		5A69290F1B95ACD100FB4C10 /* sdk.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = sdk.css; path = "readium-shared-js/build-output/css/sdk.css"; sourceTree = SOURCE_ROOT; };
 		5A69291D1B95C8AD00FB4C10 /* readium-shared-js_all.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = "readium-shared-js_all.js.map"; path = "readium-shared-js/build-output/_single-bundle/readium-shared-js_all.js.map"; sourceTree = SOURCE_ROOT; };
 		5A6929231B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "readium-shared-js_all.js.bundles.js"; path = "readium-shared-js/build-output/_single-bundle/readium-shared-js_all.js.bundles.js"; sourceTree = SOURCE_ROOT; };
-		5A7048911B94A6700046FFF0 /* Adobe Content Filter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Adobe Content Filter.xcodeproj"; path = "adobe-content-filter/build/iOS/Adobe Content Filter.xcodeproj"; sourceTree = "<group>"; };
 		841B55411B740F2700FAC1AF /* NYPLSettingsEULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLSettingsEULAViewController.h; sourceTree = "<group>"; };
 		841B55421B740F2700FAC1AF /* NYPLSettingsEULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLSettingsEULAViewController.m; sourceTree = "<group>"; };
 		848FD95A1B83875D009D9BC4 /* NYPL_Launch_Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NYPL_Launch_Screen.xib; path = Simplified/NYPL_Launch_Screen.xib; sourceTree = "<group>"; };
-		8499EE06365A73ACE6116D3C /* Pods-SimplyE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE.debug.xcconfig"; sourceTree = "<group>"; };
 		84B7A3431B84E8FE00584FB2 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		84B7A3441B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic3-Bold.ttf"; sourceTree = "<group>"; };
 		84B7A3451B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic3-Regular.ttf"; sourceTree = "<group>"; };
@@ -539,7 +697,6 @@
 		B5ED41D91B8F6E2E009FC164 /* NYPLBookButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLBookButtonsView.m; sourceTree = "<group>"; };
 		BEEC686A5C71AFACFAC2A884 /* libPods-SimplyETests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimplyETests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE35BBA1B86289500BF9BC5 /* Simplified.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplified.xcconfig; sourceTree = "<group>"; };
-		DE9D07935ED4E0F0BB8AD7B7 /* Pods-SimplyE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyE.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE.release.xcconfig"; sourceTree = "<group>"; };
 		E6202A001DD4E6F300C99553 /* NYPLSettingsAccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLSettingsAccountDetailViewController.h; sourceTree = "<group>"; };
 		E6202A011DD4E6F300C99553 /* NYPLSettingsAccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLSettingsAccountDetailViewController.m; sourceTree = "<group>"; };
 		E6202A031DD52B8600C99553 /* NYPLWelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYPLWelcomeScreen.swift; sourceTree = "<group>"; };
@@ -552,6 +709,7 @@
 		E6BA02B71DE4B6F600F76404 /* RemoteHTMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteHTMLViewController.swift; sourceTree = "<group>"; };
 		E6BC315C1E009F3E0021B65E /* NYPLAgeCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYPLAgeCheck.swift; sourceTree = "<group>"; };
 		E6F26E721DFF672F00C103CA /* NYPLDirectoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYPLDirectoryManager.swift; sourceTree = "<group>"; };
+		FA6F52186150DB19A3F38B84 /* Pods_OpenTextbooks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenTextbooks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -560,6 +718,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15AF04E809009612AA10D16 /* libPods-SimplyETests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		529014521EEF1DA70004A7AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529014531EEF1DA70004A7AB /* MediaPlayer.framework in Frameworks */,
+				529014541EEF1DA70004A7AB /* CoreMedia.framework in Frameworks */,
+				529014551EEF1DA70004A7AB /* CoreVideo.framework in Frameworks */,
+				529014561EEF1DA70004A7AB /* AVFoundation.framework in Frameworks */,
+				529014571EEF1DA70004A7AB /* AudioToolbox.framework in Frameworks */,
+				529014581EEF1DA70004A7AB /* libiconv.tbd in Frameworks */,
+				529014591EEF1DA70004A7AB /* CoreGraphics.framework in Frameworks */,
+				5290145A1EEF1DA70004A7AB /* QuartzCore.framework in Frameworks */,
+				5290145B1EEF1DA70004A7AB /* libePub3-iOS.a in Frameworks */,
+				5290145C1EEF1DA70004A7AB /* HelpStack.framework in Frameworks */,
+				5290145D1EEF1DA70004A7AB /* Bugsnag.framework in Frameworks */,
+				529014601EEF1DA70004A7AB /* ReferenceProxy in Frameworks */,
+				529014611EEF1DA70004A7AB /* libicucore.tbd in Frameworks */,
+				529014621EEF1DA70004A7AB /* libc++.dylib in Frameworks */,
+				529014631EEF1DA70004A7AB /* libstdc++.6.0.9.dylib in Frameworks */,
+				529014641EEF1DA70004A7AB /* LocalAuthentication.framework in Frameworks */,
+				529014651EEF1DA70004A7AB /* SystemConfiguration.framework in Frameworks */,
+				529014661EEF1DA70004A7AB /* Security.framework in Frameworks */,
+				529014671EEF1DA70004A7AB /* CFNetwork.framework in Frameworks */,
+				529014681EEF1DA70004A7AB /* CoreLocation.framework in Frameworks */,
+				529014691EEF1DA70004A7AB /* UIKit.framework in Frameworks */,
+				5290146A1EEF1DA70004A7AB /* Foundation.framework in Frameworks */,
+				5290146B1EEF1DA70004A7AB /* ReferenceProxy in Frameworks */,
+				5290146C1EEF1DA70004A7AB /* libz.dylib in Frameworks */,
+				5290146D1EEF1DA70004A7AB /* libxml2.dylib in Frameworks */,
+				0BAB4625A5E1DB9754CA1687 /* Pods_OpenTextbooks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,9 +769,7 @@
 				03CE00EA1E0C436400C91489 /* libePub3-iOS.a in Frameworks */,
 				2D6F7CA91D910C3C000B906A /* HelpStack.framework in Frameworks */,
 				2D6F7CA71D910C12000B906A /* Bugsnag.framework in Frameworks */,
-				08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */,
-				08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */,
-				08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */,
+				08A352271BDE91B80040BF1D /* ReferenceProxy in Frameworks */,
 				08A352221BDE8E560040BF1D /* libicucore.tbd in Frameworks */,
 				5AEA9E011B947419009F71DB /* libc++.dylib in Frameworks */,
 				5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -591,7 +780,7 @@
 				84FCD2611B7BA79200BFEDD9 /* CoreLocation.framework in Frameworks */,
 				A823D815192BABA400B55DE2 /* UIKit.framework in Frameworks */,
 				A823D811192BABA400B55DE2 /* Foundation.framework in Frameworks */,
-				1112A8431A3249B4002B8CC1 /* libTenPrintCover.a in Frameworks */,
+				1112A8431A3249B4002B8CC1 /* ReferenceProxy in Frameworks */,
 				119503E91993F919009FB788 /* libz.dylib in Frameworks */,
 				119503E71993F914009FB788 /* libxml2.dylib in Frameworks */,
 				EC89BB22576495E8A359D77E /* Pods_SimplyE.framework in Frameworks */,
@@ -858,22 +1047,6 @@
 			name = Holds;
 			sourceTree = "<group>";
 		};
-		5A569A271B8351C6003B5B61 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5A569A2C1B8351C6003B5B61 /* libADEPT.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5A7048921B94A6700046FFF0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5A7048961B94A6710046FFF0 /* libAdobe Content Filter.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		84B7A3421B84E8FE00584FB2 /* OpenDyslexicFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,8 +1063,10 @@
 			children = (
 				579E9BC126424F2B79C0FE7E /* Pods-SimplyETests.debug.xcconfig */,
 				56A7B7786F9B146602623617 /* Pods-SimplyETests.release.xcconfig */,
-				8499EE06365A73ACE6116D3C /* Pods-SimplyE.debug.xcconfig */,
-				DE9D07935ED4E0F0BB8AD7B7 /* Pods-SimplyE.release.xcconfig */,
+				4A2465DA75DB936DFF350131 /* Pods-SimplyE.debug.xcconfig */,
+				0149C3B8B9D3D790FCE23F59 /* Pods-SimplyE.release.xcconfig */,
+				356FD22C284D3AB149178898 /* Pods-OpenTextbooks.debug.xcconfig */,
+				37778B91D26F4EA20B2A318C /* Pods-OpenTextbooks.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -907,13 +1082,11 @@
 		A823D804192BABA400B55DE2 = {
 			isa = PBXGroup;
 			children = (
+				529014981EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib */,
 				03AC46C31E39573500D88541 /* attach.png */,
 				03AC46C41E39573500D88541 /* attach@2x.png */,
 				036B02C01DCBF3360098784A /* HelpStackStoryboard.storyboard */,
 				CAE35BBA1B86289500BF9BC5 /* Simplified.xcconfig */,
-				2D6AF74A1E7E341F005CEC90 /* Simplified+RMSDK.xcconfig */,
-				5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */,
-				5A7048911B94A6700046FFF0 /* Adobe Content Filter.xcodeproj */,
 				A49C25401AE05A2600D63B89 /* RDServices.xcodeproj */,
 				1112A8191A322C53002B8CC1 /* TenPrintCover.xcodeproj */,
 				848FD95A1B83875D009D9BC4 /* NYPL_Launch_Screen.xib */,
@@ -922,6 +1095,7 @@
 				A823D80E192BABA400B55DE2 /* Products */,
 				A823D816192BABA400B55DE2 /* Simplified */,
 				A823D82F192BABA400B55DE2 /* SimplifiedTests */,
+				529014931EEF1DA80004A7AB /* OpenTextbooks-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -930,6 +1104,7 @@
 			children = (
 				A823D80D192BABA400B55DE2 /* SimplyE.app */,
 				2D2B47721D08F807007F7764 /* SimplyETests.xctest */,
+				529014921EEF1DA70004A7AB /* OpenTextbooks.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -980,6 +1155,7 @@
 				A823D829192BABA400B55DE2 /* XCTest.framework */,
 				BEEC686A5C71AFACFAC2A884 /* libPods-SimplyETests.a */,
 				2FBF380CA3C6978E66F4EFAB /* Pods_SimplyE.framework */,
+				FA6F52186150DB19A3F38B84 /* Pods_OpenTextbooks.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1171,6 +1347,28 @@
 			productReference = 2D2B47721D08F807007F7764 /* SimplyETests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		529013DA1EEF1DA70004A7AB /* OpenTextbooks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5290148F1EEF1DA70004A7AB /* Build configuration list for PBXNativeTarget "OpenTextbooks" */;
+			buildPhases = (
+				6A03A98A7068DE77519EE93A /* [CP] Check Pods Manifest.lock */,
+				529013DC1EEF1DA70004A7AB /* Increment Build */,
+				529013DD1EEF1DA70004A7AB /* Sources */,
+				529014521EEF1DA70004A7AB /* Frameworks */,
+				5290146F1EEF1DA70004A7AB /* Resources */,
+				5290148C1EEF1DA70004A7AB /* Upload Bugsnag dSYM */,
+				3F4DD2CA3C5F8872D0C0E6F7 /* [CP] Embed Pods Frameworks */,
+				50ED1CD75F6D0CAAA5285E1B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenTextbooks;
+			productName = Simplified;
+			productReference = 529014921EEF1DA70004A7AB /* OpenTextbooks.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A823D80C192BABA400B55DE2 /* SimplyE */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A823D839192BABA400B55DE2 /* Build configuration list for PBXNativeTarget "SimplyE" */;
@@ -1201,13 +1399,16 @@
 			attributes = {
 				CLASSPREFIX = NYPL;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "NYPL Labs";
 				TargetAttributes = {
 					2D2B47711D08F807007F7764 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0820;
 						TestTargetID = A823D80C192BABA400B55DE2;
+					};
+					529013DA1EEF1DA70004A7AB = {
+						DevelopmentTeam = 7262U6ST2R;
 					};
 					A823D80C192BABA400B55DE2 = {
 						DevelopmentTeam = 7262U6ST2R;
@@ -1236,14 +1437,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5A569A271B8351C6003B5B61 /* Products */;
-					ProjectRef = 5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */;
-				},
-				{
-					ProductGroup = 5A7048921B94A6700046FFF0 /* Products */;
-					ProjectRef = 5A7048911B94A6700046FFF0 /* Adobe Content Filter.xcodeproj */;
-				},
-				{
 					ProductGroup = A49C25411AE05A2600D63B89 /* Products */;
 					ProjectRef = A49C25401AE05A2600D63B89 /* RDServices.xcodeproj */;
 				},
@@ -1256,6 +1449,7 @@
 			targets = (
 				A823D80C192BABA400B55DE2 /* SimplyE */,
 				2D2B47711D08F807007F7764 /* SimplyETests */,
+				529013DA1EEF1DA70004A7AB /* OpenTextbooks */,
 			);
 		};
 /* End PBXProject section */
@@ -1266,20 +1460,6 @@
 			fileType = archive.ar;
 			path = libTenPrintCover.a;
 			remoteRef = 1112A81E1A322C53002B8CC1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5A569A2C1B8351C6003B5B61 /* libADEPT.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libADEPT.a;
-			remoteRef = 5A569A2B1B8351C6003B5B61 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5A7048961B94A6710046FFF0 /* libAdobe Content Filter.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAdobe Content Filter.a";
-			remoteRef = 5A7048951B94A6710046FFF0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A49C25461AE05A2600D63B89 /* libRDServices.a */ = {
@@ -1299,6 +1479,41 @@
 				2D2B478E1D08FDF5007F7764 /* UpdateCheckNeedsUpdate.json in Resources */,
 				2D2B478F1D08FDF5007F7764 /* UpdateCheckUnknown.json in Resources */,
 				2D2B47841D08F8E2007F7764 /* UpdateCheckUpToDate.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5290146F1EEF1DA70004A7AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5290149A1EEF2EB70004A7AB /* OpenTextbooks_Launch_Screen.xib in Resources */,
+				529014701EEF1DA70004A7AB /* attach.png in Resources */,
+				529014711EEF1DA70004A7AB /* attach@2x.png in Resources */,
+				529014721EEF1DA70004A7AB /* ReportIssue.storyboard in Resources */,
+				529014731EEF1DA70004A7AB /* HelpStackThemeNYPL.plist in Resources */,
+				529014741EEF1DA70004A7AB /* OFL.txt in Resources */,
+				529014751EEF1DA70004A7AB /* HelpStackStoryboard.storyboard in Resources */,
+				529014761EEF1DA70004A7AB /* simplified.js in Resources */,
+				529014781EEF1DA70004A7AB /* NYPLProblemReportViewController.xib in Resources */,
+				529014791EEF1DA70004A7AB /* CodabarMedium.ttf in Resources */,
+				5290147A1EEF1DA70004A7AB /* readium-shared-js_all.js in Resources */,
+				5290147B1EEF1DA70004A7AB /* ReaderClientCert.sig in Resources */,
+				5290147C1EEF1DA70004A7AB /* software-licenses.html in Resources */,
+				5290147D1EEF1DA70004A7AB /* Accounts.json in Resources */,
+				5290147E1EEF1DA70004A7AB /* InfoPlist.strings in Resources */,
+				5290147F1EEF1DA70004A7AB /* reader.html in Resources */,
+				529014801EEF1DA70004A7AB /* DetailSummaryTemplate.html in Resources */,
+				529014811EEF1DA70004A7AB /* HelpStackTheme.plist in Resources */,
+				529014821EEF1DA70004A7AB /* Localizable.strings in Resources */,
+				529014831EEF1DA70004A7AB /* Images.xcassets in Resources */,
+				529014841EEF1DA70004A7AB /* sdk.css in Resources */,
+				529014851EEF1DA70004A7AB /* OpenDyslexic3-Bold.ttf in Resources */,
+				529014861EEF1DA70004A7AB /* NYPLReaderTOC.storyboard in Resources */,
+				529014871EEF1DA70004A7AB /* readium-shared-js_all.js.map in Resources */,
+				529014881EEF1DA70004A7AB /* CodabarLarge.ttf in Resources */,
+				529014891EEF1DA70004A7AB /* host_app_feedback.js in Resources */,
+				5290148A1EEF1DA70004A7AB /* readium-shared-js_all.js.bundles.js in Resources */,
+				5290148B1EEF1DA70004A7AB /* OpenDyslexic3-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1333,6 +1548,7 @@
 				030713661E749D5600DDE3FA /* CodabarLarge.ttf in Resources */,
 				11C113D219F842BE005B3F63 /* host_app_feedback.js in Resources */,
 				5A6929241B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js in Resources */,
+				529014991EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib in Resources */,
 				84B7A3481B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1354,7 +1570,81 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
+		3F4DD2CA3C5F8872D0C0E6F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		41F038C098C06905E3E27529 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		50ED1CD75F6D0CAAA5285E1B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		529013DC1EEF1DA70004A7AB /* Increment Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		5290148C1EEF1DA70004A7AB /* Upload Bugsnag dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Bugsnag dSYM";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env ruby";
+			shellScript = "fork do\n  Process.setsid\n  STDIN.reopen(\"/dev/null\")\n  STDOUT.reopen(\"/dev/null\", \"a\")\n  STDERR.reopen(\"/dev/null\", \"a\")\n\n  require 'shellwords'\n\n  Dir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\n    system(\"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} https://upload.bugsnag.com/\")\n  end\nend\n";
+			showEnvVarsInLog = 0;
+		};
+		6A03A98A7068DE77519EE93A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1468,6 +1758,129 @@
 			files = (
 				2D2B477C1D08F821007F7764 /* UpdateCheckTests.swift in Sources */,
 				2D2B477E1D08F82C007F7764 /* Log.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		529013DD1EEF1DA70004A7AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529013DE1EEF1DA70004A7AB /* NYPLCirculationAnalytics.swift in Sources */,
+				529013DF1EEF1DA70004A7AB /* UpdateCheckShim.swift in Sources */,
+				529013E01EEF1DA70004A7AB /* APIKeys.swift in Sources */,
+				529013E11EEF1DA70004A7AB /* NYPLAccount.m in Sources */,
+				529013E21EEF1DA70004A7AB /* NYPLAttributedString.m in Sources */,
+				529013E31EEF1DA70004A7AB /* NYPLAgeCheck.swift in Sources */,
+				529013E41EEF1DA70004A7AB /* Log.swift in Sources */,
+				529013E51EEF1DA70004A7AB /* NYPLBookRegistry.m in Sources */,
+				529013E61EEF1DA70004A7AB /* UILabel+NYPLAppearanceAdditions.m in Sources */,
+				529013E71EEF1DA70004A7AB /* NYPLJSON.m in Sources */,
+				529013E81EEF1DA70004A7AB /* NYPLConfiguration.m in Sources */,
+				529013E91EEF1DA70004A7AB /* NYPLNetworkQueue.swift in Sources */,
+				529013EA1EEF1DA70004A7AB /* NYPLMyBooksNavigationController.m in Sources */,
+				529013EB1EEF1DA70004A7AB /* NYPLBookCellCollectionViewController.m in Sources */,
+				529013EC1EEF1DA70004A7AB /* NYPLXML.m in Sources */,
+				529013ED1EEF1DA70004A7AB /* NYPLBookCell.m in Sources */,
+				529013EE1EEF1DA70004A7AB /* NSURL+NYPLURLAdditions.m in Sources */,
+				529013EF1EEF1DA70004A7AB /* NYPLAsync.m in Sources */,
+				529013F01EEF1DA70004A7AB /* NYPLReloadView.m in Sources */,
+				529013F11EEF1DA70004A7AB /* NYPLReachabilityManager.m in Sources */,
+				529013F21EEF1DA70004A7AB /* NYPLCatalogGroupedFeedViewController.m in Sources */,
+				529013F31EEF1DA70004A7AB /* NYPLReaderBookmarkCell.swift in Sources */,
+				529013F41EEF1DA70004A7AB /* NYPLOpenSearchDescription.m in Sources */,
+				529013F51EEF1DA70004A7AB /* NYPLReaderTOCElement.m in Sources */,
+				529013F61EEF1DA70004A7AB /* UpdateCheck.swift in Sources */,
+				529013F71EEF1DA70004A7AB /* NYPLReaderTOCViewController.m in Sources */,
+				529013F81EEF1DA70004A7AB /* BundledHTMLViewController.swift in Sources */,
+				529013F91EEF1DA70004A7AB /* NYPLBookDetailView.m in Sources */,
+				529013FA1EEF1DA70004A7AB /* UIButton+NYPLAppearanceAdditions.m in Sources */,
+				529013FB1EEF1DA70004A7AB /* NYPLBookCoverRegistry.m in Sources */,
+				529013FC1EEF1DA70004A7AB /* NYPLBookDetailDownloadingView.m in Sources */,
+				529013FD1EEF1DA70004A7AB /* NYPLOPDSCategory.m in Sources */,
+				529013FE1EEF1DA70004A7AB /* NYPLNull.m in Sources */,
+				529013FF1EEF1DA70004A7AB /* readium-shared-js_all.js.map in Sources */,
+				529014001EEF1DA70004A7AB /* NYPLLinearView.m in Sources */,
+				529014011EEF1DA70004A7AB /* NSDate+NYPLDateAdditions.m in Sources */,
+				529014021EEF1DA70004A7AB /* NYPLBook.m in Sources */,
+				529014031EEF1DA70004A7AB /* NYPLCatalogLane.m in Sources */,
+				529014041EEF1DA70004A7AB /* NYPLBookNormalCell.m in Sources */,
+				529014051EEF1DA70004A7AB /* NYPLCatalogNavigationController.m in Sources */,
+				529014061EEF1DA70004A7AB /* NYPLOPDSGroup.m in Sources */,
+				529014071EEF1DA70004A7AB /* NYPLBookButtonsView.m in Sources */,
+				529014081EEF1DA70004A7AB /* NYPLDismissibleViewController.m in Sources */,
+				529014091EEF1DA70004A7AB /* main.m in Sources */,
+				5290140A1EEF1DA70004A7AB /* UIView+NYPLViewAdditions.m in Sources */,
+				5290140B1EEF1DA70004A7AB /* NYPLSettingsPrimaryTableViewController.m in Sources */,
+				5290140C1EEF1DA70004A7AB /* UIFont+NYPLSystemFontOverride.m in Sources */,
+				5290140D1EEF1DA70004A7AB /* NYPLReaderBookmarkElement.swift in Sources */,
+				5290140E1EEF1DA70004A7AB /* NYPLReportIssueViewController.swift in Sources */,
+				5290140F1EEF1DA70004A7AB /* NYPLBookAcquisition.m in Sources */,
+				529014101EEF1DA70004A7AB /* UIColor+NYPLColorAdditions.m in Sources */,
+				529014111EEF1DA70004A7AB /* NYPLCatalogFeedViewController.m in Sources */,
+				529014121EEF1DA70004A7AB /* NYPLBookDownloadingCell.m in Sources */,
+				529014131EEF1DA70004A7AB /* NYPLTenPrintCoverView+NYPLImageAdditions.m in Sources */,
+				529014141EEF1DA70004A7AB /* NYPLFacetBarView.m in Sources */,
+				529014151EEF1DA70004A7AB /* NYPLReachability.m in Sources */,
+				529014161EEF1DA70004A7AB /* NYPLReaderViewController.m in Sources */,
+				529014171EEF1DA70004A7AB /* NYPLCatalogLaneCell.m in Sources */,
+				529014181EEF1DA70004A7AB /* NYPLSettingsAccountDetailViewController.m in Sources */,
+				529014191EEF1DA70004A7AB /* NYPLReaderReadiumView.m in Sources */,
+				5290141A1EEF1DA70004A7AB /* NYPLAlertController.m in Sources */,
+				5290141B1EEF1DA70004A7AB /* NYPLSession.m in Sources */,
+				5290141C1EEF1DA70004A7AB /* NYPLSettingsEULAViewController.m in Sources */,
+				5290141D1EEF1DA70004A7AB /* NYPLMyBooksDownloadInfo.m in Sources */,
+				5290141E1EEF1DA70004A7AB /* NYPLBookLocation.m in Sources */,
+				5290141F1EEF1DA70004A7AB /* NYPLFacetView.m in Sources */,
+				529014201EEF1DA70004A7AB /* NYPLProblemDocument.m in Sources */,
+				529014211EEF1DA70004A7AB /* NYPLReaderContainerDelegate.mm in Sources */,
+				529014221EEF1DA70004A7AB /* NYPLBookCellDelegate.m in Sources */,
+				529014231EEF1DA70004A7AB /* NYPLBookDetailNormalView.m in Sources */,
+				529014241EEF1DA70004A7AB /* NYPLSettingsPrimaryNavigationController.m in Sources */,
+				529014251EEF1DA70004A7AB /* NYPLCatalogUngroupedFeedViewController.m in Sources */,
+				529014261EEF1DA70004A7AB /* NYPLSettingsSplitViewController.m in Sources */,
+				529014271EEF1DA70004A7AB /* NYPLBookRegistryRecord.m in Sources */,
+				529014281EEF1DA70004A7AB /* NYPLMyBooksViewController.m in Sources */,
+				529014291EEF1DA70004A7AB /* NYPLBookDownloadFailedCell.m in Sources */,
+				5290142A1EEF1DA70004A7AB /* NYPLBookDetailViewController.m in Sources */,
+				5290142B1EEF1DA70004A7AB /* NYPLDeviceManager.swift in Sources */,
+				5290142C1EEF1DA70004A7AB /* NYPLSettings.m in Sources */,
+				5290142D1EEF1DA70004A7AB /* NYPLReaderTOCCell.m in Sources */,
+				5290142E1EEF1DA70004A7AB /* NYPLDirectoryManager.swift in Sources */,
+				5290142F1EEF1DA70004A7AB /* NYPLProblemReportViewController.m in Sources */,
+				529014301EEF1DA70004A7AB /* NYPLHoldsNavigationController.m in Sources */,
+				529014311EEF1DA70004A7AB /* NYPLRemoteViewController.m in Sources */,
+				529014321EEF1DA70004A7AB /* NYPLWelcomeScreen.swift in Sources */,
+				529014331EEF1DA70004A7AB /* NYPLOPDSAttribute.m in Sources */,
+				529014341EEF1DA70004A7AB /* NYPLCatalogUngroupedFeed.m in Sources */,
+				529014351EEF1DA70004A7AB /* NYPLHoldsViewController.m in Sources */,
+				529014361EEF1DA70004A7AB /* NYPLSettingsAccountsList.swift in Sources */,
+				529014371EEF1DA70004A7AB /* NYPLAppDelegate.m in Sources */,
+				529014381EEF1DA70004A7AB /* NYPLCatalogFacetGroup.m in Sources */,
+				529014391EEF1DA70004A7AB /* NSURLRequest+NYPLURLRequestAdditions.m in Sources */,
+				5290143A1EEF1DA70004A7AB /* NYPLRootTabBarController.m in Sources */,
+				5290143B1EEF1DA70004A7AB /* ExtendedNavBarView.swift in Sources */,
+				5290143C1EEF1DA70004A7AB /* NYPLCatalogSearchViewController.m in Sources */,
+				5290143D1EEF1DA70004A7AB /* NYPLBasicAuth.m in Sources */,
+				5290143E1EEF1DA70004A7AB /* NYPLReaderSettings.m in Sources */,
+				5290143F1EEF1DA70004A7AB /* NYPLKeychain.m in Sources */,
+				529014401EEF1DA70004A7AB /* NYPLOPDSEntry.m in Sources */,
+				529014411EEF1DA70004A7AB /* NYPLReaderSettingsView.m in Sources */,
+				529014421EEF1DA70004A7AB /* NYPLIndeterminateProgressView.m in Sources */,
+				529014431EEF1DA70004A7AB /* NSString+NYPLStringAdditions.m in Sources */,
+				529014441EEF1DA70004A7AB /* NYPLOPDSEntryGroupAttributes.m in Sources */,
+				529014451EEF1DA70004A7AB /* NYPLMyBooksDownloadCenter.m in Sources */,
+				529014461EEF1DA70004A7AB /* NYPLAnnotations.swift in Sources */,
+				529014471EEF1DA70004A7AB /* RemoteHTMLViewController.swift in Sources */,
+				529014481EEF1DA70004A7AB /* NYPLCatalogGroupedFeed.m in Sources */,
+				529014491EEF1DA70004A7AB /* NYPLBookState.m in Sources */,
+				5290144A1EEF1DA70004A7AB /* NYPLCatalogFacet.m in Sources */,
+				5290144B1EEF1DA70004A7AB /* NYPLAccountSignInViewController.m in Sources */,
+				5290144C1EEF1DA70004A7AB /* Accounts.swift in Sources */,
+				5290144D1EEF1DA70004A7AB /* NYPLBookDetailDownloadFailedView.m in Sources */,
+				5290144E1EEF1DA70004A7AB /* NYPLOPDSFeed.m in Sources */,
+				5290144F1EEF1DA70004A7AB /* NYPLRoundedButton.m in Sources */,
+				529014501EEF1DA70004A7AB /* NYPLOPDSLink.m in Sources */,
+				529014511EEF1DA70004A7AB /* NYPLOPDSType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1688,6 +2101,103 @@
 			};
 			name = Release;
 		};
+		529014901EEF1DA70004A7AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 356FD22C284D3AB149178898 /* Pods-OpenTextbooks.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OpenTextbooks-AppIcon";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7262U6ST2R;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
+				INFOPLIST_FILE = "OpenTextbooks-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Heap",
+					"$(PROJECT_DIR)/heap-ios-latest",
+					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Release-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umn.minitex.OpenTextbooks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8e06b98d-570a-4578-a627-281fe439cfc8";
+				PROVISIONING_PROFILE_SPECIFIER = Development;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Simplified/SimplyE-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "SimplyE-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		529014911EEF1DA70004A7AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37778B91D26F4EA20B2A318C /* Pods-OpenTextbooks.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OpenTextbooks-AppIcon";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: The New York Library Astor, Lenox, and Tilden Foundations (7262U6ST2R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7262U6ST2R;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
+				INFOPLIST_FILE = "OpenTextbooks-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Heap",
+					"$(PROJECT_DIR)/heap-ios-latest",
+					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Release-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umn.minitex.OpenTextbooks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3bc7274c-46ae-459e-8d05-3c678e597f60";
+				PROVISIONING_PROFILE_SPECIFIER = "App Store (Generic)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Simplified/SimplyE-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "SimplyE-Swift.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-documentation",
+					"-Wno-c++98-compat-pedantic",
+					"-Wno-c++98-compat",
+					"-Wno-c11-extensions",
+					"-Wno-objc-missing-property-synthesis",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		A823D837192BABA400B55DE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAE35BBA1B86289500BF9BC5 /* Simplified.xcconfig */;
@@ -1790,7 +2300,7 @@
 		};
 		A823D83A192BABA400B55DE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8499EE06365A73ACE6116D3C /* Pods-SimplyE.debug.xcconfig */;
+			baseConfigurationReference = 4A2465DA75DB936DFF350131 /* Pods-SimplyE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1838,7 +2348,7 @@
 		};
 		A823D83B192BABA400B55DE2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE9D07935ED4E0F0BB8AD7B7 /* Pods-SimplyE.release.xcconfig */;
+			baseConfigurationReference = 0149C3B8B9D3D790FCE23F59 /* Pods-SimplyE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1891,6 +2401,15 @@
 			buildConfigurations = (
 				2D2B477A1D08F808007F7764 /* Debug */,
 				2D2B477B1D08F808007F7764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5290148F1EEF1DA70004A7AB /* Build configuration list for PBXNativeTarget "OpenTextbooks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				529014901EEF1DA70004A7AB /* Debug */,
+				529014911EEF1DA70004A7AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

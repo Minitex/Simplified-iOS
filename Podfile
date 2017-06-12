@@ -14,6 +14,17 @@ target 'SimplyE' do
 
 end
 
+target 'OpenTextbooks' do
+
+  use_frameworks!
+
+  pod 'HelpStack', :git => 'https://github.com/NYPL-Simplified/helpstack-ios'
+  pod 'Bugsnag', :git => 'https://github.com/bugsnag/bugsnag-cocoa.git'
+  pod 'NYPLCardCreator', :git => 'https://github.com/NYPL-Simplified/CardCreator-iOS.git'
+  pod 'SQLite.swift', '~> 0.11.2'
+
+end
+
 target 'SimplyETests' do
 
 end
