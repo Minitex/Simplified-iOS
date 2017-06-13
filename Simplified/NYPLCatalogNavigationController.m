@@ -312,6 +312,8 @@
     [self reloadSelectedLibraryAccount];
     
     if (settings.acceptedEULABeforeMultiLibrary == NO) {
+
+    #ifndef NOTSIMPLYE
     NYPLWelcomeScreenViewController *welcomeScreenVC = [[NYPLWelcomeScreenViewController alloc] initWithCompletion:^(NSInteger accountID) {
      
       [[NYPLBookRegistry sharedRegistry] save];
@@ -330,7 +332,7 @@
       
       NYPLRootTabBarController *vc = [NYPLRootTabBarController sharedController];
       [vc safelyPresentViewController:navController animated:YES completion:nil];
-
+    #endif
     }
     
   }
