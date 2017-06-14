@@ -1,5 +1,6 @@
 @class NYPLSettingsPrimaryTableViewController;
 
+#ifndef NOTSIMPLYE
 typedef NS_ENUM(NSInteger, NYPLSettingsPrimaryTableViewControllerItem) {
   NYPLSettingsPrimaryTableViewControllerItemAccount,
   NYPLSettingsPrimaryTableViewControllerItemAbout,
@@ -8,6 +9,15 @@ typedef NS_ENUM(NSInteger, NYPLSettingsPrimaryTableViewControllerItem) {
   NYPLSettingsPrimaryTableViewControllerItemCustomFeedURL,
   NYPLSettingsPrimaryTableViewControllerItemSoftwareLicenses,
 };
+#else
+typedef NS_ENUM(NSInteger, NYPLSettingsPrimaryTableViewControllerItem) {
+  NYPLSettingsPrimaryTableViewControllerItemAccount,
+  NYPLSettingsPrimaryTableViewControllerItemAbout,
+  NYPLSettingsPrimaryTableViewControllerItemEULA,
+  NYPLSettingsPrimaryTableViewControllerItemCustomFeedURL,
+  NYPLSettingsPrimaryTableViewControllerItemSoftwareLicenses,
+};
+#endif
 
 NSIndexPath *NYPLSettingsPrimaryTableViewControllerIndexPathFromSettingsItem(
   const NYPLSettingsPrimaryTableViewControllerItem settingsItem);

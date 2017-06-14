@@ -11,8 +11,13 @@ typedef NS_ENUM(NSInteger, NYPLSettingsRenderingEngine) {
 @class NYPLCardApplicationModel;
 @class Account;
 
-static NSString *const NYPLAcknowledgementsURLString = @"http://www.librarysimplified.org/acknowledgments.html";
-static NSString *const NYPLUserAgreementURLString = @"http://www.librarysimplified.org/EULA.html";
+#ifdef OPENTEXTBOOKS
+  static NSString *const NYPLAcknowledgementsURLString = @"https://rawgit.com/Minitex/Simplified-Files/master/acknowledgments.html";
+  static NSString *const NYPLUserAgreementURLString = @"https://rawgit.com/Minitex/Simplified-Files/master/eula.html";
+#else
+  static NSString *const NYPLAcknowledgementsURLString = @"http://www.librarysimplified.org/acknowledgments.html";
+  static NSString *const NYPLUserAgreementURLString = @"http://www.librarysimplified.org/EULA.html";
+#endif
 
 @interface NYPLSettings : NSObject
 

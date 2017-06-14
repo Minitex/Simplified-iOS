@@ -15,12 +15,14 @@ SettingsItemFromIndexPath(NSIndexPath *const indexPath)
           @throw NSInvalidArgumentException;
       }
     case 1:
+    #ifndef NOTSIMPLYE
       switch (indexPath.row) {
         case 0:
           return NYPLSettingsPrimaryTableViewControllerItemHelpStack;
         default:
           @throw NSInvalidArgumentException;
       }
+    #endif
     case 2:
       switch(indexPath.row) {
         case 0:
@@ -50,8 +52,10 @@ NSIndexPath *NYPLSettingsPrimaryTableViewControllerIndexPathFromSettingsItem(
   switch(settingsItem) {
     case NYPLSettingsPrimaryTableViewControllerItemAccount:
       return [NSIndexPath indexPathForRow:0 inSection:0];
+    #ifndef NOTSIMPLYE
     case NYPLSettingsPrimaryTableViewControllerItemHelpStack:
       return [NSIndexPath indexPathForRow:0 inSection:1];
+    #endif
     case NYPLSettingsPrimaryTableViewControllerItemAbout:
       return [NSIndexPath indexPathForRow:0 inSection:2];
     case NYPLSettingsPrimaryTableViewControllerItemEULA:
@@ -155,11 +159,22 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       return [self settingsPrimaryTableViewCellWithText:NSLocalizedString(@"Accounts", nil)];
     }
     case NYPLSettingsPrimaryTableViewControllerItemAbout: {
-      return [self settingsPrimaryTableViewCellWithText:NSLocalizedString(@"AboutApp", nil)];
+      #ifdef NOTSIMPLYE
+        NSString *fullAbout = NSLocalizedString(@"About", nil);
+        fullAbout = [fullAbout stringByAppendingString:@" "];
+        NSString *productName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        fullAbout = [fullAbout stringByAppendingString:productName];
+
+        return [self settingsPrimaryTableViewCellWithText:fullAbout];
+      #else
+        return [self settingsPrimaryTableViewCellWithText:NSLocalizedString(@"AboutApp", nil)];
+      #endif
     }
+    #ifndef NOTSIMPLYE
     case NYPLSettingsPrimaryTableViewControllerItemHelpStack: {
-      return [self settingsPrimaryTableViewCellWithText:NSLocalizedString(@"Help", nil)];
+        return [self settingsPrimaryTableViewCellWithText:NSLocalizedString(@"Help", nil)];
     }
+    #endif
     case NYPLSettingsPrimaryTableViewControllerItemCustomFeedURL: {
       UITableViewCell *const cell = [[UITableViewCell alloc]
                                      initWithStyle:UITableViewCellStyleDefault

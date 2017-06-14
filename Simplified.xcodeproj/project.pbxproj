@@ -2121,6 +2121,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					"NOTSIMPLYE=1",
+					"OPENTEXTBOOKS=1",
 				);
 				INFOPLIST_FILE = "OpenTextbooks-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2175,6 +2176,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					"NOTSIMPLYE=1",
+					"OPENTEXTBOOKS=1",
 				);
 				INFOPLIST_FILE = "OpenTextbooks-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

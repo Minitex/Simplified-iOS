@@ -77,11 +77,24 @@ ontoPrimaryViewController:(__attribute__((unused)) UIViewController *)primaryVie
       accounts = [[NYPLSettings sharedSettings] settingsAccountsList];
       viewController = [[NYPLSettingsAccountsTableViewController alloc] initWithAccounts:accounts];
       break;
-    case NYPLSettingsPrimaryTableViewControllerItemAbout:
-      viewController = [[RemoteHTMLViewController alloc]
-                        initWithURL:[NSURL URLWithString:NYPLAcknowledgementsURLString]
-                        title:NSLocalizedString(@"AboutApp", nil)
-                        failureMessage:NSLocalizedString(@"SettingsConnectionFailureMessage", nil)];
+    case NYPLSettingsPrimaryTableViewControllerItemAbout: {
+      #ifdef NOTSIMPLYE
+        NSString *fullAbout = NSLocalizedString(@"About", nil);
+        fullAbout = [fullAbout stringByAppendingString:@" "];
+        NSString *productName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        fullAbout = [fullAbout stringByAppendingString:productName];
+
+        viewController = [[RemoteHTMLViewController alloc]
+                          initWithURL:[NSURL URLWithString:NYPLAcknowledgementsURLString]
+                          title:fullAbout
+                          failureMessage:NSLocalizedString(@"SettingsConnectionFailureMessage", nil)];
+      #else
+        viewController = [[RemoteHTMLViewController alloc]
+                          initWithURL:[NSURL URLWithString:NYPLAcknowledgementsURLString]
+                          title:NSLocalizedString(@"AboutApp", nil)
+                          failureMessage:NSLocalizedString(@"SettingsConnectionFailureMessage", nil)];
+      #endif
+      }
       break;
     case NYPLSettingsPrimaryTableViewControllerItemEULA:
       viewController = [[RemoteHTMLViewController alloc]
@@ -96,6 +109,7 @@ ontoPrimaryViewController:(__attribute__((unused)) UIViewController *)primaryVie
                                          withExtension:@"html"]
                         title:NSLocalizedString(@"SoftwareLicenses", nil)];
       break;
+    #ifndef NOTSIMPLYE
     case NYPLSettingsPrimaryTableViewControllerItemHelpStack: {
       [[HSHelpStack instance] setThemeFrompList:@"HelpStackTheme"];
       HSDeskGear *deskGear = [[HSDeskGear alloc]
@@ -120,6 +134,7 @@ ontoPrimaryViewController:(__attribute__((unused)) UIViewController *)primaryVie
       }
       return;
     }
+    #endif
     case NYPLSettingsPrimaryTableViewControllerItemCustomFeedURL:
       return;
   }
