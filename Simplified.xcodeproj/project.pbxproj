@@ -138,6 +138,7 @@
 		2DE514351DC3F0BE005A58BD /* NYPLCirculationAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AE32F1DC0FCFC00124AE2 /* NYPLCirculationAnalytics.swift */; };
 		2DF321831DC3B83500E1858F /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
+		521F70031EF3311F00FA5B7A /* Citations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 521F70021EF3311F00FA5B7A /* Citations.framework */; };
 		529013DE1EEF1DA70004A7AB /* NYPLCirculationAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AE32F1DC0FCFC00124AE2 /* NYPLCirculationAnalytics.swift */; };
 		529013DF1EEF1DA70004A7AB /* UpdateCheckShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC8D9DD1D09F9B4007DD125 /* UpdateCheckShim.swift */; };
 		529013E01EEF1DA70004A7AB /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345BFD61DBF002E00398B6F /* APIKeys.swift */; };
@@ -630,6 +631,7 @@
 		356FD22C284D3AB149178898 /* Pods-OpenTextbooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenTextbooks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks.debug.xcconfig"; sourceTree = "<group>"; };
 		37778B91D26F4EA20B2A318C /* Pods-OpenTextbooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenTextbooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks.release.xcconfig"; sourceTree = "<group>"; };
 		4A2465DA75DB936DFF350131 /* Pods-SimplyE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE.debug.xcconfig"; sourceTree = "<group>"; };
+		521F70021EF3311F00FA5B7A /* Citations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Citations.framework; path = Carthage/Build/iOS/Citations.framework; sourceTree = "<group>"; };
 		529014921EEF1DA70004A7AB /* OpenTextbooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenTextbooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529014931EEF1DA80004A7AB /* OpenTextbooks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenTextbooks-Info.plist"; path = "/Users/vuinguyen/Documents/NYPL-Simplified/Simplified-iOS/OpenTextbooks-Info.plist"; sourceTree = "<absolute>"; };
 		529014981EEF28700004A7AB /* OpenTextbooks_Launch_Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenTextbooks_Launch_Screen.xib; path = Simplified/OpenTextbooks_Launch_Screen.xib; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521F70031EF3311F00FA5B7A /* Citations.framework in Frameworks */,
 				529014531EEF1DA70004A7AB /* MediaPlayer.framework in Frameworks */,
 				529014541EEF1DA70004A7AB /* CoreMedia.framework in Frameworks */,
 				529014551EEF1DA70004A7AB /* CoreVideo.framework in Frameworks */,
@@ -1111,6 +1114,7 @@
 		A823D80F192BABA400B55DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				521F70021EF3311F00FA5B7A /* Citations.framework */,
 				03B0922F1E78871A00AD338D /* MediaPlayer.framework */,
 				03B0922D1E7886ED00AD338D /* CoreVideo.framework */,
 				03B0922B1E7886C900AD338D /* AVFoundation.framework */,
@@ -1359,6 +1363,7 @@
 				5290148C1EEF1DA70004A7AB /* Upload Bugsnag dSYM */,
 				3F4DD2CA3C5F8872D0C0E6F7 /* [CP] Embed Pods Frameworks */,
 				50ED1CD75F6D0CAAA5285E1B /* [CP] Copy Pods Resources */,
+				521F70061EF331A400FA5B7A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1614,6 +1619,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenTextbooks/Pods-OpenTextbooks-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		521F70061EF331A400FA5B7A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Citations.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		529013DC1EEF1DA70004A7AB /* Increment Build */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2114,6 +2133,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
@@ -2169,6 +2189,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
