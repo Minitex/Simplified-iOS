@@ -29,6 +29,7 @@
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIImageView *unreadImageView;
 @property (nonatomic) UIButton *closeButton;
+@property (nonatomic) UIButton *citationsButton;
 
 @end
 
@@ -150,6 +151,12 @@ static NSString *detailTemplate = nil;
 #pragma clang diagnostic pop
   
   [self addSubview:self.summaryWebView];
+
+  self.citationsButton = [[UIButton alloc] init];
+  [self.citationsButton setTitle:@"Citations" forState: UIControlStateNormal];
+  [self.citationsButton setTitleColor:[NYPLConfiguration mainColor] forState:UIControlStateNormal];
+  [self.citationsButton addTarget:self action:@selector(citationsButtonPressed) forControlEvents:UIControlEventTouchDown];
+  [self addSubview:self.citationsButton];
   
   NSDateFormatter *const dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.timeStyle = NSDateFormatterNoStyle;
@@ -308,7 +315,7 @@ static NSString *detailTemplate = nil;
     unreadImageViewFrame.origin.y = 10;
     self.unreadImageView.frame = unreadImageViewFrame;
   }
-  
+
   {
     // 40 left padding, 35 right to visually compensate for ragged text.
     CGFloat const leftPadding = 40;
@@ -328,9 +335,17 @@ static NSString *detailTemplate = nil;
                                            size.width,
                                            size.height);
   }
-  
+
+  // position citations button below the book description
+  {
+    [self.citationsButton sizeToFit];
+    CGFloat const x = CGRectGetMaxX(self.summaryWebView.frame) / 2;
+    CGFloat const y = CGRectGetMaxY(self.summaryWebView.frame) + 10;
+    self.citationsButton.frame = CGRectMake(x, y, self.citationsButton.frame.size.width, self.citationsButton.frame.size.height);
+  }
+
   self.contentSize = CGSizeMake(CGRectGetWidth(self.frame),
-                                CGRectGetMaxY(self.summaryWebView.frame) + 10);
+                                CGRectGetMaxY(self.summaryWebView.frame) + 50);
 }
 
 #pragma mark NYPLBookDetailDownloadFailedViewDelegate
@@ -472,6 +487,11 @@ navigationType:(__attribute__((unused)) UIWebViewNavigationType)navigationType
 - (void)closeButtonPressed
 {
   [self.detailViewDelegate didSelectCloseButton:self];
+}
+
+- (void)citationsButtonPressed
+{
+  [self.detailViewDelegate didSelectCitationsButton:self];
 }
 
 -(BOOL)accessibilityPerformEscape {

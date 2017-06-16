@@ -13,6 +13,7 @@
 - (void)didSelectReadForBookDetailView:(NYPLBookDetailView *)detailView;
 - (void)didSelectTryAgainForBookDetailView:(NYPLBookDetailView *)detailView;
 - (void)didSelectCloseButton:(NYPLBookDetailView *)detailView;
+- (void)didSelectCitationsButton:(NYPLBookDetailView *)detailView;
 
 @end
 

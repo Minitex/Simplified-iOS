@@ -5,6 +5,7 @@
 #import "NYPLMyBooksDownloadCenter.h"
 #import "NYPLReaderViewController.h"
 #import "NYPLRootTabBarController.h"
+#import <Citations/Citations.h>
 
 #import "NYPLBookDetailViewController.h"
 
@@ -92,6 +93,15 @@
 #pragma mark NYPLBookDetailViewDelegate
 -(void)didSelectCloseButton:(__attribute__((unused)) NYPLBookDetailView *)detailView {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)didSelectCitationsButton:(__attribute__((unused)) NYPLBookDetailView *)detailView {
+  NSBundle *bundle = [NSBundle bundleWithIdentifier:@"edu.umn.minitex.simplye.Citations"];
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Citations" bundle:bundle];
+  CitationsViewController *citationsViewController = (CitationsViewController*)[sb instantiateViewControllerWithIdentifier:@"Citations"];
+  citationsViewController.metadata = self.book.dictionaryRepresentation;
+  [[NYPLRootTabBarController sharedController]
+   pushViewController:citationsViewController animated:YES];
 }
 
 - (void)didSelectCancelDownloadFailedForBookDetailView:
