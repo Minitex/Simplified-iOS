@@ -339,7 +339,7 @@ static NSString *detailTemplate = nil;
   // position citations button below the book description
   {
     [self.citationsButton sizeToFit];
-    CGFloat const x = CGRectGetMaxX(self.summaryWebView.frame) / 2;
+    CGFloat const x = CGRectGetWidth(self.frame) / 2 - CGRectGetWidth(self.citationsButton.frame) / 2;
     CGFloat const y = CGRectGetMaxY(self.summaryWebView.frame) + 10;
     self.citationsButton.frame = CGRectMake(x, y, self.citationsButton.frame.size.width, self.citationsButton.frame.size.height);
   }

@@ -100,6 +100,7 @@
   UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Citations" bundle:bundle];
   CitationsViewController *citationsViewController = (CitationsViewController*)[sb instantiateViewControllerWithIdentifier:@"Citations"];
   citationsViewController.metadata = self.book.dictionaryRepresentation;
+  citationsViewController.hideClose = YES;
   [[NYPLRootTabBarController sharedController]
    pushViewController:citationsViewController animated:YES];
 }
