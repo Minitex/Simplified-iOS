@@ -5,6 +5,7 @@
 #import "NYPLSettingsSplitViewController.h"
 #import "NYPLRootTabBarController.h"
 #import "SimplyE-Swift.h"
+#import <MinitexPDFProtocols/MinitexPDFProtocols.h>
 
 @interface NYPLRootTabBarController () <UITabBarControllerDelegate>
 
@@ -12,6 +13,7 @@
 @property (nonatomic) NYPLMyBooksNavigationController *myBooksNavigationController;
 @property (nonatomic) NYPLHoldsNavigationController *holdsNavigationController;
 @property (nonatomic) NYPLSettingsSplitViewController *settingsSplitViewController;
+@property (nonatomic) NYPLPDFBookNavigationController *pdfbookNavigationController;
 
 @end
 
@@ -36,16 +38,18 @@
 
 - (instancetype)init
 {
+  self.pdfbookNavigationController = [[NYPLPDFBookNavigationController alloc] init];
+  
   self = [super init];
   if(!self) return nil;
   
   self.delegate = self;
-  
+
   self.catalogNavigationController = [[NYPLCatalogNavigationController alloc] init];
   self.myBooksNavigationController = [[NYPLMyBooksNavigationController alloc] init];
   self.holdsNavigationController = [[NYPLHoldsNavigationController alloc] init];
   self.settingsSplitViewController = [[NYPLSettingsSplitViewController alloc] init];
-  
+
   [self setTabViewControllers];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -67,7 +71,8 @@
     self.viewControllers = @[self.catalogNavigationController,
                              self.myBooksNavigationController,
                              self.holdsNavigationController,
-                             self.settingsSplitViewController];
+                             self.settingsSplitViewController,
+                             self.pdfbookNavigationController];
   } else {
     self.viewControllers = @[self.catalogNavigationController,
                              self.myBooksNavigationController,

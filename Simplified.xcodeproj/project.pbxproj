@@ -39,8 +39,6 @@
 		08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352251BDE8E700040BF1D /* SystemConfiguration.framework */; };
 		08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49C25461AE05A2600D63B89 /* libRDServices.a */; };
 		08A352731BDFF5380040BF1D /* NYPLAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A352721BDFF5380040BF1D /* NYPLAlertController.m */; };
-		08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A569A2C1B8351C6003B5B61 /* libADEPT.a */; };
-		08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7048961B94A6710046FFF0 /* libAdobe Content Filter.a */; };
 		11068C55196DD37900E8A94B /* NYPLNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 11068C54196DD37900E8A94B /* NYPLNull.m */; };
 		11078357198160A50071AB1E /* NYPLBookDownloadFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11078356198160A50071AB1E /* NYPLBookDownloadFailedCell.m */; };
 		1107835E19816E3D0071AB1E /* UIView+NYPLViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107835D19816E3D0071AB1E /* UIView+NYPLViewAdditions.m */; };
@@ -139,6 +137,14 @@
 		2DEF10BA201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF10B9201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m */; };
 		2DF321831DC3B83500E1858F /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
+		527738C720B5BCBD00FAED11 /* PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527738C420B5BC9700FAED11 /* PDF.framework */; };
+		527738C820B5BCBD00FAED11 /* PDF.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 527738C420B5BC9700FAED11 /* PDF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		527738CF20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */; };
+		527738D120B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */; };
+		52BE62DB20B490770007C81A /* MinitexPDFProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */; };
+		52BE62DC20B490770007C81A /* MinitexPDFProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52BE62E920B4A84C0007C81A /* DataModeling.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 52BE62E820B4A84C0007C81A /* DataModeling.pdf */; };
+		52F986FC20B372E4003D52D9 /* NYPLPDFBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */; };
 		5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B90141B946CBD002C53E9 /* libstdc++.6.0.9.dylib */; };
 		5A5B901B1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B901A1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm */; };
 		5A69290E1B95ACC600FB4C10 /* readium-shared-js_all.js in Resources */ = {isa = PBXBuildFile; fileRef = 5A69290D1B95ACC600FB4C10 /* readium-shared-js_all.js */; };
@@ -236,6 +242,21 @@
 			remoteInfo = RDServices;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		52BE62E020B490770007C81A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				52BE62DC20B490770007C81A /* MinitexPDFProtocols.framework in Embed Frameworks */,
+				527738C820B5BCBD00FAED11 /* PDF.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0305005D1E8EF65100EA02C4 /* HelpStackThemeNYPL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HelpStackThemeNYPL.plist; sourceTree = "<group>"; };
@@ -489,6 +510,12 @@
 		2DFAC8EB1CD8DDD1003D9EC0 /* NYPLOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLOPDSCategory.m; sourceTree = "<group>"; };
 		2FBF380CA3C6978E66F4EFAB /* Pods_SimplyE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplyE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		527738C420B5BC9700FAED11 /* PDF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PDF.framework; sourceTree = "<group>"; };
+		527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookNavigationController.swift; sourceTree = "<group>"; };
+		527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookMinitexDelegate.swift; sourceTree = "<group>"; };
+		52BE62E820B4A84C0007C81A /* DataModeling.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DataModeling.pdf; sourceTree = "<group>"; };
+		52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MinitexPDFProtocols.framework; path = Carthage/Build/iOS/MinitexPDFProtocols.framework; sourceTree = "<group>"; };
+		52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookController.swift; sourceTree = "<group>"; };
 		56A7B7786F9B146602623617 /* Pods-SimplyETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.release.xcconfig"; sourceTree = "<group>"; };
 		579E9BC126424F2B79C0FE7E /* Pods-SimplyETests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.debug.xcconfig"; sourceTree = "<group>"; };
 		5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ADEPT.xcodeproj; path = "adept-ios/ADEPT.xcodeproj"; sourceTree = "<group>"; };
@@ -612,11 +639,10 @@
 				03CE00EA1E0C436400C91489 /* libePub3-iOS.a in Frameworks */,
 				2D6F7CA91D910C3C000B906A /* HelpStack.framework in Frameworks */,
 				2D6F7CA71D910C12000B906A /* Bugsnag.framework in Frameworks */,
-				08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */,
-				08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */,
 				08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */,
 				08A352221BDE8E560040BF1D /* libicucore.tbd in Frameworks */,
 				5AEA9E011B947419009F71DB /* libc++.dylib in Frameworks */,
+				52BE62DB20B490770007C81A /* MinitexPDFProtocols.framework in Frameworks */,
 				5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */,
 				2DA4F2331C68363B008853D7 /* LocalAuthentication.framework in Frameworks */,
 				08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */,
@@ -630,6 +656,7 @@
 				119503E71993F914009FB788 /* libxml2.dylib in Frameworks */,
 				EC89BB22576495E8A359D77E /* Pods_SimplyE.framework in Frameworks */,
 				938067EE8EA3BF40E9651E5A /* Pods_SimplyE.framework in Frameworks */,
+				527738C720B5BCBD00FAED11 /* PDF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +931,25 @@
 			name = Holds;
 			sourceTree = "<group>";
 		};
+		52BE62E720B4A8130007C81A /* PDFBooks */ = {
+			isa = PBXGroup;
+			children = (
+				52BE62E820B4A84C0007C81A /* DataModeling.pdf */,
+			);
+			path = PDFBooks;
+			sourceTree = "<group>";
+		};
+		52BE62EB20B4BC310007C81A /* PDFReader */ = {
+			isa = PBXGroup;
+			children = (
+				52BE62E720B4A8130007C81A /* PDFBooks */,
+				52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */,
+				527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */,
+				527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */,
+			);
+			path = PDFReader;
+			sourceTree = "<group>";
+		};
 		5A569A271B8351C6003B5B61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +1025,8 @@
 		A823D80F192BABA400B55DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				527738C420B5BC9700FAED11 /* PDF.framework */,
+				52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */,
 				2DECDF1D20041A7E0088E7D6 /* Pods_SimplyE.framework */,
 				03B0922F1E78871A00AD338D /* MediaPlayer.framework */,
 				03B0922D1E7886ED00AD338D /* CoreVideo.framework */,
@@ -1030,6 +1078,7 @@
 		A823D816192BABA400B55DE2 /* Simplified */ = {
 			isa = PBXGroup;
 			children = (
+				52BE62EB20B4BC310007C81A /* PDFReader */,
 				0345BFE31DBF010100398B6F /* Annotations */,
 				110AF8891961D66C004887C3 /* Additions */,
 				0345BFEE1DBF031B00398B6F /* CardCreator */,
@@ -1247,6 +1296,7 @@
 				FE8719C55955B22F68EDF819 /* Upload Bugsnag dSYM */,
 				8ED1E1320C2F37F0410DA796 /* [CP] Embed Pods Frameworks */,
 				7D35AB55AEA925FC3399FA2A /* [CP] Copy Pods Resources */,
+				52BE62E020B490770007C81A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1380,6 +1430,7 @@
 				2D4379FE1C46FDB600AE1AD5 /* ReaderClientCert.sig in Resources */,
 				2D6256911D41582A0080A81F /* software-licenses.html in Resources */,
 				E65977C51F82AC91003CD6BC /* NYPL_Launch_Screen.storyboard in Resources */,
+				52BE62E920B4A84C0007C81A /* DataModeling.pdf in Resources */,
 				D7A88B031F8C02B200EF76F4 /* ReportIssue.storyboard in Resources */,
 				03F94CCF1DD627AA00CE8F4F /* Accounts.json in Resources */,
 				A823D81B192BABA400B55DE2 /* InfoPlist.strings in Resources */,
@@ -1544,9 +1595,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527738D120B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift in Sources */,
 				2DE514351DC3F0BE005A58BD /* NYPLCirculationAnalytics.swift in Sources */,
 				03DE7BE91DBF0DE400E89064 /* UpdateCheckShim.swift in Sources */,
 				0345BFE81DBF027200398B6F /* APIKeys.swift in Sources */,
+				527738CF20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift in Sources */,
 				11172764197F31280043EFBF /* NYPLAccount.m in Sources */,
 				114C8CD719BE2FD300719B72 /* NYPLAttributedString.m in Sources */,
 				E6BC315D1E009F3E0021B65E /* NYPLAgeCheck.swift in Sources */,
@@ -1638,6 +1691,7 @@
 				E6202A041DD52B8600C99553 /* NYPLWelcomeScreen.swift in Sources */,
 				110AD83D19E497D6005724C3 /* NYPLOPDSAttribute.m in Sources */,
 				1114A6A1195884CB007507A2 /* NYPLCatalogUngroupedFeed.m in Sources */,
+				52F986FC20B372E4003D52D9 /* NYPLPDFBookController.swift in Sources */,
 				11C5DCF51976D22F005A9945 /* NYPLHoldsViewController.m in Sources */,
 				E6B1F4FB1DD20EA900D73CA1 /* NYPLSettingsAccountsList.swift in Sources */,
 				A823D821192BABA400B55DE2 /* NYPLAppDelegate.m in Sources */,
@@ -1896,6 +1950,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
@@ -1945,6 +2000,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Simplified/Simplified-Prefix.pch";
