@@ -11,7 +11,7 @@ import MinitexPDFProtocols
 
 class NYPLPDFBookNavigationController: UINavigationController {
   convenience init() {
-    let minitexDelegate = NYPLBookMinitexDelegate()
+    let minitexDelegate = NYPLPDFBookMinitexDelegate()
     self.init(rootViewController: NYPLPDFBookController.getPDFViewController(delegate: minitexDelegate) as! UIViewController)
     self.tabBarItem.image = UIImage(named: "Clock")
     super.title = "PDF"

@@ -5,7 +5,6 @@
 #import "NYPLSettingsSplitViewController.h"
 #import "NYPLRootTabBarController.h"
 #import "SimplyE-Swift.h"
-#import <MinitexPDFProtocols/MinitexPDFProtocols.h>
 
 @interface NYPLRootTabBarController () <UITabBarControllerDelegate>
 

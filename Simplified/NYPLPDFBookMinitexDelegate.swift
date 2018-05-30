@@ -9,7 +9,7 @@
 import Foundation
 import MinitexPDFProtocols
 
-class NYPLBookMinitexDelegate: MinitexPDFViewControllerDelegate {
+class NYPLPDFBookMinitexDelegate: NSObject, MinitexPDFViewControllerDelegate {
   func userDidNavigate(page: Int) {
     print("userDidNavigate called")
   }
@@ -21,6 +21,4 @@ class NYPLBookMinitexDelegate: MinitexPDFViewControllerDelegate {
   func saveAnnotations(annotations: [MinitexPDFAnnotation]) {
     print("saveAnnotations called")
   }
-  
-
 }

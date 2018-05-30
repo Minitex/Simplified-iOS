@@ -26,6 +26,7 @@
 #import "NYPLReadiumViewSyncManager.h"
 
 #import "SimplyE-Swift.h"
+#import "MinitexPDFProtocols/MinitexPDFProtocols-Swift.h"
 
 @interface NYPLReaderReadiumView ()
   <NYPLReaderRenderer, RDPackageResourceServerDelegate, NYPLReadiumViewSyncManagerDelegate, WKNavigationDelegate, WKUIDelegate>
@@ -126,9 +127,19 @@ static void generateTOCElements(NSArray *const navigationElements,
                             path]];
   } @catch (...) {
     self.bookIsCorrupt = YES;
+
+    // VN: Try to open the book in a PDFViewer
+    // or else, dipslay a message via the callback (below)
+    NYPLLOG(@"**********VN: Book is corrupt , or it's not an epub book!");
+    NYPLPDFBookMinitexDelegate *minitexDelegate = [[NYPLPDFBookMinitexDelegate alloc] init];
+    UIViewController *pdfController = [NYPLPDFBookController getPDFViewControllerWithDelegate:minitexDelegate];
+
+    // show the pdfController somehow!!
+/*
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [self.delegate renderer:self didEncounterCorruptionForBook:book];
     }];
+ */
   }
   
   self.package = self.container.firstPackage;

@@ -137,13 +137,15 @@
 		2DEF10BA201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF10B9201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m */; };
 		2DF321831DC3B83500E1858F /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
-		527738C720B5BCBD00FAED11 /* PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527738C420B5BC9700FAED11 /* PDF.framework */; };
-		527738C820B5BCBD00FAED11 /* PDF.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 527738C420B5BC9700FAED11 /* PDF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		527738CF20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */; };
 		527738D120B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */; };
-		52BE62DB20B490770007C81A /* MinitexPDFProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */; };
-		52BE62DC20B490770007C81A /* MinitexPDFProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		52BE62E920B4A84C0007C81A /* DataModeling.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 52BE62E820B4A84C0007C81A /* DataModeling.pdf */; };
+		52EC3F6F20BF504D0069E8C8 /* MinitexPDFProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F6E20BF504C0069E8C8 /* MinitexPDFProtocols.framework */; };
+		52EC3F7120BF50590069E8C8 /* PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F7020BF50590069E8C8 /* PDF.framework */; };
+		52EC3F7220BF50640069E8C8 /* PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F7020BF50590069E8C8 /* PDF.framework */; };
+		52EC3F7320BF50640069E8C8 /* PDF.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F7020BF50590069E8C8 /* PDF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52EC3F7420BF50670069E8C8 /* MinitexPDFProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F6E20BF504C0069E8C8 /* MinitexPDFProtocols.framework */; };
+		52EC3F7520BF50670069E8C8 /* MinitexPDFProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52EC3F6E20BF504C0069E8C8 /* MinitexPDFProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		52F986FC20B372E4003D52D9 /* NYPLPDFBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */; };
 		5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B90141B946CBD002C53E9 /* libstdc++.6.0.9.dylib */; };
 		5A5B901B1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B901A1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm */; };
@@ -250,8 +252,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				52BE62DC20B490770007C81A /* MinitexPDFProtocols.framework in Embed Frameworks */,
-				527738C820B5BCBD00FAED11 /* PDF.framework in Embed Frameworks */,
+				52EC3F7520BF50670069E8C8 /* MinitexPDFProtocols.framework in Embed Frameworks */,
+				52EC3F7320BF50640069E8C8 /* PDF.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,11 +512,11 @@
 		2DFAC8EB1CD8DDD1003D9EC0 /* NYPLOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLOPDSCategory.m; sourceTree = "<group>"; };
 		2FBF380CA3C6978E66F4EFAB /* Pods_SimplyE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplyE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		527738C420B5BC9700FAED11 /* PDF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PDF.framework; sourceTree = "<group>"; };
 		527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookNavigationController.swift; sourceTree = "<group>"; };
 		527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookMinitexDelegate.swift; sourceTree = "<group>"; };
 		52BE62E820B4A84C0007C81A /* DataModeling.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DataModeling.pdf; sourceTree = "<group>"; };
-		52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MinitexPDFProtocols.framework; path = Carthage/Build/iOS/MinitexPDFProtocols.framework; sourceTree = "<group>"; };
+		52EC3F6E20BF504C0069E8C8 /* MinitexPDFProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MinitexPDFProtocols.framework; sourceTree = "<group>"; };
+		52EC3F7020BF50590069E8C8 /* PDF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PDF.framework; sourceTree = "<group>"; };
 		52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookController.swift; sourceTree = "<group>"; };
 		56A7B7786F9B146602623617 /* Pods-SimplyETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.release.xcconfig"; sourceTree = "<group>"; };
 		579E9BC126424F2B79C0FE7E /* Pods-SimplyETests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03B092301E78871A00AD338D /* MediaPlayer.framework in Frameworks */,
+				52EC3F7420BF50670069E8C8 /* MinitexPDFProtocols.framework in Frameworks */,
 				03B092281E78859E00AD338D /* CoreMedia.framework in Frameworks */,
 				03B0922E1E7886ED00AD338D /* CoreVideo.framework in Frameworks */,
 				03B0922C1E7886C900AD338D /* AVFoundation.framework in Frameworks */,
@@ -638,15 +641,16 @@
 				03B092241E78839D00AD338D /* QuartzCore.framework in Frameworks */,
 				03CE00EA1E0C436400C91489 /* libePub3-iOS.a in Frameworks */,
 				2D6F7CA91D910C3C000B906A /* HelpStack.framework in Frameworks */,
+				52EC3F6F20BF504D0069E8C8 /* MinitexPDFProtocols.framework in Frameworks */,
 				2D6F7CA71D910C12000B906A /* Bugsnag.framework in Frameworks */,
 				08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */,
 				08A352221BDE8E560040BF1D /* libicucore.tbd in Frameworks */,
 				5AEA9E011B947419009F71DB /* libc++.dylib in Frameworks */,
-				52BE62DB20B490770007C81A /* MinitexPDFProtocols.framework in Frameworks */,
 				5A5B90181B946D8B002C53E9 /* libstdc++.6.0.9.dylib in Frameworks */,
 				2DA4F2331C68363B008853D7 /* LocalAuthentication.framework in Frameworks */,
 				08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */,
 				08A352241BDE8E640040BF1D /* Security.framework in Frameworks */,
+				52EC3F7120BF50590069E8C8 /* PDF.framework in Frameworks */,
 				08A352201BDE8E410040BF1D /* CFNetwork.framework in Frameworks */,
 				84FCD2611B7BA79200BFEDD9 /* CoreLocation.framework in Frameworks */,
 				A823D815192BABA400B55DE2 /* UIKit.framework in Frameworks */,
@@ -656,7 +660,7 @@
 				119503E71993F914009FB788 /* libxml2.dylib in Frameworks */,
 				EC89BB22576495E8A359D77E /* Pods_SimplyE.framework in Frameworks */,
 				938067EE8EA3BF40E9651E5A /* Pods_SimplyE.framework in Frameworks */,
-				527738C720B5BCBD00FAED11 /* PDF.framework in Frameworks */,
+				52EC3F7220BF50640069E8C8 /* PDF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -939,15 +943,15 @@
 			path = PDFBooks;
 			sourceTree = "<group>";
 		};
-		52BE62EB20B4BC310007C81A /* PDFReader */ = {
+		52EC3F4B20BF0F2E0069E8C8 /* PDFReader */ = {
 			isa = PBXGroup;
 			children = (
-				52BE62E720B4A8130007C81A /* PDFBooks */,
-				52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */,
 				527738CE20B5D19500FAED11 /* NYPLPDFBookNavigationController.swift */,
+				52F986FB20B372E4003D52D9 /* NYPLPDFBookController.swift */,
 				527738D020B6079B00FAED11 /* NYPLPDFBookMinitexDelegate.swift */,
+				52BE62E720B4A8130007C81A /* PDFBooks */,
 			);
-			path = PDFReader;
+			name = PDFReader;
 			sourceTree = "<group>";
 		};
 		5A569A271B8351C6003B5B61 /* Products */ = {
@@ -1025,8 +1029,8 @@
 		A823D80F192BABA400B55DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				527738C420B5BC9700FAED11 /* PDF.framework */,
-				52F986F520B36E6C003D52D9 /* MinitexPDFProtocols.framework */,
+				52EC3F7020BF50590069E8C8 /* PDF.framework */,
+				52EC3F6E20BF504C0069E8C8 /* MinitexPDFProtocols.framework */,
 				2DECDF1D20041A7E0088E7D6 /* Pods_SimplyE.framework */,
 				03B0922F1E78871A00AD338D /* MediaPlayer.framework */,
 				03B0922D1E7886ED00AD338D /* CoreVideo.framework */,
@@ -1078,7 +1082,7 @@
 		A823D816192BABA400B55DE2 /* Simplified */ = {
 			isa = PBXGroup;
 			children = (
-				52BE62EB20B4BC310007C81A /* PDFReader */,
+				52EC3F4B20BF0F2E0069E8C8 /* PDFReader */,
 				0345BFE31DBF010100398B6F /* Annotations */,
 				110AF8891961D66C004887C3 /* Additions */,
 				0345BFEE1DBF031B00398B6F /* CardCreator */,
