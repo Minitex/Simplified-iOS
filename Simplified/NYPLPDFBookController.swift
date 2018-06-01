@@ -10,13 +10,9 @@ import Foundation
 import MinitexPDFProtocols
 
 class NYPLPDFBookController: NSObject {
-  static func getPDFViewController(delegate: MinitexPDFViewControllerDelegate) -> MinitexPDFViewController? {
-    print("instantiate NYPLPDFBookController")
+  static func getPDFViewController(delegate: MinitexPDFViewControllerDelegate, fileURL: URL) -> MinitexPDFViewController? {
 
-    let documentName = "DataModeling"
-    guard let fileURL: URL = Bundle.main.url(forResource: documentName, withExtension: "pdf") else {
-      return nil
-    }
+    print("instantiate NYPLPDFBookController")
 
     let pdfDictionary: [String: Any] = [
       "PSPDFKitLicense": APIKeys.PDFLicenseKey,
@@ -37,6 +33,14 @@ class NYPLPDFBookController: NSObject {
       print("PDF module does not exist")
       return nil
     }
+  }
+
+  static func getPDFViewController(delegate: MinitexPDFViewControllerDelegate) -> MinitexPDFViewController?  {
+    let documentName = "DataModeling"
+    guard let fileURL: URL = Bundle.main.url(forResource: documentName, withExtension: "pdf") else {
+      return nil
+    }
+    return getPDFViewController(delegate: delegate, fileURL: fileURL)
   }
 
   required init?(coder aDecoder: NSCoder) {

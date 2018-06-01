@@ -5,6 +5,8 @@ github "NYPL-Simplified/NYPLAudiobookToolkit" ~> 1.0.5
 # binary "AudioEngine.json" ~> 6.1.13
 
 # PDF
-github "Minitex/MinitexPDFProtocols" ~> 0.0.2
-binary "PSPDFKit.json" >= 6.4
+github "Minitex/MinitexPDFProtocols" ~> 0.0.4
+# github "Minitex/PDF-iOS" ~> some tag
+# we actually do NOT need to pull in PSPDFKit.json here
+# binary "PSPDFKit.json" >= 6.4
 

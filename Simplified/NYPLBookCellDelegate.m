@@ -66,6 +66,9 @@
   #endif
 }
 
+// VN: this might be a good spot to open a NYPLReaderViewController for an epub, or
+// a PDF Controller for PDF
+// test for epub or pdf, and then open the correct reader and push it onto the sharedController
 - (void)openBook:(NYPLBook *)book
 {
   [NYPLCirculationAnalytics postEvent:@"open_book" withBook:book];

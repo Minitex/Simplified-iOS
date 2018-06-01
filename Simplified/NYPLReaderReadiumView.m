@@ -125,6 +125,8 @@ static void generateTOCElements(NSArray *const navigationElements,
                       path:[[[NYPLMyBooksDownloadCenter sharedDownloadCenter]
                              fileURLForBookIndentifier:book.identifier]
                             path]];
+    // VN: temporary change, will try to implement later
+    //@throw [[NSException alloc] init];
   } @catch (...) {
     self.bookIsCorrupt = YES;
 
@@ -132,9 +134,17 @@ static void generateTOCElements(NSArray *const navigationElements,
     // or else, dipslay a message via the callback (below)
     NYPLLOG(@"**********VN: Book is corrupt , or it's not an epub book!");
     NYPLPDFBookMinitexDelegate *minitexDelegate = [[NYPLPDFBookMinitexDelegate alloc] init];
+    NSURL *bookURL = [[NYPLMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
+    NYPLLOG_F(@"%@: NSURL is: ", [bookURL absoluteString]);
     UIViewController *pdfController = [NYPLPDFBookController getPDFViewControllerWithDelegate:minitexDelegate];
 
     // show the pdfController somehow!!
+    // have the delegate display pdfController for us
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      [self.delegate renderer:self didEncounterPDFBook:book pdfController:pdfController];
+    }];
+
+    // this is the error message, commented out for now
 /*
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [self.delegate renderer:self didEncounterCorruptionForBook:book];
