@@ -118,15 +118,24 @@ static void generateTOCElements(NSArray *const navigationElements,
   self.containerDelegate = [[NYPLReaderContainerDelegate alloc] init];
   
   self.delegate = delegate;
-  
+
+  // VN
+  NSURL *bookURL = [[NYPLMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
+  NYPLLOG_F(@"book data is: %@", [book dictionaryRepresentation]);
+  NYPLLOG_F(@"bookURL is: %@", bookURL);
+
   @try {
+    // VN: temporary change, will try to implement permanent fix later
+    if ([book.title isEqualToString:@"Foundations of Computation"]) {
+      @throw [[NSException alloc] init];
+    }
+
     self.container = [[RDContainer alloc]
                       initWithDelegate:self.containerDelegate
                       path:[[[NYPLMyBooksDownloadCenter sharedDownloadCenter]
                              fileURLForBookIndentifier:book.identifier]
                             path]];
-    // VN: temporary change, will try to implement later
-    //@throw [[NSException alloc] init];
+
   } @catch (...) {
     self.bookIsCorrupt = YES;
 
@@ -134,9 +143,8 @@ static void generateTOCElements(NSArray *const navigationElements,
     // or else, dipslay a message via the callback (below)
     NYPLLOG(@"**********VN: Book is corrupt , or it's not an epub book!");
     NYPLPDFBookMinitexDelegate *minitexDelegate = [[NYPLPDFBookMinitexDelegate alloc] init];
-    NSURL *bookURL = [[NYPLMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
-    NYPLLOG_F(@"%@: NSURL is: ", [bookURL absoluteString]);
-    UIViewController *pdfController = [NYPLPDFBookController getPDFViewControllerWithDelegate:minitexDelegate];
+
+    UIViewController *pdfController = [NYPLPDFBookController getPDFViewControllerWithDelegate:minitexDelegate fileURL:bookURL];
 
     // show the pdfController somehow!!
     // have the delegate display pdfController for us

@@ -546,13 +546,13 @@ didDismissWithButtonIndex:(NSInteger const)buttonIndex
 {
   if(!identifier) return nil;
 
+  // temporary change here, will fix later: VN
+  if ([identifier isEqualToString:@"urn:uuid:14fe5a51-a2cf-42b7-a935-2354c4b2eadb"]) {
+    return [[[self contentDirectoryURL] URLByAppendingPathComponent:[identifier SHA256]]
+            URLByAppendingPathExtension:@"pdf"];
+  }
   return [[[self contentDirectoryURL] URLByAppendingPathComponent:[identifier SHA256]]
           URLByAppendingPathExtension:@"epub"];
-  // temporary change here, will try to implement later: VN
-  /*
-   return [[[self contentDirectoryURL] URLByAppendingPathComponent:[identifier SHA256]]
-                  URLByAppendingPathExtension:@"pdf"];
-   */
 }
 
 - (void)failDownloadForBook:(NYPLBook *const)book
