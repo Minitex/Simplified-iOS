@@ -126,9 +126,11 @@ static void generateTOCElements(NSArray *const navigationElements,
 
   @try {
     // VN: temporary change, will try to implement permanent fix later
+    /*
     if ([book.title isEqualToString:@"Foundations of Computation"]) {
       @throw [[NSException alloc] init];
     }
+     */
 
     self.container = [[RDContainer alloc]
                       initWithDelegate:self.containerDelegate
@@ -139,6 +141,7 @@ static void generateTOCElements(NSArray *const navigationElements,
   } @catch (...) {
     self.bookIsCorrupt = YES;
 
+    /*
     // VN: Try to open the book in a PDFViewer
     // or else, dipslay a message via the callback (below)
     NYPLLOG(@"**********VN: Book is corrupt , or it's not an epub book!");
@@ -151,13 +154,11 @@ static void generateTOCElements(NSArray *const navigationElements,
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [self.delegate renderer:self didEncounterPDFBook:book pdfController:pdfController];
     }];
+     */
 
-    // this is the error message, commented out for now
-/*
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       [self.delegate renderer:self didEncounterCorruptionForBook:book];
     }];
- */
   }
   
   self.package = self.container.firstPackage;
