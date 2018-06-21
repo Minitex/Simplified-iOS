@@ -11,7 +11,7 @@
 #import "NYPLRootTabBarController.h"
 #import "NYPLSettings.h"
 #import "NSURLRequest+NYPLURLRequestAdditions.h"
-
+#import "NYPLOPDSAcquisition.h"
 #import "NYPLBookCellDelegate.h"
 #import "SimplyE-Swift.h"
 
@@ -66,13 +66,10 @@
   #endif
 }
 
-// VN: this might be a good spot to open a NYPLReaderViewController for an epub, or
-// a PDF Controller for PDF
-// test for epub or pdf, and then open the correct reader and push it onto the sharedController
 - (void)openBook:(NYPLBook *)book
 {
   [NYPLCirculationAnalytics postEvent:@"open_book" withBook:book];
-  if ([book.title isEqualToString:@"Foundations of Computation"]) {
+  if ([book.acquisitions[0].type isEqualToString:@"application/pdf"]) {
     NYPLPDFBookMinitexDelegate *minitexDelegate = [[NYPLPDFBookMinitexDelegate alloc] init];
     NSURL *bookURL = [[NYPLMyBooksDownloadCenter sharedDownloadCenter] fileURLForBookIndentifier:book.identifier];
     UIViewController *pdfController = [NYPLPDFBookController getPDFViewControllerWithDelegate:minitexDelegate fileURL:bookURL];

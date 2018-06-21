@@ -30,10 +30,6 @@ typedef NS_ENUM(NSInteger, NYPLReaderRendererGesture) {
 - (void)renderer:(nonnull id<NYPLReaderRenderer>)renderer
 didEncounterCorruptionForBook:(nonnull NYPLBook *)book;
 
-- (void)renderer:(nonnull id<NYPLReaderRenderer>)renderer
-didEncounterPDFBook:(nonnull NYPLBook *)book
-   pdfController:(UIViewController *)pdfController;
-
 - (void)rendererDidFinishLoading:(nonnull id<NYPLReaderRenderer>)renderer;
 
 - (void)renderer:(nonnull id<NYPLReaderRenderer>)renderer

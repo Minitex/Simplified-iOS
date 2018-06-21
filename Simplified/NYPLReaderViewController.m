@@ -151,21 +151,6 @@ didEncounterCorruptionForBook:(__attribute__((unused)) NYPLBook *)book
    show];
 }
 
-- (void)renderer:(nonnull id<NYPLReaderRenderer>)renderer
-didEncounterPDFBook:(nonnull NYPLBook *)book pdfController:(UIViewController *)pdfController
-{
-  NYPLLOG(@"************trying to open a PDF book here!");
-
-  for(UIBarButtonItem *const item in self.navigationItem.rightBarButtonItems) {
-    item.enabled = NO;
-  }
-
-  // Show the interface so the user can get back out.
-  self.interfaceHidden = NO;
-
-  [self.navigationController pushViewController:pdfController animated:true];
-}
-
 - (void)rendererDidFinishLoading:(__attribute__((unused)) id<NYPLReaderRenderer>)renderer
 {
   // Do nothing.
