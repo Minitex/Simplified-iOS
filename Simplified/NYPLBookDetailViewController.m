@@ -14,6 +14,7 @@
 #import "NSURLRequest+NYPLURLRequestAdditions.h"
 #import "SimplyE-Swift.h"
 #import <PureLayout/PureLayout.h>
+#import <Citations/Citations.h>
 
 #import "NYPLBookDetailViewController.h"
 
@@ -166,6 +167,22 @@
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
   }
   [self.navigationController pushViewController:problemVC animated:YES];
+}
+
+- (void)didSelectExportCitationForBook:(NYPLBook *)book sender:(id) __unused sender
+{
+  NSBundle *bundle = [NSBundle bundleWithIdentifier:@"edu.umn.minitex.simplye.Citations"];
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Citations" bundle:bundle];
+  CitationsViewController *citationsViewController =
+    (CitationsViewController*)[sb instantiateViewControllerWithIdentifier:@"Citations"];
+
+  if (citationsViewController != NULL) {
+    // display a close button only if on iPhone
+    citationsViewController.hideClose = UI_USER_INTERFACE_IDIOM() ? UIUserInterfaceIdiomPhone : YES;
+
+    citationsViewController.metadata = book.dictionaryRepresentation;
+    [self.navigationController pushViewController:citationsViewController animated:YES];
+  }
 }
 
 - (void)didSelectMoreBooksForLane:(NYPLCatalogLane *)lane

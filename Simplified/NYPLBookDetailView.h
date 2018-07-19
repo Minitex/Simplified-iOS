@@ -13,6 +13,7 @@
 - (void)didSelectCloseButton:(NYPLBookDetailView *)detailView;
 - (void)didSelectMoreBooksForLane:(NYPLCatalogLane *)lane;
 - (void)didSelectReportProblemForBook:(NYPLBook *)book sender:(id)sender;
+- (void)didSelectExportCitationForBook:(NYPLBook *)book sender:(id)sender;
 
 @end
 

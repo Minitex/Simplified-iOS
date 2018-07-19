@@ -658,6 +658,11 @@ navigationType:(__attribute__((unused)) UIWebViewNavigationType)navigationType
   [self.detailViewDelegate didSelectReportProblemForBook:self.book sender:self];
 }
 
+- (void)exportCitationTapped
+{
+  [self.detailViewDelegate didSelectExportCitationForBook:self.book sender:self];
+}
+
 - (void)moreBooksTappedForLane:(NYPLCatalogLane *)lane
 {
   [self.detailViewDelegate didSelectMoreBooksForLane:lane];

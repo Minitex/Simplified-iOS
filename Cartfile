@@ -3,3 +3,4 @@ github "NYPL-Simplified/NYPLAEToolkit" ~> 0.0.7
 github "PureLayout/PureLayout" "v3.0.2"
 binary "AudioEngine.json" ~> 6.1.13
 
+github "Minitex/Citations-iOS" "v1.0.1"
