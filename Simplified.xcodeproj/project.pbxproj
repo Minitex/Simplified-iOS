@@ -39,8 +39,6 @@
 		08A352261BDE8E700040BF1D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A352251BDE8E700040BF1D /* SystemConfiguration.framework */; };
 		08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A49C25461AE05A2600D63B89 /* libRDServices.a */; };
 		08A352731BDFF5380040BF1D /* NYPLAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A352721BDFF5380040BF1D /* NYPLAlertController.m */; };
-		08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A569A2C1B8351C6003B5B61 /* libADEPT.a */; };
-		08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7048961B94A6710046FFF0 /* libAdobe Content Filter.a */; };
 		11068C55196DD37900E8A94B /* NYPLNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 11068C54196DD37900E8A94B /* NYPLNull.m */; };
 		11078357198160A50071AB1E /* NYPLBookDownloadFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11078356198160A50071AB1E /* NYPLBookDownloadFailedCell.m */; };
 		1107835E19816E3D0071AB1E /* UIView+NYPLViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107835D19816E3D0071AB1E /* UIView+NYPLViewAdditions.m */; };
@@ -468,7 +466,6 @@
 		2D382BD61D08BA99002C423D /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		2D62568A1D412BCB0080A81F /* BundledHTMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundledHTMLViewController.swift; sourceTree = "<group>"; };
 		2D6256901D41582A0080A81F /* software-licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "software-licenses.html"; sourceTree = "<group>"; };
-		2D6AF74A1E7E341F005CEC90 /* Simplified+RMSDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Simplified+RMSDK.xcconfig"; sourceTree = "<group>"; };
 		2D6F7CA41D910C0D000B906A /* CHRTextFieldFormatter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CHRTextFieldFormatter.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/CHRTextFieldFormatter/CHRTextFieldFormatter.framework"; sourceTree = "<group>"; };
 		2D6F7CA61D910C12000B906A /* Bugsnag.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugsnag.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/Bugsnag/Bugsnag.framework"; sourceTree = "<group>"; };
 		2D6F7CA81D910C3C000B906A /* HelpStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HelpStack.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Simplified-bozbabgxnjsiwdfvcgffxbzqjxsq/Build/Products/Debug-iphonesimulator/HelpStack/HelpStack.framework"; sourceTree = "<group>"; };
@@ -627,8 +624,6 @@
 				03CE00EA1E0C436400C91489 /* libePub3-iOS.a in Frameworks */,
 				2D6F7CA91D910C3C000B906A /* HelpStack.framework in Frameworks */,
 				2D6F7CA71D910C12000B906A /* Bugsnag.framework in Frameworks */,
-				08C469C11BDAAEB1009D8AFD /* libADEPT.a in Frameworks */,
-				08C469C21BDAAEB1009D8AFD /* libAdobe Content Filter.a in Frameworks */,
 				08A352271BDE91B80040BF1D /* libRDServices.a in Frameworks */,
 				08A352221BDE8E560040BF1D /* libicucore.tbd in Frameworks */,
 				5AEA9E011B947419009F71DB /* libc++.dylib in Frameworks */,
@@ -977,7 +972,6 @@
 			isa = PBXGroup;
 			children = (
 				CAE35BBA1B86289500BF9BC5 /* Simplified.xcconfig */,
-				2D6AF74A1E7E341F005CEC90 /* Simplified+RMSDK.xcconfig */,
 				5A569A261B8351C6003B5B61 /* ADEPT.xcodeproj */,
 				5A7048911B94A6700046FFF0 /* Adobe Content Filter.xcodeproj */,
 				A49C25401AE05A2600D63B89 /* RDServices.xcodeproj */,
@@ -1251,8 +1245,6 @@
 				2D2B476E1D08F807007F7764 /* Sources */,
 				2D2B476F1D08F807007F7764 /* Frameworks */,
 				2D2B47701D08F807007F7764 /* Resources */,
-				B487400EDB77097CB06492D7 /* [CP] Embed Pods Frameworks */,
-				EF59547DD7650F380BEFECAF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1274,7 +1266,6 @@
 				A823D80B192BABA400B55DE2 /* Resources */,
 				FE8719C55955B22F68EDF819 /* Upload Bugsnag dSYM */,
 				8ED1E1320C2F37F0410DA796 /* [CP] Embed Pods Frameworks */,
-				7D35AB55AEA925FC3399FA2A /* [CP] Copy Pods Resources */,
 				FBBAE24A211B8E6200042C19 /* Embed Carthage Frameworks */,
 			);
 			buildRules = (
@@ -1303,12 +1294,12 @@
 						TestTargetID = A823D80C192BABA400B55DE2;
 					};
 					A823D80C192BABA400B55DE2 = {
-						DevelopmentTeam = 7262U6ST2R;
+						DevelopmentTeam = J4LA386TR6;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1466,21 +1457,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7D35AB55AEA925FC3399FA2A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8ED1E1320C2F37F0410DA796 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1509,36 +1485,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplyE/Pods-SimplyE-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B487400EDB77097CB06492D7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF59547DD7650F380BEFECAF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FBBAE24A211B8E6200042C19 /* Embed Carthage Frameworks */ = {
@@ -1941,10 +1887,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Simplified/SimplyE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7262U6ST2R;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J4LA386TR6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1963,10 +1909,10 @@
 					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Release-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.nypl.labs.SimplyE;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umn.minitex.simplye.pdf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e185b6c-271e-4b02-a05e-860b8c3831f6";
-				PROVISIONING_PROFILE_SPECIFIER = "SimplyE Development (Keychain Migration)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplified/SimplyE-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1991,10 +1937,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Simplified/SimplyE.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: The New York Library Astor, Lenox, and Tilden Foundations (7262U6ST2R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7262U6ST2R;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J4LA386TR6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2017,10 +1963,10 @@
 					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/readium-sdk/Platform/Apple/build/Release-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.nypl.labs.SimplyE;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umn.minitex.simplye.pdf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9650af0-4da6-4776-a387-ac577b180b7b";
-				PROVISIONING_PROFILE_SPECIFIER = "SimplyE Distribution (Keychain Migration)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplified/SimplyE-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
