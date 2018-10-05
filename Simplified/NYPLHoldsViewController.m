@@ -28,6 +28,7 @@
 @property (nonatomic) UILabel *instructionsLabel;
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic) UIBarButtonItem *searchButton;
+@property (nonatomic) NYPLHoldsNotifications *localNotifications;
 
 @end
 
@@ -125,6 +126,12 @@
   }
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+
+  self.localNotifications = [[NYPLHoldsNotifications alloc] init];
+  [self.localNotifications requestAuthorization];
+}
 #pragma mark UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(__attribute__((unused)) UICollectionView *)collectionView
@@ -222,12 +229,33 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
        [reserved addObject:book];
        addedToReserved = YES;
      }];
+    // Once a book becomes available to checkout (ie reserved), send a local notification
+    // start by printing to console here
     if (!addedToReserved) {
       [held addObject:book];
+      NYPLLOG_F(@"%@: is still on hold", book.title);
+    } else {
+      NYPLLOG_F(@"%@: is available for checkout now", book.title);
+      [self.localNotifications sendNotificationWithBook:book];
     }
   }
   self.heldBooks = held;
   self.reservedBooks = reserved;
+  // Print our list of heldBooks and reservedBooks here
+  NYPLLOG(@"Books on hold are: ");
+  for(NYPLBook *heldBook in self.heldBooks) {
+    NYPLLOG_F(@"%@", heldBook.title);
+  }
+
+  NYPLLOG(@"Books available for checkout are: ");
+  for(NYPLBook *reservedBook in self.reservedBooks) {
+    NYPLLOG_F(@"%@", reservedBook.title);
+  }
+
+  // Test sending of notifications with screen refresh
+  // Will remove later once we can actually test book going from hold to available for checkout
+  [self.localNotifications sendNotificationWithBook:NULL];
+
   [self updateBadge];
 }
 
