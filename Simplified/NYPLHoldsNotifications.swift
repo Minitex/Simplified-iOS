@@ -9,7 +9,7 @@
 import UserNotifications
 
 @available(iOS 10.0, *)
-class NYPLHoldsNotifications: NSObject, UNUserNotificationCenterDelegate {
+@objcMembers class NYPLHoldsNotifications: NSObject, UNUserNotificationCenterDelegate {
 
   private let center = UNUserNotificationCenter.current()
 
