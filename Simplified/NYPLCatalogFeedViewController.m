@@ -19,7 +19,7 @@
           (NYPLRemoteViewController *const remoteViewController,
            NSData *const data,
            NSURLResponse *const response) {
-            if ([response.MIMEType isEqualToString:@"application/atom+xml"]) {
+            //if ([response.MIMEType isEqualToString:@"application/atom+xml"]) {
               NYPLXML *const XML = [NYPLXML XMLWithData:data];
               if(!XML) {
                 NYPLLOG(@"Cannot initialize due to invalid XML.");
@@ -47,11 +47,11 @@
                   return [self navigationFeedWithData:XML remoteVC:remoteViewController];
                 }
               }
-            }
-            else {
+            //}
+         /*   else {
               NYPLLOG(@"Did not recieve XML atom feed, cannot initialize");
               return nil;
-            }
+            } */
           }];
   
   if(!self) return nil;

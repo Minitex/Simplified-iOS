@@ -254,7 +254,7 @@ didSelectItemAtIndexPath:(NSIndexPath *const)indexPath
 
   // Test sending of notifications with screen refresh
   // Will remove later once we can actually test book going from hold to available for checkout
-  [self.localNotifications sendNotificationWithBook:NULL];
+  //[self.localNotifications sendNotificationWithBook:NULL];
 
   [self updateBadge];
 }

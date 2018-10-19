@@ -124,6 +124,8 @@ typedef NS_ENUM (NSInteger, NYPLProblemReportButtonState) {
       newMessageString = [self messageStringForNYPLBookButtonsStateHolding];
       break;
     case NYPLBookButtonsStateHoldingFOQ:
+      NYPLLOG_F(@"until value: %@", self.book.acquisitions[0].availability.until);
+      NYPLLOG_F(@"Time left: %@", [self.book.acquisitions[0].availability.until longTimeUntilString]);
       newMessageString = [NSString stringWithFormat:NSLocalizedString(@"BookDetailViewControllerReservedTitleFormat", nil),
                                 [self.book.defaultAcquisition.availability.until longTimeUntilString]];
       break;

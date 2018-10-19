@@ -108,7 +108,24 @@
       groupTitleToURLOrNull[groupTitle] = NYPLNullFromNil(entry.groupAttributes.href);
     }
   }
-  
+
+  // VN: This is where we want to print or "save off" the books in the Catalog so we can do stuff with them
+  // save off in another tab maybe so they can "live" somewhere in memory while we're messing with stuff
+
+  NYPLLOG(@"-------------VN:  This will get called when we do a refresh on the Catalog tab?");
+  //NYPLLOG_F(@"----------------VN:  For the books with the title: %@", groupTitles[0]);
+  // for the titles in the first group, let's do an experiment
+
+  /*
+  for(NYPLBook *book in groupTitleToMutableBookArray[groupTitles[0]]) {
+    NSLog(@"%@", book.title);
+    NSLog(@"%@", book.defaultAcquisition.availability);
+    NSLog(@"%@", book.defaultAcquisition.availability.since);
+
+
+    //NSLog(@"%@", book);
+  }
+*/
   NSMutableArray *const lanes = [NSMutableArray array];
   
   for(NSString *const groupTitle in groupTitles) {
@@ -116,6 +133,26 @@
                       initWithBooks:groupTitleToMutableBookArray[groupTitle]
                       subsectionURL:NYPLNullToNil(groupTitleToURLOrNull[groupTitle])
                       title:groupTitle]];
+
+    NSArray *books = groupTitleToMutableBookArray[groupTitle];
+    /*
+    for(NYPLBook *book in books) {
+      __block BOOL addedToReserved = NO;
+      [book.defaultAcquisition.availability
+       matchUnavailable:nil
+       limited:nil
+       unlimited:nil
+       reserved:nil
+       ready:^(__unused NYPLOPDSAcquisitionAvailabilityReady *_Nonnull ready) {
+         [reserved addObject:book];
+         addedToReserved = YES;
+       }];
+      if (!addedToReserved) {
+        [held addObject:book];
+      }
+    }
+     */
+
   }
   
   return [self initWithLanes:lanes

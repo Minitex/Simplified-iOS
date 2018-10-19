@@ -83,7 +83,10 @@
 
 + (NSURL *)loanURL
 {
-  return [[self mainFeedURL] URLByAppendingPathComponent:@"loans"];
+  // VN
+  //return [[self mainFeedURL] URLByAppendingPathComponent:@"loans"];
+  return [[[[self mainFeedURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"fake-catalog-loans"] URLByAppendingPathComponent:@"loans"];
+
 }
 
 + (BOOL)cardCreationEnabled
