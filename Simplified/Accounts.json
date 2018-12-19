@@ -13,5 +13,20 @@
  "supportsReservations" : false,
  "catalogUrl" : "http://open.minitex.org/textbooks",
  "mainColor" : "#497049"
+ },
+ {
+   "id" : 1,
+   "pathComponent" : "0",
+   "name" : "Columbia University Libraries",
+   "subtitle" : "Selected items from Columbia University.",
+   "logo" : "LibraryLogoColumbia",
+   "needsAuth" : false,
+   "supportsSimplyESync" : false,
+   "supportsBarcodeScanner" : false,
+   "supportsBarcodeDisplay" : false,
+   "supportsCardCreator" : false,
+   "supportsReservations" : false,
+   "catalogUrl" : "http://open.columbia.minitex.org",
+   "mainColor" : "#003865"
  }
 ]
