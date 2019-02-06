@@ -20,13 +20,13 @@
    "name" : "Columbia University Libraries",
    "subtitle" : "Selected items from Columbia University.",
    "logo" : "LibraryLogoColumbia",
-   "needsAuth" : false,
-   "supportsSimplyESync" : false,
+   "needsAuth" : true,
+   "supportsSimplyESync" : true,
    "supportsBarcodeScanner" : false,
    "supportsBarcodeDisplay" : false,
    "supportsCardCreator" : false,
    "supportsReservations" : false,
-   "catalogUrl" : "http://open.columbia.minitex.org",
+   "catalogUrl" : "https://demo.lyrasistechnology.org/columbia",
    "mainColor" : "#003865"
  }
 ]
