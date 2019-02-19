@@ -1,0 +1,32 @@
+[
+ {
+ "id" : 0,
+ "pathComponent" : "0",
+ "name" : "Open Textbook Library",
+ "subtitle" : "Textbooks free to download and read without a library card.",
+ "logo" : "LibraryLogoMagic",
+ "needsAuth" : false,
+ "supportsSimplyESync" : false,
+ "supportsBarcodeScanner" : false,
+ "supportsBarcodeDisplay" : false,
+ "supportsCardCreator" : false,
+ "supportsReservations" : false,
+ "catalogUrl" : "http://open.minitex.org/textbooks",
+ "mainColor" : "#497049"
+ },
+ {
+   "id" : 1,
+   "pathComponent" : "0",
+   "name" : "Columbia University Libraries",
+   "subtitle" : "Selected items from Columbia University.",
+   "logo" : "LibraryLogoColumbia",
+   "needsAuth" : true,
+   "supportsSimplyESync" : true,
+   "supportsBarcodeScanner" : false,
+   "supportsBarcodeDisplay" : false,
+   "supportsCardCreator" : false,
+   "supportsReservations" : false,
+   "catalogUrl" : "https://demo.lyrasistechnology.org/columbia",
+   "mainColor" : "#003865"
+ }
+]
