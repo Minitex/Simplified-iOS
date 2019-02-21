@@ -139,6 +139,10 @@
 		2DEF10BA201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF10B9201ECCEA0082843A /* NYPLMyBooksSimplifiedBearerToken.m */; };
 		2DF321831DC3B83500E1858F /* NYPLAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF321821DC3B83500E1858F /* NYPLAnnotations.swift */; };
 		2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */; };
+		5221E0E8221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5221E0E6221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.swift */; };
+		5221E0E9221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5221E0E7221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.xib */; };
+		5221E0EE221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5221E0EC221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.swift */; };
+		5221E0EF221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5221E0ED221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.xib */; };
 		52D4396E20EAB38200AD49B6 /* NYPLPDFBookMinitexDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4396D20EAB38200AD49B6 /* NYPLPDFBookMinitexDelegate.swift */; };
 		52D4397020EAB40500AD49B6 /* NYPLPDFBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4396F20EAB40500AD49B6 /* NYPLPDFBookController.swift */; };
 		5A5B901B1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B901A1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm */; };
@@ -494,6 +498,10 @@
 		2DFAC8EB1CD8DDD1003D9EC0 /* NYPLOPDSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPLOPDSCategory.h; sourceTree = "<group>"; };
 		2DFAC8EC1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPLOPDSCategory.m; sourceTree = "<group>"; };
 		2FBF380CA3C6978E66F4EFAB /* Pods_SimplyE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplyE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5221E0E6221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLShibbolethLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
+		5221E0E7221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYPLShibbolethLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
+		5221E0EC221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLShibbolethLoginSignOutTableViewCell.swift; sourceTree = "<group>"; };
+		5221E0ED221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYPLShibbolethLoginSignOutTableViewCell.xib; sourceTree = "<group>"; };
 		52D4396D20EAB38200AD49B6 /* NYPLPDFBookMinitexDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookMinitexDelegate.swift; sourceTree = "<group>"; };
 		52D4396F20EAB40500AD49B6 /* NYPLPDFBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYPLPDFBookController.swift; sourceTree = "<group>"; };
 		56A7B7786F9B146602623617 /* Pods-SimplyETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplyETests/Pods-SimplyETests.release.xcconfig"; sourceTree = "<group>"; };
@@ -918,6 +926,17 @@
 			name = Holds;
 			sourceTree = "<group>";
 		};
+		521D09AF221DBEAF00BAEF36 /* ShibbolethAuth */ = {
+			isa = PBXGroup;
+			children = (
+				5221E0E6221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.swift */,
+				5221E0E7221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.xib */,
+				5221E0EC221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.swift */,
+				5221E0ED221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.xib */,
+			);
+			path = ShibbolethAuth;
+			sourceTree = "<group>";
+		};
 		52D4396C20EAB27900AD49B6 /* PDFBooks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,6 +1149,7 @@
 				AE77E8DE5454517F1AE119BF /* OPDS */,
 				119504051994061E009FB788 /* Reader */,
 				11C5DCEE1976D19E005A9945 /* Settings */,
+				521D09AF221DBEAF00BAEF36 /* ShibbolethAuth */,
 				E6FAFBEF1F7A9C310026F0EE /* Storyboards */,
 				A823D817192BABA400B55DE2 /* Supporting Files */,
 				E6FAFBFE1F7A9D870026F0EE /* SimplyE-Bridging-Header.h */,
@@ -1400,6 +1420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5221E0EF221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.xib in Resources */,
 				0305005E1E8EF65100EA02C4 /* HelpStackThemeNYPL.plist in Resources */,
 				D7A88AFE1F8C02AD00EF76F4 /* HelpStackStoryboard.storyboard in Resources */,
 				84B7A3461B84E8FE00584FB2 /* OFL.txt in Resources */,
@@ -1421,6 +1442,7 @@
 				84B7A3471B84E8FE00584FB2 /* OpenDyslexic3-Bold.ttf in Resources */,
 				03E5F42D1EA5BCE400DFFC3A /* NYPLReaderTOC.storyboard in Resources */,
 				5A6929251B95C93B00FB4C10 /* readium-shared-js_all.js.map in Resources */,
+				5221E0E9221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.xib in Resources */,
 				11C113D219F842BE005B3F63 /* host_app_feedback.js in Resources */,
 				5A6929241B95C8B400FB4C10 /* readium-shared-js_all.js.bundles.js in Resources */,
 				84B7A3481B84E8FE00584FB2 /* OpenDyslexic3-Regular.ttf in Resources */,
@@ -1625,6 +1647,7 @@
 				11119742198827850014462F /* NYPLBookDetailDownloadingView.m in Sources */,
 				2DFAC8ED1CD8DDD1003D9EC0 /* NYPLOPDSCategory.m in Sources */,
 				11068C55196DD37900E8A94B /* NYPLNull.m in Sources */,
+				5221E0EE221F0A4B00EECF33 /* NYPLShibbolethLoginSignOutTableViewCell.swift in Sources */,
 				5A69291E1B95C8AD00FB4C10 /* readium-shared-js_all.js.map in Sources */,
 				1111973C19880E8D0014462F /* NYPLLinearView.m in Sources */,
 				11396FB9193D289100E16EE8 /* NSDate+NYPLDateAdditions.m in Sources */,
@@ -1663,6 +1686,7 @@
 				11F3771F19DB62B000487769 /* NYPLFacetView.m in Sources */,
 				085D31C41BE2987E007F7672 /* NYPLProblemDocument.m in Sources */,
 				5A5B901B1B946FAD002C53E9 /* NYPLReaderContainerDelegate.mm in Sources */,
+				5221E0E8221F09F500EECF33 /* NYPLShibbolethLoginStatusTableViewCell.swift in Sources */,
 				111197281986B43B0014462F /* NYPLBookCellDelegate.m in Sources */,
 				111197391987F4070014462F /* NYPLBookDetailNormalView.m in Sources */,
 				111E757D1A801A6F00718AD7 /* NYPLSettingsPrimaryNavigationController.m in Sources */,

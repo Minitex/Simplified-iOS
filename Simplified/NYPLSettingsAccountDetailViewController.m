@@ -46,6 +46,8 @@ typedef NS_ENUM(NSInteger, CellKind) {
   CellKindAbout,
   CellKindPrivacyPolicy,
   CellKindContentLicense,
+  CellKindShibbolethLoginStatus,
+  CellKindShibbolethLogInSignOut,
   CellReportIssue,
   CellSupportCenter
 };
@@ -202,6 +204,9 @@ double const requestTimeoutInterval = 25.0;
   
   self.syncSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
   [self checkSyncPermissionForCurrentPatron];
+
+  UINib *nib = [UINib nibWithNibName:@"NYPLShibbolethLoginStatusTableViewCell" bundle:nil];
+  [[self tableView] registerNib:nib forCellReuseIdentifier:@"ShibbolethLoginStatusCell"];
 }
 
 - (void)setupTableData
@@ -209,7 +214,10 @@ double const requestTimeoutInterval = 25.0;
   NSMutableArray *section0;
   if (!self.selectedAccount.needsAuth) {
     section0 = @[@(CellKindAgeCheck)].mutableCopy;
-  } else if (self.selectedAccount.pinRequired) {
+  } else if ([self.selectedAccount.name isEqual: @"Columbia University Libraries"]) {
+    section0 = @[@(CellKindShibbolethLoginStatus)].mutableCopy;
+  }
+  else if (self.selectedAccount.pinRequired) {
     section0 = @[@(CellKindBarcode),
                  @(CellKindPIN),
                  @(CellKindLogInSignOut)].mutableCopy;
@@ -913,6 +921,10 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   CellKind cellKind = (CellKind)[sectionArray[indexPath.row] intValue];
 
   switch(cellKind) {
+    case CellKindShibbolethLoginStatus: {
+      NYPLShibbolethLoginStatusTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginStatusCell"];
+      return cell;
+    }
     case CellKindBarcode: {
       UITableViewCell *const cell = [[UITableViewCell alloc]
                                      initWithStyle:UITableViewCellStyleDefault
