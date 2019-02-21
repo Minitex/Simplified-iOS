@@ -675,6 +675,14 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   CellKind cellKind = (CellKind)[sectionArray[indexPath.row] intValue];
   
   switch(cellKind) {
+    case CellKindShibbolethLoginStatus: {
+      // TODO
+      break;
+    }
+    case CellKindShibbolethLogInSignOut: {
+      // TODO
+      break;
+    }
     case CellKindAgeCheck: {
       UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
       if (self.selectedAccount.userAboveAgeLimit == YES) {
