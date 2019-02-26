@@ -205,8 +205,10 @@ double const requestTimeoutInterval = 25.0;
   self.syncSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
   [self checkSyncPermissionForCurrentPatron];
 
-  UINib *nib = [UINib nibWithNibName:@"NYPLShibbolethLoginStatusTableViewCell" bundle:nil];
-  [[self tableView] registerNib:nib forCellReuseIdentifier:@"ShibbolethLoginStatusCell"];
+  UINib *shibLoginStatusNib = [UINib nibWithNibName:@"NYPLShibbolethLoginStatusTableViewCell" bundle:nil];
+  [[self tableView] registerNib:shibLoginStatusNib forCellReuseIdentifier:@"ShibbolethLoginStatusCell"];
+  UINib *shibLoginSignOutNib = [UINib nibWithNibName:@"NYPLShibbolethLoginSignOutTableViewCell" bundle:nil];
+  [[self tableView] registerNib:shibLoginSignOutNib forCellReuseIdentifier:@"ShibbolethLoginSignOutCell"];
 }
 
 - (void)setupTableData
@@ -215,7 +217,8 @@ double const requestTimeoutInterval = 25.0;
   if (!self.selectedAccount.needsAuth) {
     section0 = @[@(CellKindAgeCheck)].mutableCopy;
   } else if ([self.selectedAccount.name isEqual: @"Columbia University Libraries"]) {
-    section0 = @[@(CellKindShibbolethLoginStatus)].mutableCopy;
+    section0 = @[@(CellKindShibbolethLoginStatus),
+                 @(CellKindShibbolethLogInSignOut)].mutableCopy;
   }
   else if (self.selectedAccount.pinRequired) {
     section0 = @[@(CellKindBarcode),
@@ -677,10 +680,12 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   switch(cellKind) {
     case CellKindShibbolethLoginStatus: {
       // TODO
+      NYPLLOG(@"selected ShibbolethLoginStatus button");
       break;
     }
     case CellKindShibbolethLogInSignOut: {
       // TODO
+      NYPLLOG(@"selected ShibbolethLoginSignOut button");
       break;
     }
     case CellKindAgeCheck: {
@@ -931,6 +936,10 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   switch(cellKind) {
     case CellKindShibbolethLoginStatus: {
       NYPLShibbolethLoginStatusTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginStatusCell"];
+      return cell;
+    }
+    case CellKindShibbolethLogInSignOut: {
+      NYPLShibbolethLoginSignOutTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginSignOutCell"];
       return cell;
     }
     case CellKindBarcode: {

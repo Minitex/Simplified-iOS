@@ -29,7 +29,8 @@ class NYPLShibbolethLoginStatusTableViewCell: UITableViewCell {
 
   func layoutTextField() {
     statusTextField.font = UIFont.customFont(forTextStyle: UIFontTextStyle.body)
-    statusTextField.text = "We are logged in!!!"
+    statusTextField.text = "Logged in as Columbia User"
+    statusTextField.textAlignment = .center
     statusTextField.preservesSuperviewLayoutMargins = true
     statusTextField.autoPinEdge(toSuperviewMargin: ALEdge.right)
     statusTextField.autoPinEdge(toSuperviewMargin: ALEdge.left)
