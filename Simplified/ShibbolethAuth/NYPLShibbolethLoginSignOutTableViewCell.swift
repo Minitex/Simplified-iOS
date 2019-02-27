@@ -30,8 +30,6 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
   func layoutTextField() {
     loginSignOutTextField.font = UIFont.customFont(forTextStyle: UIFontTextStyle.body)
     loginSignOutTextField.text = "Sign Out"
-    //loginSignOutTextField.textColor = NYPLConfiguration.mainColor()
-    loginSignOutTextField.textColor = .blue
     loginSignOutTextField.textAlignment = .center
     loginSignOutTextField.preservesSuperviewLayoutMargins = true
     loginSignOutTextField.autoPinEdge(toSuperviewMargin: ALEdge.right)

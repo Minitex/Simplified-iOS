@@ -940,6 +940,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     }
     case CellKindShibbolethLogInSignOut: {
       NYPLShibbolethLoginSignOutTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginSignOutCell"];
+      cell.loginSignOutTextField.textColor = [NYPLConfiguration mainColor];
       return cell;
     }
     case CellKindBarcode: {
