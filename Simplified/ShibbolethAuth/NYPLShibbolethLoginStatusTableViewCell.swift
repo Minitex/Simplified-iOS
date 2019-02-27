@@ -13,6 +13,8 @@ class NYPLShibbolethLoginStatusTableViewCell: UITableViewCell {
 
   @IBOutlet weak var statusTextField: UITextField!
   let verticalMarginPadding = 2.0
+  let loggedIn = "Logged in as Columbia User"
+  let signedOut = "Signed Out"
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -29,7 +31,7 @@ class NYPLShibbolethLoginStatusTableViewCell: UITableViewCell {
 
   func layoutTextField() {
     statusTextField.font = UIFont.customFont(forTextStyle: UIFontTextStyle.body)
-    statusTextField.text = "Logged in as Columbia User"
+    statusTextField.text = signedOut
     statusTextField.textAlignment = .center
     statusTextField.preservesSuperviewLayoutMargins = true
     statusTextField.autoPinEdge(toSuperviewMargin: ALEdge.right)

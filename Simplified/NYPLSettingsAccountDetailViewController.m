@@ -41,13 +41,13 @@ typedef NS_ENUM(NSInteger, CellKind) {
   CellKindBarcode,
   CellKindPIN,
   CellKindLogInSignOut,
+  CellKindShibbolethLoginStatus,
+  CellKindShibbolethLogInSignOut,
   CellKindRegistration,
   CellKindSyncButton,
   CellKindAbout,
   CellKindPrivacyPolicy,
   CellKindContentLicense,
-  CellKindShibbolethLoginStatus,
-  CellKindShibbolethLogInSignOut,
   CellReportIssue,
   CellSupportCenter
 };
@@ -678,16 +678,6 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   CellKind cellKind = (CellKind)[sectionArray[indexPath.row] intValue];
   
   switch(cellKind) {
-    case CellKindShibbolethLoginStatus: {
-      // TODO
-      NYPLLOG(@"selected ShibbolethLoginStatus button");
-      break;
-    }
-    case CellKindShibbolethLogInSignOut: {
-      // TODO
-      NYPLLOG(@"selected ShibbolethLoginSignOut button");
-      break;
-    }
     case CellKindAgeCheck: {
       UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
       if (self.selectedAccount.userAboveAgeLimit == YES) {
@@ -754,6 +744,19 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       } else {
         [self logIn];
       }
+      break;
+    }
+    case CellKindShibbolethLoginStatus: {
+      // TODO
+      NYPLLOG(@"selected ShibbolethLoginStatus button");
+      break;
+    }
+    case CellKindShibbolethLogInSignOut: {
+      // TODO
+      NYPLLOG(@"selected ShibbolethLoginSignOut button");
+      // first we need to access the cell, and then we can call the function on it!
+      NYPLShibbolethLoginSignOutTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+      [cell toggleButton];
       break;
     }
     case CellKindRegistration: {

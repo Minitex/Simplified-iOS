@@ -13,7 +13,9 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
   
   @IBOutlet weak var loginSignOutTextField: UITextField!
   let verticalMarginPadding = 2.0
-  
+  let signOut = "Sign Out"
+  let login = "Login"
+
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
@@ -29,7 +31,7 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
 
   func layoutTextField() {
     loginSignOutTextField.font = UIFont.customFont(forTextStyle: UIFontTextStyle.body)
-    loginSignOutTextField.text = "Sign Out"
+    loginSignOutTextField.text = login
     loginSignOutTextField.textAlignment = .center
     loginSignOutTextField.preservesSuperviewLayoutMargins = true
     loginSignOutTextField.autoPinEdge(toSuperviewMargin: ALEdge.right)
@@ -38,5 +40,9 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
     // PureLayout
     loginSignOutTextField.autoConstrainAttribute(ALAttribute.top, to: ALAttribute.marginTop, of: loginSignOutTextField.superview!, withOffset: CGFloat(verticalMarginPadding))
     loginSignOutTextField.autoConstrainAttribute(ALAttribute.bottom, to: ALAttribute.marginBottom, of: loginSignOutTextField.superview!, withOffset: CGFloat(-verticalMarginPadding))
+  }
+
+  func toggleButton() {
+    loginSignOutTextField.text = (loginSignOutTextField.text == signOut) ? login : signOut
   }
 }
