@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, CellKind) {
   CellSupportCenter
 };
 
-@interface NYPLSettingsAccountDetailViewController () <NSURLSessionDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface NYPLSettingsAccountDetailViewController () <NSURLSessionDelegate, UITextFieldDelegate, UIAlertViewDelegate, NYPLShibbolethAuthDelegate>
 
 @property (nonatomic) BOOL isLoggingInAfterSignUp;
 @property (nonatomic) BOOL loggingInAfterBarcodeScan;
@@ -755,8 +755,15 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       // TODO
       NYPLLOG(@"selected ShibbolethLoginSignOut button");
       // first we need to access the cell, and then we can call the function on it!
-      NYPLShibbolethLoginSignOutTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-      [cell toggleButton];
+      NYPLShibbolethLoginSignOutTableViewCell *logincell = [tableView cellForRowAtIndexPath:indexPath];
+      // toggle the status
+      // update the button
+      // update the status cell
+      BOOL loginStatus = [self toggleLogin];
+      [logincell toggleButtonWithLoginStatus:loginStatus];
+      NSIndexPath *path = [NSIndexPath indexPathForItem:indexPath.row-1 inSection:indexPath.section];
+      NYPLShibbolethLoginStatusTableViewCell *statuscell = [tableView cellForRowAtIndexPath:path];
+      [statuscell setLoginStatusWithLoginStatus:loginStatus];
       break;
     }
     case CellKindRegistration: {
@@ -939,6 +946,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
   switch(cellKind) {
     case CellKindShibbolethLoginStatus: {
       NYPLShibbolethLoginStatusTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginStatusCell"];
+      [cell setLoginStatusWithLoginStatus:[self getLoginStatus]];
       return cell;
     }
     case CellKindShibbolethLogInSignOut: {
@@ -1677,4 +1685,18 @@ replacementString:(NSString *)string
   [self.tableView reloadData];
 }
 
+#pragma mark - NYPLShibbolethAuthProtocol
+- (BOOL)getLoginStatus
+{
+  // return faux login status here
+  BOOL loginStatus = [[[NYPLShibbolethMockData alloc]init] getLoginStatus];
+  return loginStatus;
+}
+
+- (BOOL)toggleLogin
+{
+  BOOL loginStatus = [[[NYPLShibbolethMockData alloc]init] toggleLogin];
+  // now that we have toggled login status, how do we update the button and the text
+  return loginStatus;
+}
 @end

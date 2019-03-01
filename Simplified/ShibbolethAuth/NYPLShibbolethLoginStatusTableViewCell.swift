@@ -40,6 +40,9 @@ class NYPLShibbolethLoginStatusTableViewCell: UITableViewCell {
     // PureLayout
     statusTextField.autoConstrainAttribute(ALAttribute.top, to: ALAttribute.marginTop, of: statusTextField.superview!, withOffset: CGFloat(verticalMarginPadding))
     statusTextField.autoConstrainAttribute(ALAttribute.bottom, to: ALAttribute.marginBottom, of: statusTextField.superview!, withOffset: CGFloat(-verticalMarginPadding))
+  }
 
+  func setLoginStatus(loginStatus: Bool) {
+    statusTextField.text = (loginStatus == false) ? signedOut : loggedIn
   }
 }
