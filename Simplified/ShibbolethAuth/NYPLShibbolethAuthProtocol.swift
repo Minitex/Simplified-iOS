@@ -12,4 +12,5 @@ import Foundation
   //func saveShibbCredentials()
   func getLoginStatus() -> Bool
   func toggleLogin() -> Bool
+  func saveLoginCredentials()
 }

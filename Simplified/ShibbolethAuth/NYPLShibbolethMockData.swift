@@ -10,9 +10,14 @@ import Foundation
 
 @objc class NYPLShibbolethMockData: NSObject, NYPLShibbolethAuthDelegate {
 
-
-
   let loginStatusKey = "loginStatus"
+
+  static let shared = NYPLShibbolethMockData()
+
+  // For Objective-C classes
+  @objc class func sharedInstance() -> NYPLShibbolethMockData {
+    return NYPLShibbolethMockData.shared
+  }
 
   func getLoginStatus() -> Bool {
     var login = false
@@ -40,4 +45,7 @@ import Foundation
     return !loginStatus
   }
 
+  func saveLoginCredentials() {
+
+  }
 }

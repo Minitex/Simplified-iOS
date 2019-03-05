@@ -42,7 +42,7 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
     loginSignOutTextField.autoConstrainAttribute(ALAttribute.bottom, to: ALAttribute.marginBottom, of: loginSignOutTextField.superview!, withOffset: CGFloat(-verticalMarginPadding))
   }
 
-  func toggleButton(loginStatus: Bool) {
+  func setButtonText(loginStatus: Bool) {
     loginSignOutTextField.text = (loginStatus == false) ? login : signOut
   }
 }

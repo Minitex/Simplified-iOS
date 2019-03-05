@@ -747,12 +747,10 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       break;
     }
     case CellKindShibbolethLoginStatus: {
-      // TODO
       NYPLLOG(@"selected ShibbolethLoginStatus button");
       break;
     }
     case CellKindShibbolethLogInSignOut: {
-      // TODO
       NYPLLOG(@"selected ShibbolethLoginSignOut button");
       // first we need to access the cell, and then we can call the function on it!
       NYPLShibbolethLoginSignOutTableViewCell *logincell = [tableView cellForRowAtIndexPath:indexPath];
@@ -760,7 +758,8 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       // update the button
       // update the status cell
       BOOL loginStatus = [self toggleLogin];
-      [logincell toggleButtonWithLoginStatus:loginStatus];
+      [logincell setButtonTextWithLoginStatus:loginStatus];
+
       NSIndexPath *path = [NSIndexPath indexPathForItem:indexPath.row-1 inSection:indexPath.section];
       NYPLShibbolethLoginStatusTableViewCell *statuscell = [tableView cellForRowAtIndexPath:path];
       [statuscell setLoginStatusWithLoginStatus:loginStatus];
@@ -1688,15 +1687,19 @@ replacementString:(NSString *)string
 #pragma mark - NYPLShibbolethAuthProtocol
 - (BOOL)getLoginStatus
 {
-  // return faux login status here
-  BOOL loginStatus = [[[NYPLShibbolethMockData alloc]init] getLoginStatus];
+  BOOL loginStatus = [[NYPLShibbolethMockData shared] getLoginStatus];
   return loginStatus;
 }
 
+// toggle login and return updated login status
 - (BOOL)toggleLogin
 {
-  BOOL loginStatus = [[[NYPLShibbolethMockData alloc]init] toggleLogin];
-  // now that we have toggled login status, how do we update the button and the text
+  BOOL loginStatus = [[NYPLShibbolethMockData shared] toggleLogin];
   return loginStatus;
+}
+
+- (void)saveLoginCredentials
+{
+
 }
 @end
