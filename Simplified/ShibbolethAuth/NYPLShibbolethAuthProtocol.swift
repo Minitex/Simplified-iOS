@@ -9,7 +9,6 @@
 import Foundation
 
 @objc public protocol NYPLShibbolethAuthDelegate: class {
-  //func saveShibbCredentials()
   func getLoginStatus() -> Bool
   func toggleLogin() -> Bool
   func saveLoginCredentials()

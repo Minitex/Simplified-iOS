@@ -757,6 +757,14 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
       // toggle the status
       // update the button
       // update the status cell
+
+      // once we return from this login, we toggle the
+      // login button and status cell?
+      // should we pass in a completion handler?
+      if ([self getLoginStatus] == NO) {
+        [logincell shibbolethLogin];
+      }
+
       BOOL loginStatus = [self toggleLogin];
       [logincell setButtonTextWithLoginStatus:loginStatus];
 
@@ -951,6 +959,7 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     case CellKindShibbolethLogInSignOut: {
       NYPLShibbolethLoginSignOutTableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"ShibbolethLoginSignOutCell"];
       cell.loginSignOutTextField.textColor = [NYPLConfiguration mainColor];
+      cell.delegate = self;
       return cell;
     }
     case CellKindBarcode: {
@@ -1700,6 +1709,6 @@ replacementString:(NSString *)string
 
 - (void)saveLoginCredentials
 {
-
+  NYPLLOG(@"saveLoginCredentials called");
 }
 @end

@@ -9,12 +9,13 @@
 import UIKit
 import PureLayout
 
-class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
+@objc class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
   
   @IBOutlet weak var loginSignOutTextField: UITextField!
   let verticalMarginPadding = 2.0
   let signOut = "Sign Out"
   let login = "Login"
+  var delegate: NYPLShibbolethAuthDelegate?
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -44,5 +45,12 @@ class NYPLShibbolethLoginSignOutTableViewCell: UITableViewCell {
 
   func setButtonText(loginStatus: Bool) {
     loginSignOutTextField.text = (loginStatus == false) ? login : signOut
+  }
+
+  func shibbolethLogin() {
+    print("shibbolethLogin called")
+    if ((delegate) != nil) {
+      delegate?.saveLoginCredentials()
+    }
   }
 }
