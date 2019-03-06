@@ -9,7 +9,12 @@
 import Foundation
 
 @objc public protocol NYPLShibbolethAuthDelegate: class {
+  // Bool always returns a login status, where
+  // true means logged in, false means signed out
   func getLoginStatus() -> Bool
   func toggleLogin() -> Bool
-  func saveLoginCredentials()
+
+  // returns an optional error, if any
+  func saveLoginCredentials() -> Error?
+  func removeLoginCredentials() -> Error?
 }

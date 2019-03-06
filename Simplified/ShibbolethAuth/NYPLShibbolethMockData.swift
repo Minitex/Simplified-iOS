@@ -9,6 +9,14 @@
 import Foundation
 
 @objc class NYPLShibbolethMockData: NSObject, NYPLShibbolethAuthDelegate {
+  func removeLoginCredentials() -> Error? {
+    return nil
+  }
+
+  func saveLoginCredentials() -> Error? {
+    return nil
+  }
+
 
   let loginStatusKey = "loginStatus"
 
@@ -45,7 +53,5 @@ import Foundation
     return !loginStatus
   }
 
-  func saveLoginCredentials() {
 
-  }
 }

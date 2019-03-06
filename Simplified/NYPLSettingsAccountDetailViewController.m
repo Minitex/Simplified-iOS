@@ -752,17 +752,21 @@ didSelectRowAtIndexPath:(NSIndexPath *const)indexPath
     }
     case CellKindShibbolethLogInSignOut: {
       NYPLLOG(@"selected ShibbolethLoginSignOut button");
-      // first we need to access the cell, and then we can call the function on it!
       NYPLShibbolethLoginSignOutTableViewCell *logincell = [tableView cellForRowAtIndexPath:indexPath];
-      // toggle the status
-      // update the button
-      // update the status cell
+      // once we return from this login or signout, we toggle the
+      // login button and status cell
 
-      // once we return from this login, we toggle the
-      // login button and status cell?
-      // should we pass in a completion handler?
+      // if we're not logged in, then try to login to shibboleth
+      // if we get no errors from that, then continue
       if ([self getLoginStatus] == NO) {
-        [logincell shibbolethLogin];
+        if ([logincell shibbolethLogin] != nil) {
+          return;
+        }
+      // else we're logged in and need to sign out
+      // if we get no errors from signing out, then continue
+      } else {
+        if ([logincell shibbolethSignOut] != nil)
+          return;
       }
 
       BOOL loginStatus = [self toggleLogin];
@@ -1707,8 +1711,15 @@ replacementString:(NSString *)string
   return loginStatus;
 }
 
-- (void)saveLoginCredentials
+- (NSError *)saveLoginCredentials
 {
   NYPLLOG(@"saveLoginCredentials called");
+  return nil;
+}
+
+- (NSError *)removeLoginCredentials
+{
+  NYPLLOG(@"removeLoginCredentials called");
+  return nil;
 }
 @end

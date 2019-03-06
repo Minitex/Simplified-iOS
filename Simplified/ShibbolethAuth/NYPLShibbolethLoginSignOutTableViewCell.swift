@@ -17,6 +17,12 @@ import PureLayout
   let login = "Login"
   var delegate: NYPLShibbolethAuthDelegate?
 
+  enum LoginSignoutError: Error {
+    case noDelegateError
+    case loginError
+    case signOutError
+  }
+
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
@@ -47,10 +53,27 @@ import PureLayout
     loginSignOutTextField.text = (loginStatus == false) ? login : signOut
   }
 
-  func shibbolethLogin() {
+  func shibbolethLogin() -> Error? {
     print("shibbolethLogin called")
-    if ((delegate) != nil) {
-      delegate?.saveLoginCredentials()
+    guard delegate != nil else {
+      return LoginSignoutError.noDelegateError
     }
+
+    guard delegate?.saveLoginCredentials() == nil else {
+      return LoginSignoutError.loginError
+    }
+    return nil
+  }
+
+  func shibbolethSignOut() -> Error? {
+    print("shibbolethLogout called")
+    guard delegate != nil else {
+      return LoginSignoutError.noDelegateError
+    }
+
+    guard delegate?.removeLoginCredentials() == nil else {
+      return LoginSignoutError.signOutError
+    }
+    return nil
   }
 }
